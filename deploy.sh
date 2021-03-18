@@ -3,14 +3,15 @@
 # 确保脚本抛出遇到的错误
 set -e
 
-# 生成静态文件
-npm run build
 
-# 后来添加，将原博客上传到master分支上
+# 后来添加，将博客原文上传到master分支上
 git add .
 git commit -m 'funky edit blog'
 git push origin master
 
+
+# 生成静态文件
+npm run build
 
 # 进入生成的文件夹
 cd docs/.vuepress/dist
