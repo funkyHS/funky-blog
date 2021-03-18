@@ -1,0 +1,13 @@
+{
+  "name": "vuepress-blog",
+  "version": "1.0.0",
+  "description": "Funky的技术博客",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "keywords": [],
+  "author": "Funky、",
+  "license": "ISC"
+}
