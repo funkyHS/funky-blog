@@ -7,9 +7,9 @@ set -e
 npm run build
 
 # 后来添加，将原博客上传到master分支上
-# git add .
-# git commit -m 'funky edit blog'
-# git push origin master
+git add .
+git commit -m 'funky edit blog'
+git push origin master
 
 
 # 进入生成的文件夹
