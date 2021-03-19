@@ -14,3 +14,20 @@ features:
   details: 学习大数据必备技能。数据分析，数据挖掘等
 footer: MIT Licensed | Copyright © 2018-present Funky、
 ---
+
+
+<div style="text-align: center;">
+
+## 赞赏码
+
+**欢迎各种花式赞赏：**
+
+![image](https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/praise_code.png)
+<img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/left_point.png" alt="left_point" width="200"/>
+
+**你的鼓励，对我很重要**
+
+<br />
+
+
+</div>
