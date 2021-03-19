@@ -145,9 +145,15 @@ module.exports = {
                 sidebarDepth: 1,
                 children: [
                     ['/ios/objc/', '【学习资料】'],
-                    '/ios/objc/base/1',
-                    '/ios/objc/base/2',
-                    '/ios/objc/base/3'
+                    '/ios/objc/base/1-runtime',
+                    '/ios/objc/base/2-runloop',
+                    '/ios/objc/base/3-thread',
+                    '/ios/objc/base/4-block',
+                    '/ios/objc/base/5-kvc-kvo',
+                    '/ios/objc/base/6-arc',
+                    '/ios/objc/base/7-instrument',
+                    '/ios/objc/base/8-copy',
+                    '/ios/objc/base/9-llvm',
                 ]
             },
             {
