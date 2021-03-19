@@ -24,7 +24,7 @@
 
 **欢迎赞赏：**
 
-![image](https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/wx_praise_code.JPG)
+![image](https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/praise_code.png){:height="10px" width="10px"}
 
 
-**Keep coding，Keep improving**
+**Keep Coding，Keep Improving**
