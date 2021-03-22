@@ -63,7 +63,7 @@ module.exports = {
             text: 'Database',
             ariaLabel: 'Database Menu',
             items: [
-                { text: 'Database', link: '/database/' },
+                { text: 'Database', link: '/database/base/' },
                 { text: 'Mysql', link: '/database/mysql/1' },
                 { text: 'Mongodb', link: '/database/mongodb/' },
                 { text: 'Redis', link: '/database/redis/' }
@@ -124,7 +124,7 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    '/database/mysql/1',
+                    '/database/mysql/1.md',
                     '/database/mongodb/',
                     '/database/redis/'
                 ]
@@ -290,9 +290,22 @@ module.exports = {
                     '/database/redis/'
                 ]
             }
-        ],
-            
-    
+        ],    
     }
-  }
+  },
+  plugins: [
+    ['image'],
+    {
+        loading: true, // 是否显示loading 默认：true
+        loadingSrc: 'http://tangxiaomi.top/markdown-it-image-loading/loading.gif', // loading 图片 src
+        loadingWidth: 30, // loading 图片宽度  默认：30
+        loadingHeight: 30, // loading 图片高度 默认：30
+        minWidth: 100, // 图片最小宽度
+        minHeight: 100, // 图片最小高度
+        bgColor: '#000' // 图片背景颜色
+
+        // markdown 单独设置 loading 样式
+        // ![](/){loadingSrc=http://tangxiaomi.top/markdown-it-image-loading/loading.gif loadingWidth=50 loadingHeight=50 minWidth=200 minHeight=200  bgColor=#ccc} 
+    }
+  ]
 };

@@ -9,5 +9,8 @@
   },
   "keywords": [],
   "author": "Funky、",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "vuepress-plugin-image": "^1.0.4"
+  }
 }
