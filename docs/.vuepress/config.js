@@ -63,19 +63,20 @@ module.exports = {
             text: 'Database',
             ariaLabel: 'Database Menu',
             items: [
-                { text: 'Mysql', link: '/database/mysql/' },
+                { text: 'Database', link: '/database/' },
+                { text: 'Mysql', link: '/database/mysql/1' },
                 { text: 'Mongodb', link: '/database/mongodb/' },
                 { text: 'Redis', link: '/database/redis/' }
             ]
         },
-        { // BigData
-            text: 'BigData',
-            ariaLabel: 'BigData Menu',
-            items: [
-                { text: 'Python', link: '/bigdata/python/' },
-                { text: 'Spark', link: '/bigdata/spark/' }
-            ]
-        }
+        // { // BigData
+        //     text: 'BigData',
+        //     ariaLabel: 'BigData Menu',
+        //     items: [
+        //         { text: 'Python', link: '/bigdata/python/' },
+        //         { text: 'Spark', link: '/bigdata/spark/' }
+        //     ]
+        // }
     ],
     // sidebar: 'auto', // 侧边栏配置
     sidebarDepth: 2, // 侧边栏显示2级
@@ -123,20 +124,20 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    '/database/mysql/',
+                    '/database/mysql/1',
                     '/database/mongodb/',
                     '/database/redis/'
                 ]
             },
-            { // bigdata
-                title: 'BigData',
-                collapsable: true,
-                sidebarDepth: 1,
-                children: [
-                    '/bigdata/python/',
-                    '/bigdata/spark/',
-                ]
-            }
+            // { // bigdata
+            //     title: 'BigData',
+            //     collapsable: true,
+            //     sidebarDepth: 1,
+            //     children: [
+            //         '/bigdata/python/',
+            //         '/bigdata/spark/',
+            //     ]
+            // }
         ],
         '/ios/': [
             {
@@ -144,7 +145,7 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    ['/ios/objc/', '【学习资料】'],
+                    ['/ios/objc/', '【开篇】'],
                     '/ios/objc/base/1-runtime',
                     '/ios/objc/base/2-runloop',
                     '/ios/objc/base/3-thread',
@@ -161,7 +162,7 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    ['/ios/swift/', '【学习资料】'],
+                    ['/ios/swift/', '【开篇】'],
                     '/ios/swift/base/1',
                     '/ios/swift/base/2',
                     '/ios/swift/base/3'
@@ -172,7 +173,7 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    ['/ios/module/', '【学习资料】'],
+                    ['/ios/module/', '【开篇】'],
                     '/ios/module/1',
                     '/ios/module/2',
                     '/ios/module/3'
@@ -183,10 +184,110 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    ['/ios/ble/', '【学习资料】'],
+                    ['/ios/ble/', '【开篇】'],
                     '/ios/ble/1',
                     '/ios/ble/2',
                     '/ios/ble/3'
+                ]
+            }
+        ],
+        '/server/': [
+            {
+                title: '第一部分：Java Server',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/server/jdbc/',
+                    '/server/maven/',
+                    '/server/mybatis/',
+                    '/server/springboot/'
+                ]
+            },
+            {
+                title: '第二部分：Nodejs Server',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/server/express/',
+                    '/server/koa/',
+                ]
+            },
+            {
+                title: '第三部分：Python Server',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/ios/flask/',
+                    '/ios/django/',
+                ]
+            }
+        ],
+        '/web/': [
+            {
+                title: '第一部分：Html',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/web/html/'
+                ]
+            },
+            {
+                title: '第二部分：Css',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/web/css/'
+                ]
+            },
+            {
+                title: '第三部分：Javascript',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/web/js/'
+                ]
+            },
+            {
+                title: '第四部分：Vue',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/web/vue/'
+                ]
+            }
+        ],
+        '/database/': [
+            {
+                title: '第一部分：Database',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/database/',
+                ]
+            },
+            {
+                title: '第二部分：Mysql',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/database/mysql/1',
+                    '/database/mysql/2',
+                ]
+            },
+            {
+                title: '第三部分：MongoDB',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/database/mongodb/'
+                ]
+            },
+            {
+                title: '第四部分：Redis',
+                collapsable: false,
+                sidebarDepth: 1,
+                children: [
+                    '/database/redis/'
                 ]
             }
         ],
