@@ -209,7 +209,7 @@ module.exports = {
                 sidebarDepth: 1,
                 children: [
                     '/server/express/',
-                    '/server/koa/',
+                    // '/server/koa/',
                 ]
             },
             {
@@ -218,7 +218,7 @@ module.exports = {
                 sidebarDepth: 1,
                 children: [
                     '/server/flask/',
-                    '/server/django/',
+                    // '/server/django/',
                 ]
             }
         ],
