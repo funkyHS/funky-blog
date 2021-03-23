@@ -217,8 +217,8 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    '/ios/flask/',
-                    '/ios/django/',
+                    '/server/flask/',
+                    '/server/django/',
                 ]
             }
         ],
