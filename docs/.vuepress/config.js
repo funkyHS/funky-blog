@@ -46,6 +46,12 @@ module.exports = {
                     items: [ 
                         { text: 'Flask', link: '/server/flask/' } 
                     ] 
+                },
+                { 
+                    text: '-- Other --', 
+                    items: [ 
+                        { text: 'Nginx', link: '/server/nginx/nginx1' } 
+                    ] 
                 }
             ]
         },
@@ -220,6 +226,14 @@ module.exports = {
                 children: [
                     '/server/flask/',
                     // '/server/django/',
+                ]
+            },
+            {
+                title: '第四部分：其他',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/server/nginx/nginx1',
                 ]
             }
         ],

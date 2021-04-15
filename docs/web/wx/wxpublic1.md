@@ -8,22 +8,23 @@ title: 【微信订阅号一】
 - [微信公众平台](https://mp.weixin.qq.com/)
 
 ### 账号分类
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/1.png" width="600"/>
+<!-- http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/1.png -->
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/1.png" width="600"/>
 
 ### 注册个人订阅号
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/2.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/3.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/4.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/5.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/6.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/7.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/8.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/9.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/10.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/2.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/3.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/4.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/5.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/6.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/7.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/8.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/9.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/10.png" width="600"/>
 
 
 ## 2. 编辑模式-微信订阅号自带的后台
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/11.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/11.png" width="600"/>
 
 
 ## 3. 开发模式
@@ -33,7 +34,7 @@ title: 【微信订阅号一】
 - 用户与微信服务器的关系是多对一的关系，微信用户订阅微信公众号，就可以接收到微信服务器对应的内容
 - 微信同时也提供了一种方式，可以使用自己的服务器。用户请求微信服务器，微信服务器将请求转发给我们自己的服务器，然后由我们自己的服务器去作出对应的响应
 - 这里引用[教程](https://www.bilibili.com/video/BV1KD4y1d7zD?p=6)中的流程图加以说明
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/12.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/12.png" width="600"/>
 
 
 ## 4. Express框架
@@ -48,7 +49,7 @@ title: 【微信订阅号一】
 - 使用express初始化项目结构：`express --no-view 项目名称`
 - 在命令行中指定到项目目录下，并安装依赖：`npm install`
 - 启动express服务：`npm run start`
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/13.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/13.png" width="600"/>
 
 #### Express代码结构及作用
 - bin/www文件：关于服务启动的文件，设置监听端口号localhost:3000
@@ -65,7 +66,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 - 指定数据库目录，启动数据库：`sudo mongod --dbpath=/Users/Funky/data`
 - 通过上面一步，启动成功以后，使用可视化工具[Robo3T](https://robomongo.org/)，连接数据库
 - mongodb默认的端口号是：27017
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/14.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/14.png" width="600"/>
 
 
 ## 6. 安装mongoose模块，实现Express服务与MongoDB数据库链接
@@ -125,10 +126,10 @@ router.post('/reg',function(req,res){
 })
 ```
 - 使用postman测试接口
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/15.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/15.png" width="600"/>
 
 - 使用Robo3T查看插入到数据库中的数据
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/16.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/16.png" width="600"/>
 
 
 
@@ -139,7 +140,7 @@ router.post('/reg',function(req,res){
 - [官方-使用JSDSK的步骤](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html#1)
 
 - 这里引用[教程](https://www.bilibili.com/video/BV1KD4y1d7zD?p=12)中的流程图加以说明
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/17.png" width="700"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/17.png" width="700"/>
 - （1）node服务器请求微信服务器提供的api，获取到`access_token`
 - （2）node服务器根据`access_token`，获取到`jsapi_ticket`
 - （3）node服务器在通过`jsapi_ticket`，`timestamp`，`nonceStr`，`url`(url是前端传过来的，哪个地址需要使用jssdk api)，生成签名signature
@@ -150,14 +151,14 @@ router.post('/reg',function(req,res){
 ### 公众号js安全域名设置
 - 登录微信公众平台，进入“公众号设置” ==> “功能设置” ==> “JS接口安全域名”
 - 设置JS接口安全域名后，公众号开发者可在该域名下调用微信开放的JS接口
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/18.png" width="500"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/19.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/18.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/19.png" width="500"/>
 - 将下载下来的`MP_verify_dnD9CGfZVm8BV4Hf.txt`，存放在`my-server/public/`文件夹下，同时部署到线上服务器，用来验证域名的
 
 
 ### IP白名单设置
 - “开发” ==> “基本配置” ==> “开发者密码（AppSecret）”  ==> 启用，然后保存好AppSecret
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic1/20.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic1/20.png" width="500"/>
 
 - 然后在设置`IP白名单`，通过开发者ID及密码调用获取`access_token`接口时，需要设置访问来源IP为白名单。
 
@@ -315,3 +316,6 @@ module.exports = {
 ## 参考
 - [2020微信公众号开发（零基础全面系统教程）](https://www.bilibili.com/video/BV1KD4y1d7zD)
 - [微信公众号开发实战](https://www.bilibili.com/video/BV1nb411P7c9)
+
+## 源码
+- [源码](https://github.com/funkyHS/wxpublic)

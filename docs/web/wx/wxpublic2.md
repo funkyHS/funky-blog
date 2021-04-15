@@ -9,7 +9,7 @@ title: 【微信订阅号二】
 ## 1. 微信公众号测试号接口使用
 - [学习链接](https://www.bilibili.com/video/BV1nb411P7c9?p=4&spm_id_from=pageDriver)
 - 进入测试账号入口：登录公众号后台 ==> “开发” ==> “开发者工具” ==> “公众平台测试账号” ==> 扫码后就可以进入到测试号管理页面
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/21.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/21.png" width="600"/>
 
 
 ## 2. 微信公众号开发模式核心流程与步骤
@@ -41,17 +41,17 @@ title: 【微信订阅号二】
 ## 3. 微信服务器如何知道开发者服务器是哪个--Ngrok内网穿透
 
 ### 在“接口配置信息”中填写合法的URL，不能使用localhost
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/22.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/22.png" width="600"/>
 
 ### Ngrok内网穿透--将内网对应端口号的服务映射成外网的网址
 - [Ngrok下载](https://ngrok.com/)
 - 下载后，可以放在任意位置，我这里直接放在用户目录下
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/23.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/23.png" width="600"/>
 - 在命令行执行：`./ngrok http 3000`，就可以获取到外网地址(注意：每次运行，网址都会发生变化)
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/24.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/24.png" width="600"/>
 
 ### 填写“接口配置信息”
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/25.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/25.png" width="600"/>
 
 
 
@@ -258,7 +258,7 @@ w.fetchAccessToken().then(res=>{
 })
 ```
 - 执行上面的代码，在同级目录下生成了`accessToken.txt`文件
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/26.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/26.png" width="600"/>
 
 
 
@@ -266,7 +266,7 @@ w.fetchAccessToken().then(res=>{
 - `微信服务器`会将用户发送的数据以POST请求的方式转发到`开发者服务器`上
 - [被动回复消息说明文档](https://developers.weixin.qq.com/doc/offiaccount/Message_Management/Passive_user_reply_message.html)
 - 在`测试号管理`页面中，使用微信扫描关注`测试号二维码`,然后发送消息到测试号，此时`开发者服务器`就会收到`微信服务器`发送的post请求，打印微信服务器发送过来的的请求参数（signature，timestamp，nonce，openid）
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/27.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/27.png" width="500"/>
 
 - 实现代码：在`/routes/index.js`路由中，添加`/auth`post请求方式
 ```js
@@ -469,7 +469,7 @@ module.exports = options => {
 }
 ```
 - 通过测试号发送不同的消息，开发者服务器会自动回复
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/28.jpeg" width="300"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/28.jpeg" width="300"/>
 
 
 
@@ -567,7 +567,7 @@ class Wechat {
 })()
 ```
 - 在命令行直接执行：`node wechat.js`，此时就可以在测试公众号看到自定义的菜单，如果没有看到，可以取关，重新关注
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/29.png" width="300"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/29.png" width="300"/>
 
 
 
@@ -769,7 +769,7 @@ router.get('/wxconfig', async function (req, res) {
 ```
 - 在`search.html`中使用
     - 1. 绑定域名 -- 在测试号页面上行填写js安全域名接口
-    <br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/30.png" width="400"/>
+    <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/30.png" width="400"/>
     - 2. 引入js文件  `<script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>`
     - 3. 通过config接口注入权限验证配置
     - [所有js接口列表](https://developers.weixin.qq.com/doc/offiaccount/OA_Web_Apps/JS-SDK.html#63)
@@ -857,7 +857,7 @@ router.get('/wxconfig', async function (req, res) {
 </script>
 </html>
 ```
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/web/wx/wxpublic2/31.png" width="700"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/wx/wxpublic2/31.png" width="700"/>
 
 
 
