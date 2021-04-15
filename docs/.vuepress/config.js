@@ -56,7 +56,8 @@ module.exports = {
                 { text: 'Html', link: '/web/html/' },
                 { text: 'Css', link: '/web/css/' },
                 { text: 'Javascript', link: '/web/js/' },
-                { text: 'Vue.js', link: '/web/vue/' }
+                { text: 'Vue.js', link: '/web/vue/1' },
+                { text: '微信公众平台', link: '/web/wx/wxpublic1' }
             ]
         },
         { // Database
@@ -252,7 +253,17 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    '/web/vue/'
+                    '/web/vue/1',
+                    '/web/vue/2'
+                ]
+            },
+            {
+                title: '第五部分：微信公众平台',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/web/wx/wxpublic1',
+                    '/web/wx/wxpublic2'
                 ]
             }
         ],
