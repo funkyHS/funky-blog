@@ -6,7 +6,7 @@ title: 【Maven】
 
 
 
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/1.png" width="900"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/1.png" width="900"/>
 
 
 ## 1. 软件工程与Maven
@@ -65,7 +65,7 @@ maven把一个项目当作一个模型使用，控制maven构建项目的过程�
     - conf：maven工具本身的配置文件 settings.xml
 - 3）配置环境变量： 在`.zshrc`文件中添加 `export Maven_PATH=$HOME/Library/Maven/apache-maven-3.3.9`
 - 4）验证是否安装成功，在命令行中执行：`mvn -v`
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/2.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/2.png" width="500"/>
 
 
 
@@ -74,7 +74,7 @@ maven把一个项目当作一个模型使用，控制maven构建项目的过程�
 
 ### Maven工程约定目录结构
 每一个Maven项目在磁盘中都是一个文件夹（项目-Hello）
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/3.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/3.png" width="600"/>
 
 
 ### maven的使用
@@ -84,9 +84,9 @@ maven把一个项目当作一个模型使用，控制maven构建项目的过程�
 - 4）下载什么东西了？jar文件--叫做插件--插件是完成某些功能
 - 5）下载的东西存放到哪里了？在mac上下载的默认存储位置：`~/.m2/repository`
 - 6）执行命令 `$ mvn compile` 以后，如下，说明编译成功了，此时编译的结果是在项目根目录下生成target目录（结果目录），maven编译的java程序，最后的class文件都放在target目录中
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/4.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/4.png" width="600"/>
 - 7）运行java程序
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/5.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/5.png" width="600"/>
 
 
 
@@ -131,7 +131,7 @@ maven把一个项目当作一个模型使用，控制maven构建项目的过程�
     - [https://mvnrepository.com/](https://mvnrepository.com/) 搜索使用中的中央仓库，使用groupId或者artifactId作为搜索条件`
 - **packaging**：打包后压缩文件扩展名，默认是jar，web应用是war
 - **dependencies和dependency**：依赖，项目中要使用的各种资源说明
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/6.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/6.png" width="500"/>
 
 - **properties**：配置属性
 - **build**：构建 例如设置编译插件的jdk版本
@@ -161,7 +161,7 @@ maven把一个项目当作一个模型使用，控制maven构建项目的过程�
 - maven借助单元测试，批量的测试你类中的大量方法是否符合预期的。
 - 使用步骤：
     - 在pom.xml中添加依赖
-    <br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/7.png" width="500"/>
+    <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/7.png" width="500"/>
     - 在maven项目中的src/test/java目录下，创建测试程序。
 ```java
 // 推荐的创建类和方法的提示
@@ -257,22 +257,22 @@ public void testAdd() {
     - User settings file: 就是maven安装目录setting.xml配置文件
     - Local repository: 本机仓库的目录位置
 - 修改相关配置
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/8.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/8.png" width="600"/>
 
 - VM Options：maven项目创建时，会联网下载模版文件，比较大，使用`-DarchetypeCatalog=internal`配置，可以不用下载，从而创建maven项目速度快
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/9.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/9.png" width="600"/>
 
 
 ### 创建Maven项目
 - IntelliJ IDEA --> File --> New --> Empty Project --> 输入项目名称创建 --> Modules --> 添加 --> New Module --> Maven --> 选择模版maven-archetype-quickstart（普通java项目）如果是创建web项目，应该选择maven-archetype-webapp
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/10.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/10.5.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/11.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/10.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/10.5.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/11.png" width="600"/>
 
 
 - 自己创建resources资源文件夹，同时设定为Resources Root
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/12.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/13.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/12.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/13.png" width="600"/>
 
 
 
@@ -282,10 +282,10 @@ public void testAdd() {
 - 表示依赖使用的范围，也就是在maven构建项目的哪些阶段中起作用
 - maven构建项目  清理，编译，测试，打包，安装，部署 过程（阶段）
 - junit的依赖
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/14.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/14.png" width="600"/>
 
 - 依赖的范围
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/15.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/15.png" width="600"/>
 
 
 
@@ -295,20 +295,20 @@ public void testAdd() {
 
 
 ### Maven属性设置
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/16.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/16.png" width="600"/>
 
 
 ### Maven的全局变量
 - 在`<properties>`通过自定义标签声明变量（标签名就是变量名）
 - 在pom.xml文件中的其他位置，使用${标签名}使用变量的值
 - 自定义全局变量一般是定义 依赖的版本号
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/17.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/17.png" width="600"/>
 
 
 ### 资源插件
 - 默认没有使用resources的时候，maven执行编译代码时，会把src/main/resources目录中的文件拷贝到target/classes目录中。对于src/main/java目录下的非java文件不处理，不拷贝到target/classes目录中
 - 我们的程序有需要把一些文件放在src/main/java目录中，当我们在执行java程序时，需要用到src/main/java目录中的文件。需要告诉maven在 mvn compile src/main/java目录下的程序时，需要把文件一同拷贝到target/classes目录中。此时就需要在`<build>`中加入`<resources>`
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/maven/18.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/maven/18.png" width="600"/>
 
 
 

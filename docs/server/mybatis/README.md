@@ -79,10 +79,10 @@ title: 【Mybatis】
 ### 2.1 第一个入门的mybatis例子
 
 **（1）新建的student表**
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/mybatis/1.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/mybatis/1.png" width="600"/>
 
 **（2）在maven的配置文件pom.xml中加入mybatis坐标，mysql驱动的坐标**
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/mybatis/2.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/mybatis/2.png" width="600"/>
 
 **（3）创建实体类，Student 保存表中的一行数据**
 在domain包下创建Student.java类
@@ -405,7 +405,7 @@ public class TestMyBatis {
    ...
 </configuration>
 ```
-<img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/mybatis/3.png" width="600"/>
+<img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/mybatis/3.png" width="600"/>
 
 
 
@@ -469,8 +469,8 @@ sqlSession.close();
 ## 3. MyBatis框架Dao代理
 ### 3.1 IDEA中创建代码模版
 - IntelliJ IDEA --> Preferences --> Editor --> File and Code Templates 
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/mybatis/4.png" width="600"/>
-<br/><img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/java/mybatis/5.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/mybatis/4.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/mybatis/5.png" width="600"/>
 
 
 ### 3.2 传统Dao使用方式

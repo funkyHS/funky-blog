@@ -22,8 +22,9 @@ footer: MIT Licensed | Copyright © 2018-present Funky、
 
 **欢迎各种花式赞赏：**
 
-![image](https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/start/praise_code.png)
-<img src="https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/funkyblog/start/left_point.png" alt="left_point" width="200"/>
+<!-- ![image](http://funky_hs.gitee.io/imgcloud/funkyblog/start/praise_code.png) -->
+<img src="http://funky_hs.gitee.io/imgcloud/funkyblog/start/praise_code.png" alt="left_point" width="200"/>
+<img src="http://funky_hs.gitee.io/imgcloud/funkyblog/start/left_point.png" alt="left_point" width="200"/>
 
 **你的鼓励，对我很重要**
 

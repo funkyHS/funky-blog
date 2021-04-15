@@ -24,7 +24,7 @@
 
 **欢迎赞赏：**
 
-![image](https://raw.githubusercontent.com/funkyHS/imgrepo/master/myself/praise_code.png)
+![image](http://funky_hs.gitee.io/imgcloud/praise_code.png)
 
 
 **Keep Coding，Keep Improving**
