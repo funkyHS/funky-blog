@@ -1,16 +1,16 @@
 ---
-title: Mongodb相关
+title: 【Mongodb】
 ---
 
-[TOC]
+[[TOC]]
 
 
 
-### 第一章：MongoDB基础
+## 第一章：MongoDB基础
 
 
 
-#### 1. 数据库简介
+### 1. 数据库简介
 
 - 数据库就是用来存放数据的仓库
 
@@ -31,7 +31,7 @@ title: Mongodb相关
 
 
 
-#### 2. MongoDB简介
+### 2. MongoDB简介
 
 - MongoDB是一个基于分布式文件存储的数据库。由C++编写
 
@@ -39,7 +39,7 @@ title: Mongodb相关
 
 
 
-#### 3. MongoDB安装
+### 3. MongoDB安装
 
 - MAC系统
 
@@ -74,7 +74,7 @@ sudo mkdir -p /usr/local/mongodb/data /usr/local/mongodb/logs
 ```
 
 
-#### 4. MongoDB基本操作
+### 4. MongoDB基本操作
 
 - 数据库（database）、集合（collection）、数据/文档（document）
 
@@ -106,7 +106,7 @@ sudo mkdir -p /usr/local/mongodb/data /usr/local/mongodb/logs
 
 
 
-#### 5. MongoDB文档增删修查（CURD）
+### 5. MongoDB文档增删修查（CURD）
 
 - **增（C）**：`db.集合名.insert(JSON数据)`，集合存在-则直接插入数据，集合不存在-隐式创建
 
@@ -339,11 +339,11 @@ db.集合名.find(条件 [,查询的列])
 
 
 
-### 第二章：MongoDB高级
+## 第二章：MongoDB高级
 
 
 
-#### 1. MongoDB分页&排序
+### 1. MongoDB分页&排序
 
 - 排序
 
@@ -391,7 +391,7 @@ db.集合名.find(条件 [,查询的列])
 
 
 
-#### 2. MongoDB聚合查询
+### 2. MongoDB聚合查询
 
 - 聚合查询: 把数据聚起来，然后统计
 
@@ -511,7 +511,7 @@ db.c1.aggregate([
 
 
 
-#### 3. MongoDB优化索引
+### 3. MongoDB优化索引
 
 - 索引是一种排序好的便于快速查询的数据结构, 帮助数据库高效的查询数据
 
@@ -628,7 +628,7 @@ db.c1.aggregate([
 
 
 
-#### 4. MongoDB权限机制
+### 4. MongoDB权限机制
 
 ```
 
@@ -851,7 +851,7 @@ db.createUser({
 
 
 
-#### 5. MongoDB备份还原
+### 5. MongoDB备份还原
 
 
 
@@ -936,7 +936,7 @@ db.createUser({
 
 
 
-#### 6. 实战可视化管理工具
+### 6. 实战可视化管理工具
 
 - adminMongo       WEB/PC端口网页管理      https://adminmongo.markmoffat.com/
 
@@ -952,11 +952,11 @@ db.createUser({
 
 
 
-### 第三章：玩转API接口
+## 第三章：玩转API接口
 
 
 
-#### 1. mongoose简介(schema&model)
+### 1. mongoose简介(schema&model)
 
 - node中提供操作MongoDB的模块，能够通过node语法实现MongoDB数据库增删改查
 
@@ -966,7 +966,7 @@ db.createUser({
 
 
 
-#### 2. mongoose使用
+### 2. mongoose使用
 
 ```js
 
@@ -1458,9 +1458,9 @@ model2.find({}).skip(1).limit(1)
 
 
 
-#### 3. 实战教学管理系统学生模块接口开发
+### 3. 实战教学管理系统学生模块接口开发
 
-#### 4. 实战接口文档开发apiDoc
+### 4. 实战接口文档开发apiDoc
 
 - apiDoc是nodejs中的一个模块，可以快速生成接口文档，前提是写接口的时候把注释加上
 

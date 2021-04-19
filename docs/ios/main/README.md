@@ -1,6 +1,7 @@
 <!-- ---
-title: 第四部分：iOS BLE技术
+title: 第一部分：Objc知识归纳
 --- -->
+
 
 # 学习链接
 
@@ -19,9 +20,4 @@ title: 第四部分：iOS BLE技术
 
 ## 博客资源
 - [阮一峰的网络日志](http://www.ruanyifeng.com/blog/javascript/)
-
-
-
-
-
 

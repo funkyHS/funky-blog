@@ -1,5 +1,5 @@
 ---
-title: JavaScript相关
+title: 【JavaScript】
 ---
 
 # JavaScript

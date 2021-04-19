@@ -658,7 +658,9 @@ drop table if exists 表名; # oracle不支持这种写法。
     - Create（增） Retrieve（检索） Update（修改） Delete（删除）
 
 
+
 ----------------------------------------------------------------------------------
+
 
 ## 10 约束（Constraint）
 
@@ -671,6 +673,7 @@ drop table if exists 表名; # oracle不支持这种写法。
     - 外键约束(foreign key)：...（简称FK）
     - 检查约束(check)：注意Oracle数据库有check约束，但是mysql没有，目前mysql不支持该约束。
 
+
 ### 10.2 非空约束 not null
 ```sql
 drop table if exists t_user;
@@ -682,6 +685,7 @@ insert into t_user(id,password) values(1,'123'); # 错误的写法
 
 insert into t_user(id,username,password) values(1,'lisi','123');
 ```
+
 
 ### 10.3 唯一性约束（unique）
 - 唯一约束修饰的字段具有唯一性，不能重复。但可以为NULL。
@@ -700,6 +704,7 @@ insert into t_user(id) values(2);
 insert into t_user(id) values(3);
 insert into t_user(id) values(4);
 ```
+
 - 给两个列或者多个列添加unique
 ```sql
 drop table if exists t_user;
@@ -730,6 +735,7 @@ insert into t_user values(2,'111','ls');
 ```
 
 
+
 ### 10.4 主键约束
 - 给一张表添加主键约束
 ```sql
@@ -751,6 +757,7 @@ insert into t_user(id,username,email) values(1,'jack','jack@123.com');
 insert into t_user(username,email) values('jack','jack@123.com');
 # ERROR 1364 (HY000): Field 'id' doesn't have a default value
 ```
+
 - 主键的特点：不能为NULL，也不能重复。一张表的主键约束只能有1个!!
 - 主键相关的术语
     - 主键约束 : primary key
@@ -759,6 +766,7 @@ insert into t_user(username,email) values('jack','jack@123.com');
 - 主键有什么作用:
     - 表的设计三范式中有要求，第一范式就要求任何一张表都应该有主键。
     - 主键的作用：主键值是这行记录在这张表当中的唯一标识。（就像一个人的身份证号码一样。）
+
 
 - 使用表级约束方式定义主键
 ```sql
@@ -777,6 +785,7 @@ select * from t_user;
 insert into t_user(id,username) values(4,'cx');
 # ERROR 1062 (23000): Duplicate entry '4' for key 'PRIMARY'
 ```
+
 - mysql提供主键值自增：（非常重要。）
 ```sql
 drop table if exists t_user;
@@ -792,6 +801,7 @@ insert into t_user(username) values('e');
 insert into t_user(username) values('f');
 select * from t_user;
 ```
+
 - 提示:Oracle当中也提供了一个自增机制，叫做：序列（sequence）对象。
 
 
@@ -996,6 +1006,7 @@ Transactions: NO
 
 -----------------------------------------------------------------------------------
 
+
 ## 13 索引
 
 ### 13.1 什么是索引
@@ -1009,8 +1020,8 @@ Transactions: NO
     - 当ename字段上添加索引的时候，以上sql语句会根据索引扫描，快速定位。
 - 注意：主键和具有unique约束的字段自动会添加索引。根据主键查询效率较高。尽量根据主键检索。
 
-### 13.2 创建及删除索引对象
 
+### 13.2 创建及删除索引对象
 - 创建索引对象：create index 索引名称 on 表名(字段名);
 - 删除索引对象：drop index 索引名称 on 表名;
 - 查看sql语句的执行计划：explain select ename,sal from emp where sal = 5000; ==> type：ALL，rows：14
@@ -1027,7 +1038,6 @@ Transactions: NO
 ### 13.4 索引的实现原理
 - 通过B Tree缩小扫描范围，底层索引进行了排序，分区，索引会携带数据在表中的“物理地址”，最终通过索引检索到数据之后，获取到关联的物理地址，通过物理地址定位表中的数据，效率是最高的。
 - 数据库表中的每一行数据都对应有物理地址与之关联
-
 - 索引什么时候失效：
     - select ename from emp where ename like '%A%';
     - 模糊查询的时候，第一个通配符使用的是%，这个时候索引是失效的。
@@ -1041,7 +1051,9 @@ Transactions: NO
 
 
 
+
 --------------------------------------------------------------------------------
+
 
 ## 14 视图
 - 视图可以隐藏表的实现细节。保密级别较高的系统，数据库只对外提供相关的视图，java程序员只对视图对象进行CRUD。
@@ -1059,13 +1071,13 @@ drop view myview;
 
 ## 15 DBA命令
 - 将数据库当中的数据导出
-    - 导出整个库：mysqldump funkytest>~/funkytest.sql -uroot -p333
-    - 导出指定数据库当中的指定表：mysqldump funkytest emp>~/funkytest.sql -uroot –p123
+    - 导出整个库：`mysqldump funkytest>~/funkytest.sql -uroot -p333`
+    - 导出指定数据库当中的指定表：`mysqldump funkytest emp>~/funkytest.sql -uroot –p123`
 
 - 导入数据
-    - create database funkytest;
-    - use funkytest;
-    - source ~/funkytest.sql
+    - `create database funkytest;`
+    - `use funkytest;`
+    - `source ~/funkytest.sql`
 
 --------------------------------------------------------------------------------
 

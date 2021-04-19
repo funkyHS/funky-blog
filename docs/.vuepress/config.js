@@ -12,15 +12,14 @@ module.exports = {
   themeConfig: {
     nav:[ // nav
         {text: '首页', link: '/' },
-        {text: '归档', link: '/guide/' },
+        // {text: '归档', link: '/guide/' },
         { // iOS
             text: 'iOS',
             ariaLabel: 'iOS Menu',
             items: [
+                { text: 'iOS核心', link: '/ios/main/' },
                 { text: 'Objc', link: '/ios/objc/' },
-                { text: 'Swift', link: '/ios/swift/'},
-                { text: '组件化', link: '/ios/module/' },
-                { text: 'BLE', link: '/ios/ble/' }
+                { text: 'Swift', link: '/ios/swift/'}
             ]
         },
         { // Server
@@ -31,8 +30,15 @@ module.exports = {
                     items: [
                         { text: 'JDBC', link: '/server/jdbc/' },
                         { text: 'Maven', link: '/server/maven/' },
-                        { text: 'Mybatis', link: '/server/mybatis/' },
-                        { text: 'SpringBoot', link: '/server/springboot/' }
+                        { text: 'Mybatis', link: '/server/mybatis/' }
+                    ] 
+                },
+                { 
+                    text: '-- Spring --', 
+                    items: [
+                        { text: 'Spring', link: '/server/spring1/' },
+                        { text: 'SpringMVC', link: '/server/springmvc1/' },
+                        { text: 'SpringBoot', link: '/server/springboot1/' }
                     ] 
                 },
                 { 
@@ -50,7 +56,7 @@ module.exports = {
                 { 
                     text: '-- Other --', 
                     items: [ 
-                        { text: 'Nginx', link: '/server/nginx/nginx1' } 
+                        { text: 'Nginx', link: '/server/nginx/' } 
                     ] 
                 }
             ]
@@ -62,16 +68,15 @@ module.exports = {
                 { text: 'Html', link: '/web/html/' },
                 { text: 'Css', link: '/web/css/' },
                 { text: 'Javascript', link: '/web/js/' },
-                { text: 'Vue.js', link: '/web/vue/1' },
-                { text: '微信公众平台', link: '/web/wx/wxpublic1' }
+                { text: 'Vue', link: '/web/vue1/' },
+                { text: '微信公众平台', link: '/web/wxpublic1/' }
             ]
         },
         { // Database
             text: 'Database',
             ariaLabel: 'Database Menu',
             items: [
-                { text: 'Database', link: '/database/base/' },
-                { text: 'Mysql', link: '/database/mysql/1' },
+                { text: 'Mysql', link: '/database/mysql1/' },
                 { text: 'Mongodb', link: '/database/mongodb/' },
                 { text: 'Redis', link: '/database/redis/' }
             ]
@@ -95,10 +100,10 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    ['/ios/objc/', '第一部分：Objc知识归纳'],
-                    ['/ios/swift/', '第二部分：Swift知识归纳'],
-                    ['/ios/module/', '第三部分：iOS组件化'],
-                    ['/ios/ble/', '第四部分：iOS BLE技术'],
+                    ['/ios/objc/', '【Objc知识归纳】'],
+                    ['/ios/swift/', '【Swift知识归纳】'],
+                    ['/ios/module/', '【iOS 组件化】'],
+                    ['/ios/ble/', '【iOS BLE技术】'],
                     // ['/ios/objc/', 'Objectice-C'] // 如果使用这种方式定义title，就不能在README文件中使用title
                 ]
             },
@@ -110,7 +115,9 @@ module.exports = {
                     '/server/jdbc/',
                     '/server/maven/',
                     '/server/mybatis/',
-                    '/server/springboot/',
+                    '/server/spring1/',
+                    '/server/springmvc1/',
+                    '/server/springboot1/',
                     '/server/express/',
                     '/server/flask/'
                 ]
@@ -123,7 +130,11 @@ module.exports = {
                     '/web/html/',
                     '/web/css/',
                     '/web/js/',
-                    '/web/vue/'
+                    '/web/vue1/',
+                    '/web/vue2/',
+                    '/web/vue3/',
+                    '/web/wxpublic1/',
+                    '/web/wxpublic2/'
                 ]
             },
             { // database
@@ -131,7 +142,8 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    '/database/mysql/1.md',
+                    '/database/mysql1/',
+                    '/database/mysql2/',
                     '/database/mongodb/',
                     '/database/redis/'
                 ]
@@ -148,70 +160,65 @@ module.exports = {
         ],
         '/ios/': [
             {
-                title: '第一部分：Objc知识归纳',
+                title: 'iOS核心',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    ['/ios/main/', '【开篇】'],
+                    '/ios/main/1-runtime/',
+                    '/ios/main/2-runloop/',
+                    '/ios/main/3-thread/',
+                    '/ios/main/4-block/',
+                    '/ios/main/5-kvc-kvo/',
+                    '/ios/main/6-arc/',
+                    '/ios/main/7-instrument/',
+                    '/ios/main/8-copy/',
+                    '/ios/main/9-llvm/',
+                    '/ios/main/10-module/',
+                    '/ios/main/11-ble/',
+                ]
+            },
+            {
+                title: 'Objc知识归纳',
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
                     ['/ios/objc/', '【开篇】'],
-                    '/ios/objc/base/1-runtime',
-                    '/ios/objc/base/2-runloop',
-                    '/ios/objc/base/3-thread',
-                    '/ios/objc/base/4-block',
-                    '/ios/objc/base/5-kvc-kvo',
-                    '/ios/objc/base/6-arc',
-                    '/ios/objc/base/7-instrument',
-                    '/ios/objc/base/8-copy',
-                    '/ios/objc/base/9-llvm',
                 ]
             },
             {
-                title: '第二部分：Swift知识归纳',
+                title: 'Swift知识归纳',
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
                     ['/ios/swift/', '【开篇】'],
-                    '/ios/swift/base/1',
-                    '/ios/swift/base/2',
-                    '/ios/swift/base/3'
-                ]
-            },
-            {
-                title: '第三部分：iOS组件化',
-                collapsable: true,
-                sidebarDepth: 1,
-                children: [
-                    ['/ios/module/', '【开篇】'],
-                    '/ios/module/1',
-                    '/ios/module/2',
-                    '/ios/module/3'
-                ]
-            },
-            {
-                title: '第四部分：iOS BLE技术',
-                collapsable: true,
-                sidebarDepth: 1,
-                children: [
-                    ['/ios/ble/', '【开篇】'],
-                    '/ios/ble/1',
-                    '/ios/ble/2',
-                    '/ios/ble/3'
+                    // '/ios/swift/',
                 ]
             }
         ],
         '/server/': [
             {
-                title: '第一部分：Java Server',
+                title: 'Java Server',
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
                     '/server/jdbc/',
                     '/server/maven/',
-                    '/server/mybatis/',
-                    '/server/springboot/'
+                    '/server/mybatis/'
                 ]
             },
             {
-                title: '第二部分：Nodejs Server',
+                title: 'Spring',
+                collapsable: true,
+                sidebarDepth: 1,
+                children: [
+                    '/server/spring1/',
+                    '/server/springmvc1/',
+                    '/server/springboot1/'
+                ]
+            },
+            {
+                title: 'Nodejs Server',
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
@@ -220,7 +227,7 @@ module.exports = {
                 ]
             },
             {
-                title: '第三部分：Python Server',
+                title: 'Python Server',
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
@@ -229,11 +236,11 @@ module.exports = {
                 ]
             },
             {
-                title: '第四部分：其他',
+                title: 'Other',
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    '/server/nginx/nginx1',
+                    '/server/nginx/',
                 ]
             }
         ],
@@ -267,8 +274,9 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    '/web/vue/1',
-                    '/web/vue/2'
+                    '/web/vue1/',
+                    '/web/vue2/',
+                    '/web/vue3/'
                 ]
             },
             {
@@ -276,39 +284,31 @@ module.exports = {
                 collapsable: true,
                 sidebarDepth: 1,
                 children: [
-                    '/web/wx/wxpublic1',
-                    '/web/wx/wxpublic2'
+                    '/web/wxpublic1/',
+                    '/web/wxpublic2/'
                 ]
             }
         ],
         '/database/': [
             {
-                title: '第一部分：Database',
-                collapsable: true,
+                title: 'Mysql',
+                collapsable: false,
                 sidebarDepth: 1,
                 children: [
-                    '/database/base/',
+                    '/database/mysql1/',
+                    '/database/mysql2/'
                 ]
             },
             {
-                title: '第二部分：Mysql',
-                collapsable: true,
-                sidebarDepth: 1,
-                children: [
-                    '/database/mysql/1',
-                    '/database/mysql/2',
-                ]
-            },
-            {
-                title: '第三部分：MongoDB',
-                collapsable: true,
+                title: 'MongoDB',
+                collapsable: false,
                 sidebarDepth: 1,
                 children: [
                     '/database/mongodb/'
                 ]
             },
             {
-                title: '第四部分：Redis',
+                title: 'Redis',
                 collapsable: false,
                 sidebarDepth: 1,
                 children: [
