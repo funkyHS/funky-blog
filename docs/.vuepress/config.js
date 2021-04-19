@@ -94,7 +94,7 @@ module.exports = {
     sidebarDepth: 2, // 侧边栏显示2级
     logo: '/logo.jpg',
     sidebar: {
-        '/guide/': [
+        /*'/guide/': [
             { // ios
                 title: 'iOS',
                 collapsable: true,
@@ -157,7 +157,7 @@ module.exports = {
             //         '/bigdata/spark/',
             //     ]
             // }
-        ],
+        ],*/
         '/ios/': [
             {
                 title: 'iOS核心',
