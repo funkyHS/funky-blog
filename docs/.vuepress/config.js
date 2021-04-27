@@ -76,9 +76,9 @@ module.exports = {
             text: 'Database',
             ariaLabel: 'Database Menu',
             items: [
-                { text: 'Mysql', link: '/database/mysql1/' },
-                { text: 'Mongodb', link: '/database/mongodb/' },
-                { text: 'Redis', link: '/database/redis/' }
+                { text: 'Mysql', link: '/database/mysql/1' },
+                { text: 'Mongodb', link: '/database/mongodb/1' },
+                { text: 'Redis', link: '/database/redis/1' }
             ]
         },
         // { // BigData
@@ -295,8 +295,8 @@ module.exports = {
                 collapsable: false,
                 sidebarDepth: 1,
                 children: [
-                    '/database/mysql1/',
-                    '/database/mysql2/'
+                    '/database/mysql/1',
+                    '/database/mysql/2'
                 ]
             },
             {
@@ -304,7 +304,7 @@ module.exports = {
                 collapsable: false,
                 sidebarDepth: 1,
                 children: [
-                    '/database/mongodb/'
+                    '/database/mongodb/1'
                 ]
             },
             {
@@ -312,7 +312,7 @@ module.exports = {
                 collapsable: false,
                 sidebarDepth: 1,
                 children: [
-                    '/database/redis/'
+                    '/database/redis/1'
                 ]
             }
         ],    
