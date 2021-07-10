@@ -1,5 +1,5 @@
 ---
-title: 【Nginx由浅入深】
+title: 1. Nginx由浅入深
 ---
 
 

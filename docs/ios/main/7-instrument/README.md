@@ -1,5 +1,5 @@
 ---
-title: 【Instrument】
+title: 7. Instrument
 ---
 
 [[TOC]]

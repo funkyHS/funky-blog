@@ -1,5 +1,5 @@
 ---
-title: 【Maven】
+title: 1. Maven
 ---
 
 [[TOC]]

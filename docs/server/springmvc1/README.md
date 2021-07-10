@@ -1,5 +1,5 @@
 ---
-title: 【SpringMVC】
+title: 1. SpringMVC
 ---
 
 # SpringMVC

@@ -1,5 +1,5 @@
 ---
-title: 【JavaScript】
+title: 1. JavaScript
 ---
 
 # JavaScript

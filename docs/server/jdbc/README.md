@@ -1,5 +1,5 @@
 ---
-title: 【JDBC】
+title: 1. JDBC
 ---
 
 [[TOC]]

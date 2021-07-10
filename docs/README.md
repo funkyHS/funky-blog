@@ -1,13 +1,13 @@
 ---
 home: true
 heroImage: #/background-cover.jpg
-heroText: Funky的知识仓库
+heroText: Funky的技术仓库
 tagline: 不积跬步，无以至千里
-actionText: 快速阅读 →
+actionText: 去看看 →
 actionLink: /guide/
 features:
 - title: 前端
-  details: iOS，Android，Web，微信小程序等基础知识的积累，Objective-C，Swift，Java，JavaScript等不同语言的特性。
+  details: iOS，Android，Web，微信小程序等基础知识的积累，Objective-C，Swift，Java，Kotlin，JavaScript等不同语言的特性。
 - title: 后端
   details: 后端的基础知识，Spring，Nodejs，Python等后端项目学习，数据库的基本操作及使用。
 - title: 大数据

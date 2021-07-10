@@ -1,5 +1,5 @@
 ---
-title: 【Spring】
+title: 1. Spring
 ---
 
 # Spring

@@ -1,5 +1,5 @@
 ---
-title: 【Mybatis】
+title: 1. Mybatis
 ---
 
 [[TOC]]

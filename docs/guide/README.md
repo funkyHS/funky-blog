@@ -1,43 +1,42 @@
 ---
-title: 学习资源
+title: 关于Funky
 ---
 
-
-# 目录
-
-
-## iOS
-
-### iOS核心
-- [runtime](../ios/main/1-runtime/)
-- [runloop](../ios/main/2-runloop/)
-- [thread](../ios/main/3-thread/)
-- [block](../ios/main/4-block/)
-- [kvc-kvo](../ios/main/5-kvc-kvo/)
-- [arc](../ios/main/6-arc/)
-- [instrument](../ios/main/7-instrument/)
-- [copy](../ios/main/8-copy/)
-- [llvm](../ios/main/9-llvm/)
-- [module](../ios/main/10-module/)
-- [ble](../ios/main/11-ble/)
-
-### Objc
-- [objc](../ios/objc/)
-
-
-### Swift
-- [swift](../ios/swift/)
+## 关于Blog
+- 很多曾经接触过的技术，没有及时巩固，一段时间后，总是会忘记，当时的短时记忆没有转化为长期记忆，就已经被遗忘，在想回忆知识点的时候，如果没有留下学习记录，无从下手，所以在很早之前就开始写Blog，记录自己的学习过程
+- 个人日常学习，生活的记录，笔记，备忘
 
 
 
-## Server
-- [JDBC](../server/jdbc/)
+## 关于Funky
+
+### 于生活
+- 要求：🌞 乐观的对待每一天，爱家人，爱生活
+- 目标：💪 希望通过自己的努力，让家人更幸福
+- 感恩：🙏 感恩那些在生活中帮助过我朋友
+
+
+### 于工作
+- 要求：🌞 不抱怨，不消极
+- 目标：💪 每天要保持进步，保持思考
+- 坚持：💪 不断积累，不停深耕，量变产生质变
+- 感恩：🙏 感恩那些在我成长路上给我指导的领导和同事
+
+
+## 联系
+- 邮箱：📮 hs1024942667@163.com
+- 企鹅：🐧 1824718008
 
 
 
-## Web
-- [Vue](../web/vue1/)
+## 私房
 
+- 2018-11 三亚
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/myself/2018-11-10.png" width="300"/>
 
-## Database
-- [JDBC](../database/mysql1/)
+- 2019-05 厦门
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/myself/2019-05-03.png" width="300"/>
+
+- 2019-11 云南
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/myself/2019-11-18.png" width="300"/>
+

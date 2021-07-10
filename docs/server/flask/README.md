@@ -1,5 +1,5 @@
 ---
-title: 【Flask】
+title: 1. Flask
 ---
 
 # Flask

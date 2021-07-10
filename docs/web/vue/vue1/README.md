@@ -1,5 +1,5 @@
 ---
-title: 【Vue基础一】
+title: 1. Vue基础一
 ---
 
 [[TOC]]

@@ -1,5 +1,5 @@
 ---
-title: 【SpringBoot】
+title: 1. SpringBoot
 ---
 
 # SpringBoot
