@@ -262,6 +262,7 @@ const sidebar = {
                 '/flutter/flutter/15-drawer/',
                 '/flutter/flutter/16-button/',
                 '/flutter/flutter/17-form/',
+                '/flutter/flutter/18-provider/',
             ]
         },
         {
