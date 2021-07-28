@@ -1,11 +1,11 @@
 
 const topNav = [ // nav
-    {text: '概述', link: '/' },
+    {text: 'Guide', link: '/' },
     //{text: 'iOS', link: '/ios/' },
     //{text: 'Android', link: '/android/' },
     {text: 'Flutter', link: '/flutter/' },
-    {text: '服务端', link: '/server/' },
-    {text: '前端', link: '/web/' },
+    {text: 'Server', link: '/server/' },
+    {text: 'Web', link: '/web/' },
     //{text: '数据库', link: '/database/' },
 
 /*
