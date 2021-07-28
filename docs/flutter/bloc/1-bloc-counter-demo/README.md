@@ -18,21 +18,15 @@ title: 1. Bloc基础-实现加减计数器
 
 
 
-## 2. bloc vs provider
-- bloc 是一种 mvvm 基于 事件、状态 驱动的
-- provider 是基于方法的
-
-
-## 3. 安装bloc vscode插件
+## 2. 安装bloc vscode插件
 - 有代码提示，并且可以快速生成代码
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/flutter/bloc/1/2.png" width="400"/>
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/flutter/bloc/1/3.png" width="300"/>
 
-## 4. 创建项目
+## 3. 创建项目
 
 - 新建flutter项目 bloc_counter_demo
-- 在lib下创建counter文件夹
-- 在counter文件夹下创建`counter_page.dart`页面
+- 创建`lib/counter/counter_page.dart`页面
 - 创建bloc文件夹
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/flutter/bloc/1/4.png" width="300"/>
 - 导入依赖
@@ -45,8 +39,9 @@ equatable: ^1.2.5  # 用来做类比较 ==
 
 
 
-## 5. 编写bloc
-- /counter/bloc/counter_event.dart
+## 4. 编写bloc
+- `/counter/bloc/counter_event.dart`
+
 ```dart
 part of 'counter_bloc.dart';
 
@@ -64,7 +59,7 @@ class CounterIncrementEvent extends CounterEvent {}
 class CounterSubductionEvent extends CounterEvent {}
 ```
 
-- /counter/bloc/counter_state.dart
+- `/counter/bloc/counter_state.dart`
 ```dart
 part of 'counter_bloc.dart';
 
@@ -91,7 +86,7 @@ class CounterChange extends CounterState {
 }
 ```
 
-- /counter/bloc/counter_bloc.dart
+- `/counter/bloc/counter_bloc.dart`
 ```dart
 import 'dart:async';
 
@@ -130,8 +125,8 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
 }
 ```
 
-## 6. 编写view
-- /counter/counter_page.dart
+## 5. 编写view
+- `/counter/counter_page.dart`
 ```dart
 import 'package:bloc_counter_demo/counter/bloc/counter_bloc.dart';
 import 'package:bloc_counter_demo/counter/counter_view.dart';
@@ -154,7 +149,7 @@ class CounterPage extends StatelessWidget {
 }
 ```
 
-- /counter/counter_page.dart
+- `/counter/counter_page.dart`
 ```dart
 import 'package:bloc_counter_demo/counter/bloc/counter_bloc.dart';
 import 'package:flutter/material.dart';

@@ -32,20 +32,23 @@ import 'routes/Routes.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => CountProvider(),
+    // 单个状态管理写法
+    // ChangeNotifierProvider(
+    //   create: (context) => CountProvider(),
+    //   child: MyApp(),
+    // )
+
+    // 全局共享多个状态管理Provider写法
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider( create: (context) => CountProvider() ),
+        ChangeNotifierProvider( create: (context) => OtherProvider() ),
+      ],
       child: MyApp(),
-    )
+    ),
   );
 
-  // 全局共享多个状态管理Provider写法
-  MultiProvider(
-    providers: [
-      ChangeNotifierProvider( create: (context) => CountProvider() ),
-      ChangeNotifierProvider( create: (context) => OtherProvider() ),
-    ],
-    child: MyApp(),
-  ),
+  
 }
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

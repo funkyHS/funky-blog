@@ -4,7 +4,7 @@ const topNav = [ // nav
     //{text: 'iOS', link: '/ios/' },
     //{text: 'Android', link: '/android/' },
     {text: 'Flutter', link: '/flutter/' },
-    //{text: '服务端', link: '/server/' },
+    {text: '服务端', link: '/server/' },
     {text: '前端', link: '/web/' },
     //{text: '数据库', link: '/database/' },
 
@@ -298,49 +298,7 @@ const sidebar = {
             children: [
                 '/server/mybatis/'
             ]
-        },
-        {
-            title: 'Spring',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                '/server/spring1/'
-            ]
-        },
-        {
-            title: 'SpringMVC',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                '/server/springmvc1/'
-            ]
-        },
-        {
-            title: 'SpringBoot',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                '/server/springboot1/'
-            ]
-        },
-        {
-            title: 'Express',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                '/server/express/',
-                // '/server/koa/',
-            ]
-        },
-        {
-            title: 'Flask',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                '/server/flask/',
-                // '/server/django/',
-            ]
-        },
+        },        
         {
             title: 'Nginx',
             collapsable: true,
@@ -348,7 +306,50 @@ const sidebar = {
             children: [
                 '/server/nginx/',
             ]
-        }
+        },
+        // {
+        //     title: 'SpringMVC',
+        //     collapsable: true,
+        //     sidebarDepth: 1,
+        //     children: [
+        //         '/server/springmvc1/'
+        //     ]
+        // },
+        // {
+        //     title: 'SpringBoot',
+        //     collapsable: true,
+        //     sidebarDepth: 1,
+        //     children: [
+        //         '/server/springboot1/'
+        //     ]
+        // },
+        // {
+        //     title: 'Spring',
+        //     collapsable: true,
+        //     sidebarDepth: 1,
+        //     children: [
+        //         '/server/spring1/'
+        //     ]
+        // },
+        // {
+        //     title: 'Express',
+        //     collapsable: true,
+        //     sidebarDepth: 1,
+        //     children: [
+        //         '/server/express/',
+        //         // '/server/koa/',
+        //     ]
+        // },
+        // {
+        //     title: 'Flask',
+        //     collapsable: true,
+        //     sidebarDepth: 1,
+        //     children: [
+        //         '/server/flask/',
+        //         // '/server/django/',
+        //     ]
+        // },
+        
     ],
     '/web/': [
         // {

@@ -5,8 +5,7 @@ title: 1. JDBC
 [[TOC]]
 
 
-## 1. JDBC
-### 1.1 JDBC本质--一套接口
+## 1. JDBC本质--一套接口
 - JDBC: Java DataBase Connectivity（Java语言连接数据库）
 - JDBC是SUN公司制定的一套接口（interface），java.sql.*; (这个软件包下有很多接口。)
 - 接口都有调用者和实现者。面向接口调用、面向接口写实现类，这都属于面向接口编程。
@@ -15,7 +14,7 @@ title: 1. JDBC
     - 多态机制就是非常典型的：面向抽象编程。（不要面向具体编程）
 - 每一个数据库的底层实现原理都不一样，Oracle数据库有自己的原理。MySQL数据库也有自己的原理。MS SqlServer数据库也有自己的原理。每一个数据库产品都有自己独特的实现原理。所以SUN制定一套JDBC接口，然后不同的数据库厂商实现JDBC接口
 
-### 1.2 JDBC编程六步
+## 2. JDBC编程六步
 - 第一步：注册驱动（作用：告诉Java程序，即将要连接的是哪个品牌的数据库）
 - 第二步：获取连接（表示JVM的进程和数据库进程之间的通道打开了，这属于进程之间的通信，重量级的，使用完之后一定要关闭通道。）
 - 第三步：获取数据库操作对象（专门执行sql语句的对象）
@@ -23,7 +22,7 @@ title: 1. JDBC
 - 第五步：处理查询结果集（只有当第四步执行的是select语句的时候，才有这第五步处理查询结果集。）
 - 第六步：释放资源（使用完资源之后一定要关闭资源。Java和数据库属于进程间的通信，开启之后一定要关闭。）
 
-### 1.3 JDBC使用外部配置文件，不需要重新编译
+## 3. JDBC使用外部配置文件，不需要重新编译
 - 配置文件：jdbc.properties
 ```properties
 driver="com.mysql.jdbc.Driver"
@@ -141,7 +140,7 @@ public class JDBCTest05 {
 }
 ```
 
-### 1.4 SQL注入
+## 4. SQL注入
 - SQL注入的根本原因
     - 用户输入的信息中含有sql语句的关键字，并且这些关键字参与sql语句的编译过程，导致sql语句的原意被扭曲，进而达到sql注入
 
@@ -169,7 +168,7 @@ public class JDBCTest05 {
 
 
 
-### 1.5 使用Statement 模拟用户登录
+## 5. 使用Statement 模拟用户登录
 ```java
 package com.funky;
 /*
@@ -283,7 +282,7 @@ public class JDBCTest06 {
 }
 ```
 
-### 1.6 使用PreparedStatement模拟用户登录，解决SQL注入
+## 6. 使用PreparedStatement模拟用户登录，解决SQL注入
 ```java
 package com.funky;
 
@@ -409,7 +408,7 @@ public class JDBCTest07 {
 ```
 
 
-### 1.7 使用PreparedStatement完成 insert，delete，update
+## 7. 使用PreparedStatement完成 insert，delete，update
 ```java
 package com.funky;
 
@@ -476,7 +475,7 @@ public class JDBCTest08 {
 ```
 
 
-### 1.8 JDBC 使用单机事务，回滚事务
+## 8. JDBC 使用单机事务，回滚事务
 ```java
 package com.funky;
 
@@ -576,7 +575,7 @@ public class JDBCTest09 {
 }
 ```
 
-### 1.9 JDBC封装工具类，使用工具类进行模糊查询
+## 9. JDBC封装工具类，使用工具类进行模糊查询
 - DBUtil.java
 ```java
 package com.funky.utils;
@@ -671,8 +670,7 @@ public class JDBCTest10 {
 
 
 
-
-## 2. 悲观锁和乐观锁
+## 10. 悲观锁和乐观锁
 - 悲观锁：事务必须排队执行。数据锁住了，不允许并发（行级锁，在select后面添加for update）
 - 乐观锁：支持并发，事务也不需要排队，只不过需要一个版本号
 
