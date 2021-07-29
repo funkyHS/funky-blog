@@ -6,163 +6,11 @@ const topNav = [ // nav
     {text: 'Flutter', link: '/flutter/' },
     {text: 'Server', link: '/server/' },
     {text: 'Web', link: '/web/' },
-    //{text: '数据库', link: '/database/' },
-
-/*
-    {text: '归档', link: '/guide/' },
-
-    { // iOS
-        text: 'iOS',
-        ariaLabel: 'iOS Menu',
-        items: [
-            { text: 'iOS核心', link: '/ios/main/' },
-            { text: 'Objc', link: '/ios/objc/' },
-            { text: 'Swift', link: '/ios/swift/'}
-        ]
-    },
-
-    { // Server
-        text: 'Server',
-        items: [
-            { 
-                text: '-- Java --', 
-                items: [
-                    { text: 'JDBC', link: '/server/jdbc/' },
-                    { text: 'Maven', link: '/server/maven/' },
-                    { text: 'Mybatis', link: '/server/mybatis/' }
-                ] 
-            },
-            { 
-                text: '-- Spring --', 
-                items: [
-                    { text: 'Spring', link: '/server/spring1/' },
-                    { text: 'SpringMVC', link: '/server/springmvc1/' },
-                    { text: 'SpringBoot', link: '/server/springboot1/' }
-                ] 
-            },
-            { 
-                text: '-- Node --', 
-                items: [ 
-                    { text: 'Express', link: '/server/express/' } 
-                ] 
-            },
-            { 
-                text: '-- Python --', 
-                items: [ 
-                    { text: 'Flask', link: '/server/flask/' } 
-                ] 
-            },
-            { 
-                text: '-- Other --', 
-                items: [ 
-                    { text: 'Nginx', link: '/server/nginx/' } 
-                ] 
-            }
-        ]
-    },
-
-    { // Web
-        text: 'Web',
-        ariaLabel: 'Web Menu',
-        items: [
-            { text: 'Html', link: '/web/html/' },
-            { text: 'Css', link: '/web/css/' },
-            { text: 'Javascript', link: '/web/js/' },
-            { text: 'Vue', link: '/web/vue1/' },
-            { text: '微信公众平台', link: '/web/wxpublic1/' }
-        ]
-    },
-
-    { // Database
-        text: 'Database',
-        ariaLabel: 'Database Menu',
-        items: [
-            { text: 'Mysql', link: '/database/mysql/1' },
-            { text: 'Mongodb', link: '/database/mongodb/1' },
-            { text: 'Redis', link: '/database/redis/1' }
-        ]
-    },
-
-    { // BigData
-        text: 'BigData',
-        ariaLabel: 'BigData Menu',
-        items: [
-            { text: 'Python', link: '/bigdata/python/' },
-            { text: 'Spark', link: '/bigdata/spark/' }
-        ]
-    }
-*/
 ];
 
 
 
 const sidebar = {
-/*
-    '/guide/': [
-        { // ios
-            title: 'iOS',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                ['/ios/objc/', '【Objc知识归纳】'],
-                ['/ios/swift/', '【Swift知识归纳】'],
-                ['/ios/module/', '【iOS 组件化】'],
-                ['/ios/ble/', '【iOS BLE技术】'],
-                // ['/ios/objc/', 'Objectice-C'] // 如果使用这种方式定义title，就不能在README文件中使用title
-            ]
-        },
-        { // server
-            title: 'Server',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                '/server/jdbc/',
-                '/server/maven/',
-                '/server/mybatis/',
-                '/server/spring1/',
-                '/server/springmvc1/',
-                '/server/springboot1/',
-                '/server/express/',
-                '/server/flask/'
-            ]
-        },
-        { // web
-            title: 'Web',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                '/web/html/',
-                '/web/css/',
-                '/web/js/',
-                '/web/vue1/',
-                '/web/vue2/',
-                '/web/vue3/',
-                '/web/wxpublic1/',
-                '/web/wxpublic2/'
-            ]
-        },
-        { // database
-            title: 'Database',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                '/database/mysql1/',
-                '/database/mysql2/',
-                '/database/mongodb/',
-                '/database/redis/'
-            ]
-        },
-        // { // bigdata
-        //     title: 'BigData',
-        //     collapsable: true,
-        //     sidebarDepth: 1,
-        //     children: [
-        //         '/bigdata/python/',
-        //         '/bigdata/spark/',
-        //     ]
-        // }
-    ],
-*/
     '/ios/': [
         {
             title: 'iOS基础',
@@ -224,7 +72,7 @@ const sidebar = {
         {
             title: 'Dart学习',
             collapsable: true,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [
                 '/flutter/dart/1-dart/',
                 '/flutter/dart/2-var-final-const/',
@@ -243,7 +91,7 @@ const sidebar = {
         {
             title: 'Flutter学习',
             collapsable: true,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [
                 '/flutter/flutter/1-run/',
                 '/flutter/flutter/2-custom-widget/',
@@ -268,7 +116,7 @@ const sidebar = {
         {
             title: 'Flutter Bloc架构学习',
             collapsable: true,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [
                 '/flutter/bloc/1-bloc-counter-demo/',
             ]
@@ -278,7 +126,7 @@ const sidebar = {
         {
             title: 'JDBC',
             collapsable: true,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [
                 '/server/jdbc/',
             ]
@@ -286,15 +134,16 @@ const sidebar = {
         {
             title: 'Maven',
             collapsable: true,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [
-                '/server/maven/',
+                '/server/maven/1-maven-base/',
+                '/server/maven/2-maven-module/',
             ]
         },
         {
             title: 'MyBatis',
             collapsable: true,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [
                 '/server/mybatis/'
             ]
@@ -302,9 +151,26 @@ const sidebar = {
         {
             title: 'Nginx',
             collapsable: true,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [
                 '/server/nginx/',
+            ]
+        },
+        {
+            title: 'Mysql',
+            collapsable: true,
+            sidebarDepth: 2,
+            children: [
+                '/server/mysql/1',
+                '/server/mysql/2'
+            ]
+        },
+        {
+            title: 'MongoDB',
+            collapsable: true,
+            sidebarDepth: 2,
+            children: [
+                '/server/mongodb/1'
             ]
         },
         // {
@@ -349,7 +215,6 @@ const sidebar = {
         //         // '/server/django/',
         //     ]
         // },
-        
     ],
     '/web/': [
         // {
@@ -379,7 +244,7 @@ const sidebar = {
         {
             title: 'Vue',
             collapsable: true,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [
                 '/web/vue/vue1/',
                 '/web/vue/vue2/',
@@ -389,40 +254,13 @@ const sidebar = {
         {
             title: '微信公众平台',
             collapsable: true,
-            sidebarDepth: 1,
+            sidebarDepth: 2,
             children: [
                 '/web/wxpublic/wxpublic1/',
                 '/web/wxpublic/wxpublic2/'
             ]
         }
     ],
-    '/database/': [
-        {
-            title: 'Mysql',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                '/database/mysql/1',
-                '/database/mysql/2'
-            ]
-        },
-        {
-            title: 'MongoDB',
-            collapsable: true,
-            sidebarDepth: 1,
-            children: [
-                '/database/mongodb/1'
-            ]
-        },
-        // {
-        //     title: 'Redis',
-        //     collapsable: true,
-        //     sidebarDepth: 1,
-        //     children: [
-        //         '/database/redis/1'
-        //     ]
-        // }
-    ],    
 };
 
 

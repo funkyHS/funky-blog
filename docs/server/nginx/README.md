@@ -8,14 +8,14 @@ title: 1. Nginx由浅入深
 
 ## 1. Nginx基本概念
 
-### 什么是Nginx
-- [Nginx](https://lnmp.org/nginx.html) ("engine x") 是一个`高性能的HTTP和反向代理服务器`，特点是`占有内存少，并发能力强`。
+### 1.1 什么是Nginx
+- [Nginx](https://lnmp.org/nginx.html) ("engine x") 是一个`高性能的HTTP和反向代理服务器`，特点是`占有内存少，并发能力强`
 
 
-### Nginx作为web服务器
+### 1.2 Nginx作为web服务器
 - Nginx 可以作为静态页面的 web 服务器，同时还支持 CGI 协议的动态语言，比如 perl、php等，但是不支持 java。Java 程序只能通过与 tomcat 配合完成。Nginx 专为性能优化而开发，性能是其最重要的考量,实现上非常注重效率 ，能经受高负载的考验,有报告表明能支持高达 50,000 个并发连接数。
 
-### 正向代理与反向代理
+### 1.3 正向代理与反向代理
 #### 正向代理
 - 在客户端（浏览器）配置代理服务器，通过代理服务器进行互联网访问
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/nginx/1.png" width="600"/>
@@ -25,14 +25,14 @@ title: 1. Nginx由浅入深
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/nginx/2.png" width="600"/>
 
 
-### 负载均衡
+### 1.4 负载均衡
 - 客户端发送多个请求到服务器，服务器处理请求，有一些可能要与数据库进行交互，服务器处理完毕后，再将结果返回给客户端。
 - 这种架构模式对于早期的系统相对单一，并发请求相对较少的情况下是比较适合的，成本也低。但是随着信息数量的不断增长，访问量和数据量的飞速增长，以及系统业务的复杂度增加，这种架构会造成服务器相应客户端的请求日益缓慢，并发量特别大的时候，还容易造成服务器直接崩溃。很明显这是由于服务器性能的瓶颈造成的问题，那么如何解决这种情况呢？
 - 我们首先想到的可能是升级服务器的配置，比如提高 CPU 执行频率，加大内存等提高机器的物理性能来解决此问题，但是我们知道摩尔定律的日益失效，硬件的性能提升已经不能满足日益提升的需求了。最明显的一个例子，天猫双十一当天，某个热销商品的瞬时访问量是极其庞大的，那么类似上面的系统架构，将机器都增加到现有的顶级物理配置，都是不能够满足需求的。那么怎么办呢？
 - 上面的分析我们去掉了增加服务器物理配置来解决问题的办法，也就是说纵向解决问题的办法行不通了，那么横向增加服务器的数量呢？这时候集群的概念产生了，单个服务器解决不了，我们增加服务器的数量，然后将请求分发到各个服务器上，将原先请求集中到单个服务器上的情况改为将请求分发到多个服务器上，将负载分发到不同的服务器，也就是我们所说的负载均衡
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/nginx/3.png" width="600"/>
 
-### 动静分离
+### 1.5 动静分离
 - 为了加快网站的解析速度，可以把动态页面和静态页面由不同的服务器来解析，加快解析速度。降低原来单个服务器的压力。
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/nginx/4.png" width="600"/>
 
@@ -68,7 +68,7 @@ title: 1. Nginx由浅入深
 - 我这里是最新版本nginx配置，后面在补充
 - 下面主要介绍老版本的配置，老版本的配置主要是在`nginx.conf`中
 
-### Mac系统中Nginx的配置
+### 4.1 Mac系统中Nginx的配置
 - 在mac中使用`nginx -t`命令，可以查看到配置文件的位置，我这里的位置是在：`/usr/local/etc/nginx/nginx.conf`
 - nginx在mac上日志路径：/usr/local/var/log/nginx/access.log
 - 查看nginx是否启动：ps -ef | grep nginx
@@ -313,7 +313,7 @@ server {
 ```
 - 在浏览器中访问`http://127.0.0.1:80/edu/a.html`，不断刷新，可以看到成功转发到不同的端口中了
 
-### 负载均衡分配策略
+### 7.1 负载均衡分配策略
 - 负载均衡（load balance）即是将负载分摊到不同的服务单元，既保证服务的可用性，又保证响应足够快，给用户很好的体验。
 - 快速增长的访问量和数据流量催生了各式各样的负载均衡产品，很多专业的负载均衡硬件提供了很好的功能，但却价格不菲，这使得负载均衡软件大受欢迎，nginx 就是其中的一个，在 linux 下有 Nginx、 LVS、 Haproxy 等等服务可以提供负载均衡服务，而且 Nginx 提供了几种分配方式(策略)
 
@@ -339,7 +339,7 @@ upstream myserver{
 }
 ```
 
-### fair(第三方)
+### 7.2 fair(第三方)
 - Ngnix负载均衡第三方分配策略。按后端服务器的响应时间来分配请求，响应时间短的优先分配。
 ```shell
 upstream myserver{
@@ -388,12 +388,12 @@ server {
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/nginx/7.png" width="600"/>
 - 需要两台 nginx 服务器，需要 keepalived，需要虚拟ip(对外部可访问)
 
-### 准备工作
+### 9.1 准备工作
 - 需要两台服务器 192.168.17.129 和 192.168.17.131
 - 在两台服务器安装 Nginx
 - 在两台服务器安装 keepalived
 
-### keepalived
+### 9.2 keepalived
 - 在CenterOS中 使用 yum 命令进行安装yum install keepalived –y
 - 安装之后，生成目录`/etc/keepalived`，配置文件：keepalived.conf
 - 修改/etc/keepalived/keepalivec.conf配置文件
@@ -482,7 +482,7 @@ server {
 
 ## 11. Nginx的原理解析
 
-### mater 和 worker
+### 11.1 mater 和 worker
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/nginx/8.png" width="600"/>
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/nginx/9.png" width="600"/>
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/nginx/10.png" width="600"/>
@@ -490,14 +490,14 @@ server {
     - 发送请求，先到Nginx中的Master，Master相当于一个管理员，管理员得到任务之后，把任务给下面的Worker
     - Worker通过争抢机制，得到任务，然后可以进行反向代理，用tomcat完成请求的具体操作
 
-### 一个master多个workers 的机制好处
+### 11.2 一个master多个workers 的机制好处
 - 可以使用 `nginx -s reload` 热部署，线上的nginx是不能结束的，使用reload重新加载其他的Work，不影响正在运行的Work
 - 对于每个 worker 进程来说，独立的进程，不需要加锁，所以省掉了锁带来的开销，同时在编程以及问题查找时，也会方便很多
 - 采用独立的进程，可以让互相之间不会影响，一个进程退出后，其它进程还在工作，服务不会中断， master 进程则很快启动新的worker进程。
 - worker 进程的异常退出，肯定是程序有 bug 了，异常退出，会导致当前 worker 上的所有请求失败，不过不会影响到所有请求，所以降低了风险
 
 
-### 需要设置多少个 worker
+### 11.3 需要设置多少个 worker
 - Nginx 同 redis 类似都采用了 io 多路复用机制，每个 worker 都是一个独立的进程，但每个进程里只有一个主线程，通过异步非阻塞的方式来处理请求， 即使是千上万个请求也不在话下。每个 worker 的线程可以把一个 cpu 的性能发挥到极致。
 - 所以 worker 数和服务器的cpu数相等是最为适宜的。设少了会浪费 cpu，设多了会造成 cpu 频繁切换上下文带来的损耗。
 ```shell
@@ -509,7 +509,7 @@ worker_cpu_affinity 0001 0010 0100 1000
 worker_cpu_affinity 0000001 00000010 00000100 00001000
 ```
 
-### 连接数 worker_connection
+### 11.4 连接数 worker_connection
 - 发送请求，占用了worker的几个连接数？2个或者4个
     - 2个：如果请求的是静态资源，nginx把请求指向静态资源服务器，直接将请求返回了，这样就占用了2个
     - 4个：如果nginx要访问tomcat，查询数据库，那么就需要占用4个连接数

@@ -5,6 +5,9 @@ title: 1. Mybatis
 [[TOC]]
 
 
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/mybatis/0.png" width="900"/>
+
+
 
 ## 1. 框架概述
 ### 1.1 软件开发常用结构
@@ -25,20 +28,20 @@ title: 1. Mybatis
 
 ### 1.2 框架
 - 模版：
-    - 规定了好一些条款，内容。
+    - 规定好了一些条款，内容。
     - 加入自己的东西
 - 框架是一个模块
     - 框架中定义好了一些功能。这些功能是可用的
     - 可以加入项目中自己的功能， 这些功能可以利用框架中写好的功能。
-- 框架是一个软件，半成品的软件，定义好了一些基础功能， 需要加入你的功能就是完整的。基础功能是可重复使用的，可升级的。
+- 框架是一个软件，半成品的软件，定义好了一些基础功能，需要加入自己的功能就是完整的。基础功能是可重复使用的，可升级的。
 - 框架特点：
-    - 框架一般不是全能的， 不能做所有事情
-    - 框架是针对某一个领域有效。 特长在某一个方面，比如mybatis做数据库操作强，但是他不能做其它的。
+    - 框架一般不是全能的，不能做所有事情
+    - 框架是针对某一个领域有效。特长在某一方面，比如mybatis做数据库操作强，但是不能做其它的
     - 框架是一个软件
 - 常用框架：
-    - `MyBatis 框架`: MyBatis 是一个优秀的基于 java 的持久层框架，内部封装了 jdbc，开发者只需要关注 sql 语句本身，而不需要处理加载驱动、创建连接、创建 statement、关闭连接，资源等繁杂的过程。 MyBatis 通过 xml 或注解两种方式将要执行的各种 sql 语句配置起来，并通过 java 对象和 sql 的 动态参数进行映射生成最终执行的 sql 语句，最后由 mybatis 框架执行 sql 并将结果映射为 java对象并返回。
+    - `MyBatis 框架`: MyBatis 是一个优秀的基于 java 的持久层框架，内部封装了 jdbc，开发者只需要关注 sql 语句本身，而不需要处理加载驱动、创建连接、创建 statement、关闭连接，资源等繁杂的过程。 **MyBatis 通过 xml 或注解两种方式将要执行的各种 sql 语句配置起来，并通过 java 对象和 sql 的 动态参数进行映射生成最终执行的 sql 语句，最后由 mybatis 框架执行 sql 并将结果映射为 java对象并返回。**
     - `Spring 框架`：Spring框架为了解决软件开发的复杂性而创建的。Spring使用的是基本的JavaBean来完成以前非常复杂的企业级开发。Spring 解决了业务对象，功能模块之间的耦合，不仅在 javase,web 中使用， 大部分 Java 应用都可以从 Spring 中受益。Spring 是一个轻量级控制反转(IoC)和面向切面(AOP)的容器。
-    - `SpringMVC 框架`：Spring MVC 属于 SpringFrameWork 3.0 版本加入的一个模块，为 Spring 框架提供了构建 Web应用程序的能力。现在可以 Spring 框架提供的 SpringMVC 模块实现 web 应用开发，在 web 项目中 可以无缝使用 Spring 和 Spring MVC 框架。
+    - `SpringMVC 框架`：Spring MVC 属于 SpringFrameWork 3.0 版本加入的一个模块，为 Spring 框架提供了构建 Web应用程序的能力。现在可以用 Spring 框架提供的 SpringMVC 模块实现 web 应用开发，在 web 项目中 可以无缝使用 Spring 和 Spring MVC 框架。
 
 ### 1.3 使用JDBC的缺陷
 - 代码比较多，开发效率低
@@ -52,17 +55,15 @@ title: 1. Mybatis
 - MyBatis是 MyBatis SQL Mapper Framework for Java （sql映射框架）
     - SQL Mapper : sql映射，可以把数据库表中的一行数据  映射为 一个java对象。一行数据可以看做是一个java对象。操作这个对象，就相当于操作表中的数据
     - Data Access Objects（DAOs） : 数据访问 ， 对数据库执行增删改查。
-
 - MyBatis提供了哪些功能：
     - 提供了创建Connection ,Statement, ResultSet的能力 ，不用开发人员创建这些对象了
-    - 提供了执行sql语句的能力， 不用你执行sql
+    - 提供了执行sql语句的能力， 不用自己执行sql
     - 提供了循环sql， 把sql的结果转为java对象， List集合的能力
-    - 提供了关闭资源的能力，不用你关闭Connection, Statement, ResultSet
-
+    - 提供了关闭资源的能力，不用自己关闭Connection, Statement, ResultSet
 - 开发人员做的是： 提供sql语句
-- 开发人员提供sql语句--MyBatis处理sql---开发人员得到List集合或java对象（表中的数据）
+- 开发人员提供sql语句 --> MyBatis处理sql --> 开发人员得到List集合或java对象（表中的数据）
 - **总结：**
-    - mybatis是一个sql映射框架，提供的数据库的操作能力。增强的JDBC,
+    - mybatis是一个sql映射框架，提供的数据库的操作能力。增强的JDBC
     - 使用mybatis让开发人员写sql就可以了，不必关心Connection,Statement,ResultSet
   的创建，销毁，sql的执行。 
 
@@ -81,11 +82,12 @@ title: 1. Mybatis
 **（1）新建的student表**
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/mybatis/1.png" width="600"/>
 
-**（2）在maven的配置文件pom.xml中加入mybatis坐标，mysql驱动的坐标**
+**（2）在maven的配置文件pom.xml中加入mybatis坐标，mysql驱动坐标**
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/java/mybatis/2.png" width="600"/>
 
 **（3）创建实体类，Student 保存表中的一行数据**
-在domain包下创建Student.java类
+
+- 在domain包下创建Student.java类
 ```java
 package com.funky.domain;
 
@@ -144,32 +146,41 @@ public interface StudentDao {
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.funky.dao.StudentDao">
 
-<!--select: 表示查询操作
+<!--
+    select: 表示查询操作
     id: 你要执行的sql语法的唯一标识，mybatis会使用这个id的值来找到要执行的sql语句，可以自定义，但是要求你使用接口中的方法名称
+    
     resultType: 表示结果类型的，是sql语句执行后得到的ResultSet，遍历这个ResultSet得到java对象的类型。
-                值写的是类型的全限定名称-->
+    resultType的值 是类型的全限定名称
+-->
     <select id="selectStudents" resultType="com.funky.domain.Student">
         select id,name,email,age from student order by id
     </select>
 </mapper>
 
-<!--sql映射文件：写sql语句的，mybatis会执行这些sql
+<!--
+当前文件是sql映射文件：写sql语句的，mybatis会执行这些sql
+
     1. 指定约束文件
     <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
       mybatis-3-mapper.dtd 是约束文件的名称，扩展名是dtd的
+
     2. 约束文件作用：限制，检查在当前文件中出现的标签，属性必须符合mybatis的要求
+
     3. mapper 是当前文件的根标签，必须的
         namespace：叫做命名空间，唯一值的，可以是自定义的字符串，要求你使用dao接口的全限定名称
+
     4. 在当前文件中，可以使用特定的标签，表示数据库的特定操作
         <select>：表示执行查询，select语句
         <update>：表示更新数据库的操作，就是在<update>标签中写 update sql语句
         <insert>：表示插入，放的是insert语句
-        <delete>：表示删除，执行的delete语句-->
+        <delete>：表示删除，执行的delete语句
+-->
 ```
 
-**（6）创建mybatis的主配置文件：一个项目就一个主配置文件，主配置文件提供了数据库的连接信息和sql映射文件的位置信息**
+**（6）在resources目录下，创建mybatis的主配置文件：一个项目就一个主配置文件，主配置文件提供了数据库的连接信息和sql映射文件的位置信息**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 
@@ -636,7 +647,8 @@ public class TestMyBatis {
 
 ### 3.4 深入理解参数
 - 从java代码中把数据传入到mapper文件的sql语句中
-- parameterType：写在mapper文件中的一个属性。表示dao接口中方法的参数的数据类型
+
+- **parameterType：写在mapper文件中的一个属性。表示dao接口中方法的参数的数据类型**
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
@@ -670,7 +682,7 @@ public void testSelectStudentById() {
 }
 ```
 
-- 一个简单类型的参数
+- **一个简单类型的参数**
 ```java
 public interface StudentDao {
     /*
@@ -682,7 +694,7 @@ public interface StudentDao {
 }
 ```
 
-- mybatis内部机制，其实是封装的jdbc
+- **mybatis内部机制，其实是封装的jdbc**
 ```xml
 <!--
     使用 #{}之后，mybatis执行sql是使用的jdbc中的PreparedStatement对象，由mybatis执行下面的代码：
@@ -708,13 +720,17 @@ public interface StudentDao {
     </select>
 ```
 
-- 多个参数--使用@Param
-接口类
+- **多个参数--使用@Param**
+
+接口类StudentDao
 ```java
-/*
-    多个参数：命名参数，在形参定义的前面加入 @Param("自定义参数名称")
- */
-public List<Student> selectMulitParam(@Param("myname") String name, @Param("myage") Integer age);
+public interface StudentDao {
+    /*
+        多个参数：命名参数，在形参定义的前面加入 @Param("自定义参数名称")
+    */
+    List<Student> selectMulitParam(@Param("myname") String name,
+                                    @Param("myage") Integer age);
+}
 ```
 
 mapper类
@@ -740,8 +756,9 @@ public void testSelectMultiParam() {
 ```
 
 
-- 多个参数--使用对象
-创建Object
+- **多个参数，使用对象**
+
+创建QueryParam类
 ```java
 public class QueryParam {
     private String paramName;
@@ -756,11 +773,13 @@ public class QueryParam {
 
 接口类
 ```java
-/*
-    多个参数：使用java对象作为接口中方法的参数
-*/
-List<Student> selectMultiObject(QueryParam param);
-List<Student> selectMultiStudent(Student param);
+public interface StudentDao {
+    /*
+        多个参数：使用java对象作为接口中方法的参数
+    */
+    List<Student> selectMultiObject(QueryParam param);
+    List<Student> selectMultiStudent(Student param);
+}
 ```
 
 mapper文件
@@ -823,14 +842,16 @@ public void testSelectMultiStudent() {
 }
 ```
 
-- 多个参数--按位置(不建议使用)
+- **多个参数，按位置(不建议使用)**
 ```java
-/*
-    多个参数-简单类型的，按位置
-    mybatis 3.4之前，使用#{0}, #{1}
-            3.4之后，使用 #{arg0}, #{arg1}
-*/
-List<Student> selectMultiPosition(String name, Integer age);
+public interface StudentDao {
+    /*
+        多个参数-简单类型的，按位置
+        mybatis 3.4之前，使用 #{0}, #{1}
+                3.4之后，使用 #{arg0}, #{arg1}
+    */
+    List<Student> selectMultiPosition(String name, Integer age);
+}
 ```
 
 ```xml
@@ -840,13 +861,16 @@ List<Student> selectMultiPosition(String name, Integer age);
 </select>
 ```
 
-- 多个参数--Map(不建议使用)
+- **多个参数，Map(不建议使用)**
     - 可读性差，看不到参数的个数，阿里巴巴的手册，不建议使用map
+
 ```java
-/*
-    多个参数-Map
-*/
-List<Student> selectMultiByMap(Map<String,Object> map);
+public interface StudentDao {
+    /*
+        多个参数-Map
+    */
+    List<Student> selectMultiByMap(Map<String,Object> map);
+}
 ```
 
 ```xml
@@ -875,7 +899,7 @@ public void testSelectMultiByMap() {
 }
 ```
 
-- `#和$`
+- **# 和 $**
     - `#`：告诉mybatis使用实际的参数值代替，并使用PrepareStatement对象执行sql语句，`#{...}`代替sql语句的“？”，这样做更安全，更迅速，通常也是首选的做法。
     - `$`：字符串替换，告诉mybatis使用$包含的“字符串”替换所在位置。使用Statement把sql语句和${}的内容连接起来。主要用在替换表名，列名，不同列排序等操作，有sql注入的风险，缺乏安全性
 
@@ -887,16 +911,18 @@ public void testSelectMultiByMap() {
 
 
 ### 3.5 封装MyBatis输出结果
-- resultType结果类型，指sql语句执行完毕后，数据转为的java对象，java类型是任意的
+- resultType结果类型
+    - 指sql语句执行完毕后，数据转为的java对象，java类型是任意的
 - 处理方式：
     - mybatis执行sql语句，然后mybatis调用类的无参数构造方法，创建对象。          
     - mybatis把ResultSet指定列值付给同名的属性
-- resultType结果类型的值：可以是类型的全限定名称，也可以是类型的别名。例如：java.lang.Interger别名是int
-
+- resultType结果类型的值：
+    - 可以是类型的全限定名称，也可以是类型的别名。例如：java.lang.Interger别名是int
 - 定义自定义类型的别名
     - 在mybatis主配置文件中定义，使用`<typeAlias>`定义别名
     - 可以在resultType中使用自定义别名
-在mybatis.xml中添加如下 
+
+**在mybatis.xml中添加如下**
 ```xml
 <!--定义别名-->
 <typeAliases>
@@ -1034,7 +1060,7 @@ public class MyStudent {
 
 
 
-- 模糊查询like
+- **模糊查询like**
 
 接口定义类
 ```java
@@ -1095,7 +1121,7 @@ public void testSelectLikeTwo() {
 - 动态sql：sql的内容是变化的，可以根据条件获取到不同的sql语句，主要是where部分发生变化
 - 动态sql的实现，使用的是mybatis提供的标签：`<if>`,`<where>`,`<foreach>`
 
-接口类：
+### 4.1 接口类
 
 ```java
 public interface StudentDao {
@@ -1115,7 +1141,7 @@ public interface StudentDao {
 }
 ```
 
-mapper文件
+### 4.2 mapper文件
 ```xml
 <mapper namespace="com.funky.dao.StudentDao">
 
@@ -1179,7 +1205,7 @@ mapper文件
 </mapper>
 ```
 
-测试类：
+### 4.3 测试类
 ```java
 public class TestMyBatis {
 
@@ -1276,7 +1302,7 @@ public class TestMyBatis {
 
 ## 5. MyBatis配置文件
 
-- 主配置文件
+### 5.1 主配置文件
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -1353,7 +1379,7 @@ public class TestMyBatis {
 </configuration>
 ```
 
-- 主配置文件中的mappers
+### 5.2 主配置文件中的mappers
 
 ```xml
 <configuration>
@@ -1375,7 +1401,7 @@ public class TestMyBatis {
 </configuration>
 ```
 
-- 主配置文件中的settings
+### 5.3 主配置文件中的settings
 
 ```xml
     
@@ -1433,23 +1459,19 @@ public class TestMyBatis {
 ```
 
 
+### 5.4 数据库的属性配置文件
+- 把数据库连接信息放到一个单独的文件中。和mybatis主配置文件分开。目的是便于修改，保存，处理多个数据库的信息
+- 在resources目录中定义一个属性配置文件，xxx.properties，例如`jdbc.properties`在属性配置文件中，定义数据，格式是key=value，key一般使用 . 做多级目录的, 例如 jdbc.mysql.driver,  jdbc.driver
 
-- 数据库的属性配置文件：把数据库连接信息放到一个单独的文件中。和mybatis主配置文件分开。目的是便于修改，保存，处理多个数据库的信息
-    - 自私resources目录中定义一个属性配置文件，xxx.properties，例如jdbc.properties在属性配置文件中，定义数据，格式是key=value，key一般使用 . 做多级目录的, 例如 jdbc.mysql.driver,  jdbc.driver
-    - 在mybatis的主配置文件
-
-
-jdbc.properties配置文件
-```java
+- jdbc.properties配置文件
+```properties
 jdbc.driver=com.mysql.jdbc.Driver
 jdbc.url=jdbc:mysql://localhost:3306/mybatis_study?useUnicode=true&amp;characterEncoding=utf-8
 jdbc.user=root
 jdbc.passwd=Funky123456
 ```
 
-
-
-mybatis的主配置文件
+- mybatis的主配置文件
 ```xml
 <configuration>
     <!--指定properties文件的位置，从类路径根开始找文件-->
