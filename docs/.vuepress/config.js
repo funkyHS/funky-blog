@@ -173,6 +173,17 @@ const sidebar = {
                 '/server/mongodb/1'
             ]
         },
+        {
+            title: 'Spring',
+            collapsable: true,
+            sidebarDepth: 2,
+            children: [
+                '/server/spring/1-spring-ioc/',
+                '/server/spring/2-spring-aop/',
+                '/server/spring/3-spring-mybatis/',
+                '/server/spring/4-spring-transactional/',
+            ]
+        },
         // {
         //     title: 'SpringMVC',
         //     collapsable: true,
