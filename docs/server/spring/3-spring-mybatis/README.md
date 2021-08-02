@@ -399,7 +399,7 @@ public class StudentServiceImpl implements StudentService {
 ```properties
 jdbc.url=jdbc:mysql://localhost:3306/mybatis_study?useUnicode=true&characterEncoding=utf-8
 jdbc.user=root
-jdbc.passwd=Husheng0328
+jdbc.passwd=12345
 jdbc.max=20
 ```
 

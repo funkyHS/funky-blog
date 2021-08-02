@@ -123,7 +123,7 @@ const sidebar = {
         }
     ],
     '/server/': [
-        {
+        { // JDBC
             title: 'JDBC',
             collapsable: true,
             sidebarDepth: 2,
@@ -131,7 +131,7 @@ const sidebar = {
                 '/server/jdbc/',
             ]
         },
-        {
+        { // Maven
             title: 'Maven',
             collapsable: true,
             sidebarDepth: 2,
@@ -140,15 +140,18 @@ const sidebar = {
                 '/server/maven/2-maven-module/',
             ]
         },
-        {
+        { // MyBatis
             title: 'MyBatis',
             collapsable: true,
             sidebarDepth: 2,
             children: [
-                '/server/mybatis/'
+                '/server/mybatis/1-mybatis-base/',
+                '/server/mybatis/2-mybatis-proxy/',
+                '/server/mybatis/3-mybatis-sql/',
+                '/server/mybatis/4-mybatis-config/',
             ]
         },        
-        {
+        { // Nginx
             title: 'Nginx',
             collapsable: true,
             sidebarDepth: 2,
@@ -156,7 +159,7 @@ const sidebar = {
                 '/server/nginx/',
             ]
         },
-        {
+        { // Mysql
             title: 'Mysql',
             collapsable: true,
             sidebarDepth: 2,
@@ -165,7 +168,7 @@ const sidebar = {
                 '/server/mysql/2'
             ]
         },
-        {
+        { // MongoDB
             title: 'MongoDB',
             collapsable: true,
             sidebarDepth: 2,
@@ -173,7 +176,7 @@ const sidebar = {
                 '/server/mongodb/1'
             ]
         },
-        {
+        { // Spring
             title: 'Spring',
             collapsable: true,
             sidebarDepth: 2,

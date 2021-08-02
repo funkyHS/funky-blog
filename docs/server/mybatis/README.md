@@ -136,9 +136,7 @@ public interface StudentDao {
 
 **（5）创建一个mybatis使用的配置文件，叫做sql映射文件：写sql语句的，一般一个表一个sql映射文件。这个文件是xml文件**
 
-写在接口所在的目录中
-
-- 文件名称和和接口保持一致, StudentDao.xml
+- 写在接口所在的目录中，文件名称和接口保持一致, dao/StudentDao.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
@@ -357,7 +355,7 @@ public int insertStudent(Student student);
 ```
 
 **（2）StudentDao.xml加入sql语句**
-```java
+```xml
 <!--插入操作-->
 <insert id="insertStudent">
     insert into student values(#{id}, #{name},#{email}, #{age})
@@ -605,7 +603,7 @@ public class TestMyBatis {
     public void testSelectStudents() {
         /*
             使用mybatis的动态代理机制，使用SqlSession.getMapper(dao接口)
-            getMapper能获取dao接口对于的实现类对象
+            getMapper能获取dao接口对应的实现类对象
          */
         SqlSession sqlSession = MyBatisUtils.getSqlSession();
         StudentDao dao = sqlSession.getMapper(StudentDao.class);
