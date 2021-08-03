@@ -187,6 +187,16 @@ const sidebar = {
                 '/server/spring/4-spring-transactional/',
             ]
         },
+        { // SpringBoot
+            title: 'SpringBoot',
+            collapsable: true,
+            sidebarDepth: 2,
+            children: [
+                '/server/springboot/1-springboot-base/',
+                '/server/springboot/2-springboot-properties/',
+                '/server/springboot/3-springboot-mybatis/',
+            ]
+        },
         // {
         //     title: 'SpringMVC',
         //     collapsable: true,
@@ -195,14 +205,7 @@ const sidebar = {
         //         '/server/springmvc1/'
         //     ]
         // },
-        // {
-        //     title: 'SpringBoot',
-        //     collapsable: true,
-        //     sidebarDepth: 1,
-        //     children: [
-        //         '/server/springboot1/'
-        //     ]
-        // },
+        
         // {
         //     title: 'Spring',
         //     collapsable: true,
