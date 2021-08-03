@@ -69,7 +69,7 @@ const sidebar = {
         }
     ],
     '/flutter/': [
-        {
+        { // Dart学习
             title: 'Dart学习',
             collapsable: true,
             sidebarDepth: 2,
@@ -88,7 +88,7 @@ const sidebar = {
                 '/flutter/dart/12-lib/',
             ]
         },
-        {
+        { // Flutter学习
             title: 'Flutter学习',
             collapsable: true,
             sidebarDepth: 2,
@@ -113,8 +113,8 @@ const sidebar = {
                 '/flutter/flutter/18-provider/',
             ]
         },
-        {
-            title: 'Flutter Bloc架构学习',
+        { // Bloc架构学习
+            title: 'Bloc架构学习',
             collapsable: true,
             sidebarDepth: 2,
             children: [
