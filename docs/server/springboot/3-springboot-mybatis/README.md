@@ -321,4 +321,3 @@ public class StudentServiceImpl implements StudentService {
 - [Spring框架从入门到精通](https://www.bilibili.com/video/BV1PZ4y1j7QK?p=23)
 
 
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/1.png" width="700"/>

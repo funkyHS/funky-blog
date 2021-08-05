@@ -205,15 +205,6 @@ const sidebar = {
         //         '/server/springmvc1/'
         //     ]
         // },
-        
-        // {
-        //     title: 'Spring',
-        //     collapsable: true,
-        //     sidebarDepth: 1,
-        //     children: [
-        //         '/server/spring1/'
-        //     ]
-        // },
         // {
         //     title: 'Express',
         //     collapsable: true,
