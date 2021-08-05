@@ -1,5 +1,5 @@
 ---
-title: 6. 设置字符编码，打包与部署
+title: 6. 设置字符编码，打包与部署，集成logback
 ---
 
 
@@ -448,6 +448,121 @@ java -jar SpringBootJar.jar
 
 - 在阿里云后台安全组添加端口号9090，就可以正常的访问了
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/44.png" width="500"/>
+
+
+
+
+
+
+---------------------------------------------------------
+
+
+
+## 3. 集成logback
+
+
+### 3.1 创建logback配置文件 resources/logback-spring.xml
+
+- 日志级别从低到高分为：TRACE < DEBUG < INFO < WARN < ERROR < FATAL
+    - 如果设置为 WARN，则低于 WARN 的信息都不会输出
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    1）scan: 当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true。
+
+    2）scanPeriod: 设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为 1 分钟。
+
+    3）debug:当此属性设置为 true 时，将打印出 logback 内部日志信息，实时查看 logback运行状态。默认值为 false。通常不打印
+-->
+<configuration scan="true" scanPeriod="10 seconds" debug="false">
+
+    <!--输出到控制台-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>debug</level> <!-- 过滤级别：debug以下不打印 -->
+        </filter>
+        <encoder>
+            <!-- 日志打印格式：日期｜级别｜当前线程｜日志消息｜哪个文件的｜哪一行的｜打印内容｜换行 -->
+            <Pattern>%date [%5p] [%thread] %logger{60} [%file : %line] %msg%n</Pattern>
+            <charset>UTF-8</charset> <!-- 设置字符集 -->
+        </encoder>
+    </appender>
+
+    <!--输出到文件-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<File>/home/log/stdout.log</File>-->
+        <File>/Users/Funky/Desktop/pencilcaselog/stdout.log</File>
+        <encoder>
+            <pattern>%date [%-5p] %thread %logger{60}
+                [%file : %line] %msg%n</pattern> </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 添加.gz 历史日志会启用压缩 大大缩小日志文件所占空间 -->
+            <!--<fileNamePattern>/home/log/stdout.log.%d{yyyy-MM-dd}.log</fileNamePattern>-->
+            <fileNamePattern>/Users/Funky/Desktop/pencilcaselog/stdout.log.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory><!-- 保留30天日志--> 
+        </rollingPolicy>
+    </appender>
+
+    <!--单个定义-->
+    <logger name="com.starot.pencilcase.mapper" level="trace"/>
+
+    <!--如果root标签指定的日志级别，那么以根日志级别为准,如果没有则已当前追加器日志级别为准-->
+    <!--全部-->
+    <!--
+        appender trace  trace
+        root     trace
+
+        appender trace  debug
+        root     debug
+
+        appender trace   debug
+        root     空      如果root没有值默认root级别是debug
+
+        appender debug  info
+        root     info
+    -->
+    <root level="info">
+        <!--必须在这里引用，才能将日志输出到控制台或文件-->
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
+```
+
+
+### 3.2 添加依赖 lombok
+```xml
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+</dependency>
+```
+
+### 3.3 在Controller中打印log，@Slf4j注解
+```java
+@Controller
+@Slf4j
+public class StudentController {
+
+    @Autowired
+    private StudentService studentService;
+
+    @RequestMapping(value = "/student/count")
+    public @ResponseBody String studentCount() {
+
+        log.trace("查询当前学生总人数");
+        log.debug("查询当前学生总人数");
+        log.info("查询当前学生总人数");
+        log.warn("查询当前学生总人数");
+        log.error("查询当前学生总人数");
+
+        Integer studentCount = studentService.queryStudentCount();
+
+        return "学生总人数为:" + studentCount;
+    }
+}
+```
+
 
 
 

@@ -195,6 +195,9 @@ const sidebar = {
                 '/server/springboot/1-springboot-base/',
                 '/server/springboot/2-springboot-properties/',
                 '/server/springboot/3-springboot-mybatis/',
+                '/server/springboot/4-springboot-springmvc/',
+                '/server/springboot/5-springboot-redis/',
+                '/server/springboot/6-springboot-log/',
             ]
         },
         // {
