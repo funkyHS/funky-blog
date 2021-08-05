@@ -222,7 +222,7 @@ spring.mvc.view.suffix=.jsp
 
 
 #### 5）创建jsp文件，webapp/userDetail.jsp
-```jsp
+```html
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
