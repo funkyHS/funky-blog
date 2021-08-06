@@ -156,7 +156,9 @@ const sidebar = {
             collapsable: true,
             sidebarDepth: 2,
             children: [
-                '/server/nginx/',
+                '/server/nginx/1-nginx-base/',
+                '/server/nginx/2-nginx-install/',
+                '/server/nginx/3-nginx-config/',
             ]
         },
         { // Mysql
@@ -164,8 +166,11 @@ const sidebar = {
             collapsable: true,
             sidebarDepth: 2,
             children: [
-                '/server/mysql/1',
-                '/server/mysql/2'
+                '/server/mysql/1-mysql-install/',
+                '/server/mysql/2-mysql-base/',
+                '/server/mysql/3-mysql-query/',
+                '/server/mysql/4-mysql-constraint/',
+                '/server/mysql/5-mysql-transaction/',
             ]
         },
         { // MongoDB
@@ -173,7 +178,8 @@ const sidebar = {
             collapsable: true,
             sidebarDepth: 2,
             children: [
-                '/server/mongodb/1'
+                '/server/mongodb/1-mongodb-base/',
+                '/server/mongodb/2-mongodb-improve/',
             ]
         },
         { // Spring

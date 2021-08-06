@@ -1,12 +1,12 @@
 ---
-title: 1. Mac安装备份与卸载MySql
+title: 【1. 安装备份与卸载MySql】
 ---
 
 [[TOC]]
 
 ## 1. Mac安装Mysql
 
-### 方法一：官网下载dmg包安装
+### 官网下载dmg包安装
 - [官网地址](https://dev.mysql.com/downloads/mysql/)
 
 - 下载dmg安装包
@@ -63,32 +63,31 @@ title: 1. Mac安装备份与卸载MySql
 ## 2. Mysql数据库的备份与恢复
 
 
-### 常用用法
-- 导出全部数据库
+### 2.1 导出全部数据库
 ```shell
 mysqldump -uroot -p --all-databases > ~/Desktop/dbbackups/db.sql
 ```
 
-- 导出整个数据库
+### 2.2 导出整个数据库
 ```shell
 mysqldump -u 用户名 -p 数据库名 > 导出的文件名   
 mysqldump -u root -p funkytest > ~/Desktop/dbbackups/funkytest.sql
 ```
 
-- 导出一个表
+### 2.3 导出一个表
 ```shell
 mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
 mysqldump -u root -p funkytest DEPT > ~/Desktop/dbbackups/dept_tab.sql
 ```
 
-- 导出一个数据库结构
+### 2.4 导出一个数据库结构
 ```shell
 mysqldump -u root -p -d --add-drop-table funkytest > ~/Desktop/dbbackups/funkytest_struct.sql
 // -d 不导出任何数据，只导出数据库表结构
 // --add-drop-table 在每个create语句之前增加一个drop table
 ```
 
-- 导入数据库, 常用source 命令
+### 2.5 导入数据库, 常用source 命令
 ```shell
 # 进入mysql数据库控制台
 mysql -u root -p
@@ -101,7 +100,7 @@ mysql> source ~/Desktop/dbbackups/funkytest.sql;
 ```
 
 
-### mysqldump可选项
+### 2.6 mysqldump可选项
 
 - **-A, --all-databases**
 导出全部数据库
@@ -422,7 +421,7 @@ mysqldump -uroot -p --host=localhost --all-databases --plugin_dir=”/usr/local/
 
 ## 3. Mac卸载Mysql
 
-- 使用mysqldump备份数据库
+- 先使用mysqldump备份数据库
 - 停止数据库服务器
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mysql/1/1.png" width="500"/>
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mysql/1/2.png" width="500"/>

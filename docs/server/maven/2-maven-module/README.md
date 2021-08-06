@@ -1,5 +1,5 @@
 ---
-title: 2. Maven多模块管理
+title: 【2. Maven多模块管理】
 ---
 
 [[TOC]]

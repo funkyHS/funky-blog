@@ -1,5 +1,5 @@
 ---
-title: 4. MyBatis配置文件
+title: 【4. MyBatis配置文件】
 ---
 
 [[TOC]]

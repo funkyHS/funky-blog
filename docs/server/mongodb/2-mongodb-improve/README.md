@@ -1,284 +1,13 @@
 ---
-title: 1. Mongodb基础
+title: 【2. Mongodb提高】
 ---
+
 
 [[TOC]]
 
 
 
-## 一、MongoDB基础
-
-
-
-### 1. 数据库简介
-
-- 数据库就是用来存放数据的仓库
-
-#### 种类：
-- 关系型：Oracle、MySQL、SQLite 、SQL Server等
-- 非关系型：（Not Only SQL）：MongoDB（文档）、Redis/Memcache（内存）
-
-#### 关系型和非关系型数据库区别
-- 相同点：都是数据库软件，用来存放项目数据
-- 不同点：
-    - 关系型：1.遵循SQL标准，语法大同小异、2.有库和表约束等
-    - 非关系型：1.没有统一标准、2.一般键值对形式存储、3.读取速度更快
-
-
-
-### 2. MongoDB简介
-- [MongoDB](https://www.mongodb.com/)是一个基于分布式文件存储的数据库。由C++编写
-- 支持的数据结构非常松散，是类似json的bson（二进制JSON）格式
-
-
-
-
-
-### 3. MongoDB安装
-
-- Mac系统
-```shell
-# 1：进入/usr/local
-cd /usr/local
-# 2：下载
-sudo curl -O https://fastdl.mongodb.org/osx/mongodb-osx-ssl-x86_64-4.0.9.tgz
-# 3：解压
-sudo tar -zxvf mongodb-osx-ssl-x86_64-4.0.9.tgz
-# 4：重命名
-sudo mv mongodb-osx-x86_64-4.0.9/ mongodb
-# 5：创建数据存放目录与日志存放目录
-sudo mkdir -p /usr/local/mongodb/data /usr/local/mongodb/logs
-# 6：启动MongoDB服务(指定目录)
-/usr/local/mongodb/bin/mongod --dbpath=/usr/local/mongodb/data --logpath=/usr/local/mongodb/logs/mongodb.log --logappend --port=27017 --fork
-```
-
-
-- 我这里本地设置的数据存放目录是在`~/data`下
-
-- 终端我使用的是`zsh`，所以在`~/.zshrc`中添加mongo启动路径,并且追加到环境变量中
-
-```shell
-export Mongo_PATH=/usr/local/mongodb/bin
-export PATH=$Maven_PATH:$PATH
-```
-
-- 指定路径启动mongodb
-```shell
-sudo mongod --dbpath=/Users/Funky/data
-```
-
-- mongodb启动默认的端口号是：27017
-- 在单独开启一个终端窗口执行：`mongo`,进入数据库操作窗口
-- 退出：`exit`
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mongodb/1/1.png" width="600"/>
-
-
-
-
-### 4. MongoDB基本操作
-
-- 数据库（database）、集合（collection）、数据/文档（document）
-- 查看数据库：`show databases`
-- 选择数据库 ：`use 数据库名 `
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mongodb/1/2.png" width="400"/>
-
-- 查看集合：`show collections`
-- 创建集合：`db.createCollection('集合名')`
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mongodb/1/3.png" width="400"/>
-
-- 删除集合：`db.集合名.drop()`
-- 删除数据库：通过use语法选中数据库，然后通过`db.dropDatabase()`删除数据库
-
-
-
-### 5. MongoDB文档增删修查（CURD）
-
-#### 增（C-Create）
-
-- `db.集合名.insert(JSON数据)`，集合存在-则直接插入数据，集合不存在-隐式创建
-- 数据库和集合不存在都隐式创建
-- 对象的键统一不加引号，方便看，但是查看集合数据时系统会自动加
-- mongodb会给每条数据增加一个全球唯一的_id键 
-```shell
-use test2
-
-# 插入一条数据
-db.c1.insert({ uname:"funky", age:18 })
-
-# 查看数据
-db.c1.find()
-
-# 一次性插入多条
-db.c1.insert([
-    {uname:"funky1", age:18},
-    {uname:"funky2", age:19}
-])
-
-# 快速插入10条数据  mongodb底层使用的是js引擎实现的，所以支持部分js语法
-# for循环是一条一条插入，前9条的插入提示看不到，最后一条提示可以看到
-for (var i=1; i<=10; i++) {
-    db.c2.insert( {uname: "a"+i, age: i} )
-}
-```
-
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mongodb/1/4.png" width="400"/>
-
-#### 查（R-Read）
-
-- `db.集合名.find(条件 [,查询的列])`，`[]`表示可写可不写
-
-- 条件：
-    - 查询所有数据： {}或者不写
-    - 查询age=6的数据： `{age:6}`
-    - 既要age=6又要性别=男： `{age:6,sex:'男'}`
-
-- 查询的列（可选参数)：
-    - 不写: 查询全部列（字段）
-    - `{age:1}`  只显示age列（字段）
-    - `{age:0}`  除了age列（字段都显示）
-    - 留心：不管你怎么写系统自定义的_id都会在
-
-
-```shell
-# 升级语法
-db.集合名.find({键:值})   
-
-db.集合名.find({
-    键:{运算符:值}
-}) 
-
-# 查询所有数据
-db.c1.find()
-
-# 查询所有数据，只显示uname字段
-db.c1.find({}, {uname:1})
-
-# 查询所有数据，除了uname字段，其他都显示
-db.c1.find({}, {uname:0})
-
-# 查询年龄 等于|大于｜小于18 的数据
-db.c1.find({age:18})
-db.c1.find({age:{$gt: 18}})
-
-# 查询年龄是18岁、19岁的数据
-db.c1.find({ age:{$in: [18,19]} })
-```
-
-
-|  运算符 |   作用  |
-|:------:|:-------:|
-|  $gt   | 大于    |
-|  $gte  | 大于等于 |
-|  $lt   | 小于    |
-|  $lte  | 小于等于 |
-|  $ne   | 不等于   |
-|  $in   | in      |
-|  $nin  | not in  |
-
-
-#### 改（U-Update）
-- `db.集合名.update(条件， 新数据  [,是否新增，是否修改多条])`
-    - 是否新增：指匹配不到数据则插入（true-是插入，false-否不插入默认）
-    - 是否修改多条：将匹配成功的数据都修改（true-是，false-否默认）
-```shell
-# 将uname:funky，改为uname:funky3
-# 默认不是修改，是替换，会删掉原先其他字段的值
-db.c1.update({uname:"funky"}, {uname:"funky3"})
-
-# 使用修改器，将uname:funky，改为uname:funky3，而不更改其他字段的值（默认只修改一条）
-db.c1.update({uname:"funky"}, {$set:{uname:"funky3"}})
-
-# true 表示如果没有找到funky100，那么插入
-db.c1.update({uname:"funky100"}, {$set:{age:100}}, true)
-
-# 修改满足条件的一条｜多条数据
-db.c1.update({age:18}, {$set:{age:100}}, false, false)
-db.c1.update({age:18}, {$set:{age:20}}, false, true)
-
-# 将uname:funky2的age增加｜减少 2岁
-db.c1.update({uname:"funky2"}, {$inc:{age:2}})
-db.c1.update({uname:"funky2"}, {$inc:{age:-2}})
-
-# 将uname:funky2的列名uname修改为name
-db.c1.update({uname:"funky2"}, {$rename:{uname: "name"}})
-
-# 删除name:funky2的age列名
-db.c1.update({name:"funky2"}, {$unset:{age: true}})
-
-# 一次性写多个修改器
-db.c1.update({uname:"funky2"}, {
-    $set:{uname:"funky222"},
-    $inc:{age:2}
-})
-```
-
-
-|  修改器  | 作用     |
-| :-----: | :------:|
-|  $inc   | 递增     |
-| $rename | 重命名列  |
-|  $set   | 修改列值  |
-| $unset  | 删除列    |
-
-#### 删（D-Delete）
-- `db.集合名.remove(条件 [, 是否删除一条] )`
-    - 是否删除一条 true是,false否 默认
-```shell
-# 只删除一条
-db.c1.remove({}, true)
-
-# 删除多条 默认false
-db.c1.remove({})
-```
-
-#### 总结：
-
-```shell
-# 增Create
-db.集合名.insert(JSON数据)
-
-# 删Delete
-db.集合名.remove(条件 [,是否删除一条true是 false否默认])  # 也就是默认删除多条
-
-# 改Update
-db.集合名.update(条件， 新数据  [,是否新增,是否修改多条])
-升级语法 db.集合名.update(条件，{修改器：{键：值}})
-
-# 查Read
-db.集合名.find(条件 [,查询的列])
-```
-
-#### 数据库实战设计
-```shell
-# 创建school数据库，并且插入stu集合数据
-use school
-for (var num=1; num<=20; num++) {
-    db.stu.insert({
-        id: num,
-        no: "QF"+num,
-        uname: "神龙教"+num,
-        tel: "11111111111",
-        sex:"女",
-        age: num,
-        school: "研究生",
-        remark: "土豪"
-    })
-}
-
-# 可以格式化打印数据
-db.stu.find().pretty()
-```
-
-
---------------------------------------------------------------------
-
-
-
-## 二、MongoDB高级
-
-
-
-### 1. MongoDB分页&排序
+## 1. 分页&排序
 
 - 准备数据
 ```shell
@@ -292,7 +21,7 @@ db.c1.insert({_id:5, name:"d", sex:2, age:5})
 db.c1.find()
 ```
 
-#### 排序
+### 1.1 排序
 ```shell
 # 语法：db.集合名.find().sort(JSON数据)
 # 说明：键-就是要排序的列/字段、值：1 升序  -1 降序
@@ -303,7 +32,7 @@ db.c1.find().sort({age: 1})
 ```
 
 
-#### Limit与Skip方法
+### 1.2 Limit与Skip方法
 ```shell
 # 语法：db.集合名.find().sort().skip(数字).limit(数字)
 # 说明：skip跳过指定数量（可选），limit限制查询的数量
@@ -324,11 +53,15 @@ db.c1.find().sort({age: -1}).skip(2).limit(2)
 
 
 
-### 2. MongoDB聚合查询
+-----------------------------------------
+
+
+
+## 2. 聚合查询
 
 - 聚合查询: 把数据聚起来，然后统计
 
-#### 语法
+### 2.1 语法
 ```shell
 db.集合名称.aggregate([
     {管道:{表达式}}
@@ -336,7 +69,7 @@ db.集合名称.aggregate([
 ])
 ```
 
-#### 常用管道
+### 2.2 常用管道
 ```shell
 $group 将集合中的文档分组，用于统计结果
 $match 过滤数据，只要输出符合条件的文档
@@ -346,7 +79,7 @@ $limit 限制集合数据返回文档数
 ....
 ```
 
-#### 常用表达式
+### 2.3 常用表达式
 
 ```shell
 $sum  总和  $sum:1同count表示统计
@@ -356,7 +89,7 @@ $max  最大值
 ```
 
 
-#### 练习1：统计男生、女生的总年龄
+#### 1）练习：统计男生、女生的总年龄
 ```shell
 db.c1.aggregate([
     {
@@ -372,7 +105,7 @@ db.c1.aggregate([
 ```
 
 
-#### 练习2：统计男生、女生的总人数
+#### 2）练习：统计男生、女生的总人数
 ```shell
 db.c1.aggregate([
     {
@@ -388,7 +121,7 @@ db.c1.aggregate([
 ```
 
 
-#### 练习3：求学生总数和平均年龄
+#### 3）练习：求学生总数和平均年龄
 
 ```shell
 db.c1.aggregate([
@@ -405,7 +138,7 @@ db.c1.aggregate([
 ```
 
 
-#### 练习4：查询男生、女生人数，按人数升序
+#### 4）练习：查询男生、女生人数，按人数升序
 ```shell
 db.c1.aggregate([
     {$group: {_id: "$sex",rs: {$sum: 1}}},
@@ -417,14 +150,19 @@ db.c1.aggregate([
 ```
 
 
-### 3. MongoDB优化索引
+
+-----------------------------------------
+
+
+
+## 3. 优化索引
 
 - 索引是一种排序好的便于快速查询的数据结构, 帮助数据库高效的查询数据
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mongodb/1/5.png" width="600"/>
 
 
 
-#### 索引优缺点
+### 3.1 索引优缺点
 - 优点
     - 提高数据查询的效率，降低数据库的IO成本
     - 通过索引对数据进行排序，降低数据排序的成本，降低CPU的消耗
@@ -433,7 +171,7 @@ db.c1.aggregate([
     - 大量索引影响SQL语句效率，因为每次插入和修改数据都需要更新索引
 
 
-#### 语法
+### 3.2 语法
 
 - 创建索引语法：`db.集合名.createIndex(待创建索引的列 [,额外选项])`
 - 参数：
@@ -445,7 +183,9 @@ db.c1.aggregate([
     - 删除指定：`db.集合名.dropIndex(索引名)`
 - 查看索引语法：`db.集合名.getIndexes()`
 
-#### 练习
+
+
+### 3.3 练习
 
 - 准备100000条数据
 ```shell
@@ -458,7 +198,7 @@ for(var i=0; i<100000; i++) {
 db.c1.count()
 ```
 
-- 练习1：给name添加普通索引
+#### 1）练习：给name添加普通索引
 
 ```shell
 # 添加索引
@@ -495,20 +235,20 @@ db.c1.getIndexes()
 ```
 
 
-- 练习2：删除name索引
+#### 2）练习：删除name索引
 ```shell
 db.c1.dropIndex('name_1')
 # 输出
     { "nIndexesWas" : 2, "ok" : 1 }
 ```
 
-- 练习3：给name创建索引并起名funky
+#### 3）练习：给name创建索引并起名funky
 ```shell
 db.c1.createIndex({name:1}, {name: "funky"})
 ```
 
 
-- 练习4: 给name和age添加组合索引（一次性给两个字段建立索引）
+#### 4）练习: 给name和age添加组合索引（一次性给两个字段建立索引）
     - db.集合名.createIndex({键1:方式,键2:方式})
 ```shell
 db.c1.createIndex({name:1, age:1})
@@ -542,7 +282,7 @@ db.c1.createIndex({name:1}, {unique: "name"})
 ```
 
 
-#### 分析索引
+### 3.4 分析索引
 - 语法：`db.c1.find().explain('executionStats')`
 - 索引扫描方式：
     - COLLSCAN：全表扫描
@@ -728,11 +468,14 @@ db.c1.find({age:500}).explain('executionStats')
 
 
 
-### 4. MongoDB权限机制
+----------------------------------------------
+
+
+## 4. 权限机制
 
 - 问题：直接在窗口输入命令就可以登录到数据库，应该使用权限机制，开启验证模式即可
 
-#### 创建账号
+### 4.1 创建账号
 ```shell
 db.createUser({ 
     "user" : "用户名",
@@ -744,7 +487,7 @@ db.createUser({
 })
 ```
 
-#### 角色种类
+### 4.2 角色种类
 - 超级用户角色：root 
 - 数据库用户角色：read、readWrite; 
 - 数据库管理角色：dbAdmin、userAdmin； 
@@ -752,7 +495,7 @@ db.createUser({
 - 备份恢复角色：backup、restore； 
 - 所有数据库角色：readAnyDatabase、readWriteAnyDatabase、userAdminAnyDatabase、dbAdminAnyDatabase 
 
-#### 角色说明
+### 4.3 角色说明
 - root：只在admin数据库中可用。超级账号，超级权限；
 - read：允许用户读取指定数据库；
 - readWrite：允许用户读写指定数据库； 
@@ -765,9 +508,9 @@ db.createUser({
 - readWriteAnyDatabase：只在admin数据库中可用，赋予用户所有数据库的读写权限； 
 
 
-#### 开启验证模式（指用户需要输入账号密码才能登陆使用）
+### 4.4 开启验证模式（指用户需要输入账号密码才能登陆使用）
 
-##### 添加超级管理员
+#### 1）添加超级管理员
 ```shell
 # admin这个数据库是系统自带的数据库，他的用户可以访问任何其他数据库的数据，也叫做超级管理员
 use admin  # 2.x 3.x 4.x 前面版本默认是看不到admin没关系 直接选中即可
@@ -789,12 +532,12 @@ db.auth('admin', 'admin888')
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mongodb/1/7.png" width="600"/>
 
 
-##### 退出mongod,使用--auth重新进入mongod
+#### 2）退出mongod,使用--auth重新进入mongod
 ```shell
 sudo mongod --dbpath=/Users/Funky/data --auth
 ```
 
-##### 启动服务 登录测试
+#### 3）启动服务 登录测试
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mongodb/1/8.png" width="600"/>
 
 - 登录数据库
@@ -811,7 +554,7 @@ mongo 127.0.0.1:27017/admin -u admin -p admin888
 
 
 
-#### 练习
+### 4.5 练习
 - 准备数据：
 ```shell
 use shop
@@ -820,7 +563,7 @@ for(var i=1; i<=10; i++) {
 }
 ```
 
-- 添加用户shop1可以读shop数据库，添加用户shop2可以读写shop数据库 
+#### 添加用户shop1可以读shop数据库，添加用户shop2可以读写shop数据库 
 ```shell
 use shop
 
@@ -867,9 +610,9 @@ mongo 127.0.0.1:27017/shop -u shop2 -p shop999
 
 
 
-### 5. MongoDB备份还原
+## 5. 备份还原
 
-#### 备份数据库 mongodump
+### 5.1 备份数据库 mongodump
 - 导出数据语法：mongodump -h -port -u -p -d -o
     - `-h`：host 服务器IP地址（一般不写 默认本机）
     - `-port`：端口（一般不写 默认27017）
@@ -883,7 +626,7 @@ mongo 127.0.0.1:27017/shop -u shop2 -p shop999
 
 
 
-#### 还原数据库mongorestore
+### 5.2 还原数据库mongorestore
 - 还原数据语法：mongorestore -h -port -u -p  -d --drop 备份数据目录
     - `-h`：host 服务器IP地址（一般不写 默认本机）
     - `-port`：端口（一般不写 默认27017）
@@ -895,10 +638,12 @@ mongo 127.0.0.1:27017/shop -u shop2 -p shop999
 - 还原指定数据: mongorestore -u shop2 -p shop999 -d shop --drop ~/Desktop/shopbak
 
 
+------------------------------------------
 
-### 6. 实战可视化管理工具
 
-#### adminMongo 网页端管理工具
+## 6. 实战可视化管理工具
+
+### 6.1 adminMongo 网页端管理工具
 - 数据库启动成功后，可以在浏览器直接访问 [http://localhost:27017](http://localhost:27017)
 - 安装与启动adminMongo
 ```shell
@@ -924,7 +669,7 @@ $ npm start
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mongodb/1/13.png" width="600"/>
 
 
-#### Robo 3T 客户端软件工具                    
+### 6.2 Robo 3T 客户端软件工具                    
 - [Robo 3T](https://robomongo.org/download)
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mongodb/1/14.png" width="700"/>
 
@@ -935,10 +680,10 @@ $ npm start
 
 
 
-## 三、玩转API接口
+## 7. express与mongoose
 
 
-### 1. mongoose简介(schema&model)
+### 7.1 mongoose简介(schema&model)
 
 - node中提供操作MongoDB的模块，能够通过node语法实现MongoDB数据库增删改查
 - mongoose核心概念：
@@ -949,7 +694,7 @@ $ npm start
 
 
 
-### 2. mongoose使用
+### 7.2 mongoose使用
 
 - 安装mongoose
 ```shell
@@ -1024,7 +769,7 @@ model.find({}).then(res => {
 
 
 
-### 3. 使用express进行接口开发
+### 7.3 使用express进行接口开发
 
 - 安装express
 ```shell
@@ -1187,7 +932,12 @@ module.exports = {
 
 
 
-### 4. 实战接口文档开发apiDoc
+----------------------------------------
+
+
+
+
+## 8. 实战接口文档开发apiDoc
 
 - [apiDoc](https://apidocjs.com/#configuration)是nodejs中的一个模块，可以快速生成接口文档，前提是写接口的时候把注释加上
 - 使用：
@@ -1241,8 +991,6 @@ const index = async (req, res) => {
 
 ## 参考
 - [MongoDB数据库 基础入门到高级](https://www.bilibili.com/video/BV1xz4y1X7cE)
-
-
 
 
 

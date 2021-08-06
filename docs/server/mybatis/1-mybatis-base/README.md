@@ -1,5 +1,5 @@
 ---
-title: 1. Mybatis快速入门
+title: 【1. Mybatis快速入门】
 ---
 
 [[TOC]]

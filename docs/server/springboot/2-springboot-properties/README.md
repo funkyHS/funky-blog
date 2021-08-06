@@ -1,5 +1,5 @@
 ---
-title: 2. 核心配置文件properties
+title: 【2. 核心配置文件properties】
 ---
 
 
