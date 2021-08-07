@@ -171,6 +171,8 @@ const sidebar = {
                 '/server/mysql/3-mysql-query/',
                 '/server/mysql/4-mysql-constraint/',
                 '/server/mysql/5-mysql-transaction/',
+                '/server/mysql/6-mysql-user/',
+                '/server/mysql/7-mysql-datatype/',
             ]
         },
         { // MongoDB
