@@ -7,7 +7,7 @@ title: 【7. MySQL字段类型】
 
 
 ## 1. 数值类型
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mysql/7/1.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mysql/7/1.png" width="700"/>
 
 ### 1.1 整型
 - tinyint、smallint、mediumint、int、integer、bigint
@@ -33,7 +33,7 @@ title: 【7. MySQL字段类型】
 
 
 ## 2. 字符串类型
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mysql/7/3.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mysql/7/3.png" width="700"/>
 - char、varchar、tinyblob、tinytext、blob、text、mediumblob、mediumtext、longblob、longtext
 - 其中 char 和 varchar 是最常用到的
     - char 类型是定长的，MySQL 总是根据定义的字符串长度分配足够的空间。当保存 char 值时，在它们的右边填充空格以达到指定的长度，当检索到 char 值时，尾部的空格被删除掉。
@@ -44,7 +44,7 @@ title: 【7. MySQL字段类型】
 
 
 ## 3. 日期时间类型
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mysql/7/2.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mysql/7/2.png" width="700"/>
 - date、time、year、datetime、timestamp
 - 关于 DATETIME 与 TIMESTAMP 两种类型如何选用，可以按照存储需求来，比如要求存储范围更广，则推荐使用 DATETIME ，如果只是存储当前时间戳，则可以使用 TIMESTAMP 类型。不过值得注意的是，TIMESTAMP 字段数据会随着系统时区而改变但 DATETIME 字段数据不会。总体来说 DATETIME 使用范围更广
 
