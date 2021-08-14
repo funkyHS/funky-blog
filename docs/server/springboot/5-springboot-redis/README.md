@@ -8,7 +8,7 @@ title: 【5. Redis，拦截器，Servlet】
 ## 1. 集成Redis
 
 
-### 1.1 pom文件中添加依赖
+### 1.1 pom中添加Redis依赖
 ```xml
 <dependencies>
     <!--SpringBoot框架web项目起步依赖-->
@@ -25,8 +25,9 @@ title: 【5. Redis，拦截器，Servlet】
 </dependencies>
 ```
 
-### 1.2 在核心配置文件application.properties中配置连接信息
+### 1.2 配置Redis连接信息
 
+- application.properties
 ```java
 #设置redis配置信息
 spring.redis.host=192.168.10.18
@@ -56,7 +57,7 @@ public class StudentController {
 }
 ```
 
-### 1.4 业务层使用 StudentServiceImpl
+### 1.4 业务层实现 StudentServiceImpl
 ```java
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -88,8 +89,8 @@ public class StudentServiceImpl implements StudentService {
 
 ## 2. 使用拦截器 HandlerInterceptor
 
-### 2.1 定义一个拦截器/interceptor/UserInterceptor.java
-- 实现HandlerInterceptor接口
+### 2.1 定义拦截器 UserInterceptor
+- 定义一个拦截器：/interceptor/UserInterceptor.java 
 ```java
 package com.funky.springboot.interceptor;
 
@@ -100,6 +101,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+// 实现HandlerInterceptor接口
 public class UserInterceptor implements HandlerInterceptor {
 
     // 编写业务拦截的规则
@@ -128,7 +130,9 @@ public class UserInterceptor implements HandlerInterceptor {
 }
 ```
 
-### 2.2 创建控制层 /web/UserController.java
+### 2.2 创建控制层 UserController
+
+- 控制层：/web/UserController.java
 ```java
 package com.funky.springboot.web;
 
@@ -177,7 +181,8 @@ public class UserController {
 ```
 
 
-### 2.3 创建一个配置类 config/InterceptorConfig.java
+### 2.3 创建配置类 InterceptorConfig
+- config/InterceptorConfig.java
 ```java
 package com.funky.springboot.config;
 
@@ -220,11 +225,13 @@ public class InterceptorConfig implements WebMvcConfigurer {
 ## 3. 使用Servlet
 
 
-### 3.1 注解的方式，@WebServlet注解，@ServletComponentScan注解
+### 3.1 注解的方式
 
-#### 1）创建Servlet，servlet/MyServlet.java
-- 继承HttpServlet
+#### 1）创建Servlet
+
+- 创建Servlet：servlet/MyServlet.java
 ```java
+// 继承HttpServlet
 @WebServlet(urlPatterns = "/myservlet") // 定义请求的路径
 public class MyServlet extends HttpServlet {
 
@@ -242,7 +249,8 @@ public class MyServlet extends HttpServlet {
 }
 ```
 
-#### 2）在启动类Application中添加 @ServletComponentScan注解
+#### 2）@ServletComponentScan注解
+- 在启动类Application中添加 @ServletComponentScan注解
 ```java
 @SpringBootApplication  // 开启spring配置
 @ServletComponentScan(basePackages = "com.funky.springboot.servlet") // 扫描servlet
@@ -260,7 +268,8 @@ public class Application {
 
 - 这种方式，就不需要在Application启动类添加@ServletComponentScan注解了
 
-#### 1）创建Servlet，servlet/MyServlet.java
+#### 1）创建Servlet
+- 创建Servlet：servlet/MyServlet.java
 ```java
 // @WebServlet(urlPatterns = "/myservlet") // 使用配置类的方式，不需要添加此注解
 public class MyServlet extends HttpServlet {
@@ -279,7 +288,8 @@ public class MyServlet extends HttpServlet {
 ```
 
 
-#### 2）创建一个配置类，config/ServletConfig.java
+#### 2）创建配置类
+- 创建配置类：config/ServletConfig.java
 ```java
 @Configuration  // 该注解将此类定义为配置类(相当一个xml配置文件)
 public class ServletConfig {

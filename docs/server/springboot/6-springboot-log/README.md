@@ -1,5 +1,5 @@
 ---
-title: 【6. 字符编码，打包与部署，logback】
+title: 【6. 字符编码，打包部署，logback】
 ---
 
 
@@ -8,9 +8,9 @@ title: 【6. 字符编码，打包与部署，logback】
 ## 1. 设置字符编码
 
 
-### 1.1 创建一个Servlet，servlet/MyServlet.java，并设置浏览器编码格式
+### 1.1 创建Servlet，设置浏览器编码格式
 
-- 如果直接访问，中文会出现乱码
+- 创建一个Servlet，servlet/MyServlet.java：如果直接访问，中文会出现乱码
 ```java
 @WebServlet(urlPatterns = "/myservlet") // 定义请求的路径
 public class MyServlet extends HttpServlet {
@@ -80,7 +80,7 @@ public class SystemConfig {
 ```
 
 
-### 1.2 设置字符编码方式二（推荐）
+### 1.3 设置字符编码方式二（推荐）
 - 在核心配置文件application.properties中
 ```properties
 # 设置请求响应字符编码
@@ -106,7 +106,8 @@ spring.http.encoding.charset=utf-8
 ### 2.2 打war包并部署到tomcat
 - 部署到tomcat中，之前在application.properties设置的上下文根和端口号就失效了，以本地Tomcat为准
 
-#### 1）创建控制类web/UserController.java
+#### 1）创建控制类UserController
+- 创建控制类web/UserController.java
 ```java
 package com.funky.springboot.web;
 
@@ -141,14 +142,15 @@ public class UserController {
 ```
 
 
-#### 2）创建webapp文件夹，并指定为web资源文件夹
-- 经过下面的步骤，此时webapp文件夹上有蓝色的标志点
+#### 2）创建webapp资源文件夹
+- 创建webapp文件夹，并指定为web资源文件夹，经过下面的步骤，此时webapp文件夹上有蓝色的标志点
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/28.png" width="700"/>
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/29.png" width="700"/>
 
 
 
-#### 3）在核心配置文件application.properties中，配置视图解析器
+#### 3）配置视图解析器
+- 在核心配置文件application.properties中，配置视图解析器
 ```properties
 # 前缀
 spring.mvc.view.prefix=/
@@ -157,7 +159,8 @@ spring.mvc.view.suffix=.jsp
 ```
 
 
-#### 4）在pom文件中添加 SpringBoot内嵌Tomcat解析jsp的依赖，指定编译位置
+#### 4）添加内嵌Tomcat解析jsp的依赖
+- 在pom文件中添加 SpringBoot内嵌Tomcat解析jsp的依赖，指定编译位置
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -221,7 +224,8 @@ spring.mvc.view.suffix=.jsp
 ```
 
 
-#### 5）创建jsp文件，webapp/userDetail.jsp
+#### 5）创建jsp文件userDetail
+- webapp/userDetail.jsp
 ```html
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -241,7 +245,8 @@ spring.mvc.view.suffix=.jsp
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/31.png" width="500"/>
 
 
-#### 7）修改入口类 Application.java
+#### 7）修改入口类Application
+- Application.java
 ```java
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer {
@@ -275,7 +280,8 @@ public class Application extends SpringBootServletInitializer {
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/34.png" width="700"/>
 
 
-#### 9）访问tomcat中部署的SpringBootWar
+#### 9）访问SpringBootWar
+- 访问tomcat中部署的SpringBootWar
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/35.png" width="500"/>
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/36.png" width="500"/>
 
@@ -288,7 +294,8 @@ public class Application extends SpringBootServletInitializer {
 - jar包内嵌了tomcat，所以不需要放在tomcat中
 - jar包端口号和上下文根就是springboot核心配置文件中设置的值，以内嵌tomcat为准
 
-#### 1）创建控制类UserController.java
+#### 1）创建控制类UserController
+- UserController.java
 ```java
 package com.funky.springboot.web;
 
@@ -321,10 +328,11 @@ public class UserController {
 }
 ```
 
-#### 2）创建webapp文件夹，并指定为web资源文件夹
+#### 2）创建资源文件夹webapp
 - 同上面打war包 步骤2
 
-#### 3）在核心配置文件application.properties中，设置端口号，上下文根，配置视图解析器
+#### 3）设置端口号，上下文根，配置视图解析器
+- 在核心配置文件application.properties中
 ```properties
 # 设置端口号 上下文根
 server.port=9090
@@ -335,10 +343,10 @@ spring.mvc.view.prefix=/
 spring.mvc.view.suffix=.jsp
 ```
 
-#### 4）在pom文件中添加 SpringBoot内嵌Tomcat解析jsp的依赖，指定编译位置
+#### 4）添加内嵌Tomcat解析jsp的依赖
 - 同上面打war包 步骤4
 
-#### 5）创建jsp文件，webapp/userDetail.jsp
+#### 5）创建jsp文件userDetail.jsp
 - 同上面打war包 步骤5
 
 #### 6）本地访问
@@ -461,8 +469,8 @@ java -jar SpringBootJar.jar
 ## 3. 集成logback
 
 
-### 3.1 创建logback配置文件 resources/logback-spring.xml
-
+### 3.1 创建logback配置文件 
+- resources/logback-spring.xml
 - 日志级别从低到高分为：TRACE < DEBUG < INFO < WARN < ERROR < FATAL
     - 如果设置为 WARN，则低于 WARN 的信息都不会输出
 ```xml
@@ -530,7 +538,7 @@ java -jar SpringBootJar.jar
 ```
 
 
-### 3.2 添加依赖 lombok
+### 3.2 添加依赖lombok
 ```xml
 <dependency>
     <groupId>org.projectlombok</groupId>
@@ -538,7 +546,7 @@ java -jar SpringBootJar.jar
 </dependency>
 ```
 
-### 3.3 在Controller中打印log，@Slf4j注解
+### 3.3 Controller中打印log
 ```java
 @Controller
 @Slf4j

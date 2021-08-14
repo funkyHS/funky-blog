@@ -6,12 +6,13 @@ title: 【2. 核心配置文件properties】
 [[TOC]]
 
 
-## 1. 在核心配置文件application.properties中设置端口号与上下文请求根路径
+## 1. 端口号与上下文请求根路径
+- 在核心配置文件application.properties中
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/11.png" width="700"/>
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/12.png" width="500"/>
 
 
-## 2. 核心配置文件application.yml与application.yaml
+## 2. 核心配置文件yml与yaml后缀名
 - 如果配置同时存在，优先使用 **application.properties**
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/13.png" width="700"/>
 
@@ -60,11 +61,13 @@ title: 【2. 核心配置文件properties】
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/19.png" width="700"/>
 
 
-## 5. @Value注解，在核心配置文件application.properties中自定义的配置
+## 5. @Value注解
+- 在核心配置文件application.properties中自定义的配置
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/20.png" width="700"/>
 
 
-## 6. @ConfigurationProperties注解，将核心配置文件application.properties中自定义的配置映射成对象
+## 6. @ConfigurationProperties注解
+- 将核心配置文件application.properties中自定义的配置映射成对象
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/21.png" width="700"/>
 
 

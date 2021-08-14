@@ -1,5 +1,5 @@
 ---
-title: 【4. SpringMVC常用注解以及RESTful】
+title: 【4. SpringMVC常用注解，RESTful】
 ---
 
 
@@ -139,7 +139,7 @@ public class StudentController {
 
 
 
-## 2. RESTful
+## 2. 请求接口与获取参数
 
 - REST（英文：Representational State Transfer，简称 REST）
 - 一种互联网软件架构设计的风格，但它并不是标准，它只是提出了一组客户端和服务器

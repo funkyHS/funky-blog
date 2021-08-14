@@ -1,5 +1,5 @@
 ---
-title: 【3. 集成MyBatis】
+title: 【3. 集成MyBatis，使用事务】
 ---
 
 
@@ -8,7 +8,7 @@ title: 【3. 集成MyBatis】
 
 ## 1. 集成MyBatis基础步骤
 
-### 1.1 pom文件中添加依赖
+### 1.1 pom中添加依赖
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -65,7 +65,7 @@ title: 【3. 集成MyBatis】
 </project>
 ```
 
-### 1.2 使用MyBatis提供的逆向工程生成实体bean，映射文件，DAO接口
+### 1.2 MyBatis逆向工程 Generator
 - `mapper`文件夹，也有创建为`dao`
 - 先有数据库
 - SYBASE 提供的`PowerDesigner`工具，可以设计数据模型
@@ -179,14 +179,14 @@ title: 【3. 集成MyBatis】
 
 
 
-### 1.3 编写Controller层与Service层，注解@Mapper
+### 1.3 编写Controller与Service层
 - 后面会使用注解`@MapperScan`，不需要一个个在Mapper类上添加`@Mapper`
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springboot/25.png" width="900"/>
 
 
-### 1.4 在application.properties中编写数据库连接配置
+### 1.4 数据库连接配置
 
-#### 数据库时区问题
+- **数据库时区问题**
 - 如果设置serverTimezone=UTC，连接不报错，但是我们在用java代码插入到数据库时间的时候却出现了问题
 - 比如在java代码里面插入的时间为：2021-06-24 17:29:56，但是在数据库里面显示的时间却为：2021-06-24 09:29:56，有了8个小时的时差
 
@@ -194,6 +194,7 @@ title: 【3. 集成MyBatis】
 - 北京时间 == 东八区时间 != 北京当地时间，serverTimezone=GMT%2B8
 - 或者使用上海时间，serverTimezone=Asia/Shanghai
 
+- application.properties文件中添加如下
 ```properties
 #设置连接数据库的配置
 
@@ -206,7 +207,8 @@ spring.datasource.password=12345
 ```
 
 
-### 1.5 修改pom文件，编译的时候将xml文件也作为resources处理
+### 1.5 编译时将xml移到resources中
+- pom文件中添加
 ```xml
 <build>
     <!--手动指定文件夹为resources-->
@@ -249,7 +251,7 @@ spring.datasource.password=12345
 ---------------------------------------------
 
 
-## 2. 使用注解@MapperScan
+## 2. 注解@MapperScan
 - springboot集成mybatis，不需要一个个在Mapper类上添加`@Mapper`，直接在`Application`类中添加`@MapperScan`
 ```java
 @SpringBootApplication // 开启spring配置
@@ -269,10 +271,10 @@ public class Application {
 
 ## 3. Mapper映射文件xml存放位置
 
-### 3.1 方法一
+### 3.1 如果xml在java某个目录下
 - 上面1.5步骤所描述，在pom文件中指定resources
 
-### 3.2 方法二
+### 3.2 如果xml在resources某个目录下
 - 将原本在`com.funky.springboot.mapper`文件中的`StudentMapper.xml`，移动到 `resources/mapper`目录下
 - 在application.properties中指定MyByBatis映射文件的路径
 ```
@@ -284,7 +286,7 @@ mybatis.mapper-locations=classpath:mapper/*.xml
 ---------------------------------------------
 
 
-## 4. SpringBoot项目下使用事务，@Transactional注解
+## 4. 事务的使用 注解@Transactional
 
 - 事务只跟DML（增删改）有关系
 ```java

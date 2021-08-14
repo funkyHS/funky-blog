@@ -206,6 +206,7 @@ const sidebar = {
                 '/server/springboot/4-springboot-springmvc/',
                 '/server/springboot/5-springboot-redis/',
                 '/server/springboot/6-springboot-log/',
+                '/server/springboot/7-springboot-exception/',
             ]
         },
         // {
