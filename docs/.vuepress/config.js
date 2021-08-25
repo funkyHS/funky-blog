@@ -209,6 +209,15 @@ const sidebar = {
                 '/server/springboot/7-springboot-exception/',
             ]
         },
+        {
+            title: 'SpringSecurity',
+            collapsable: true,
+            sidebarDepth: 2,
+            children: [
+                '/server/springsecurity/1-springsecurity-base/',
+                '/server/springsecurity/2-springsecurity-rbac/'
+            ]
+        },
         // {
         //     title: 'SpringMVC',
         //     collapsable: true,
