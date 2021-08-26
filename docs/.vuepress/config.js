@@ -275,9 +275,25 @@ const sidebar = {
             collapsable: true,
             sidebarDepth: 2,
             children: [
-                '/web/vue/vue1/',
-                '/web/vue/vue2/',
-                '/web/vue/vue3/'
+                '/web/vue/1-vue-base/',
+                '/web/vue/2-vue-grammar/',
+                '/web/vue/3-vue-forlist/',
+                '/web/vue/4-vue-event/',
+                '/web/vue/5-vue-computed/',
+                '/web/vue/6-vue-component/',
+                '/web/vue/7-vue-swiper/',
+                '/web/vue/8-vue-router/',
+            ]
+        },
+        {
+            title: 'Vue项目-电影卖座',
+            collapsable: true,
+            sidebarDepth: 2,
+            children: [
+                '/web/vue/maizuo/1-maizuo/',
+                '/web/vue/maizuo/2-maizuo/',
+                '/web/vue/maizuo/3-maizuo/',
+                '/web/vue/maizuo/4-maizuo/'
             ]
         },
         {

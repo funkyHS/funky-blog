@@ -24,8 +24,8 @@ title: 【2. 基于角色的权限RBAC】
 - RBAC 是基于角色的访问控制(Role-Based Access Control )
 - 在 RBAC 中，权限与角色相关联，用户通过成为适当角色的成员而得到这些角色的权限。
 - 极大地简化了权限的管理。这样管理都是层级相互依赖的，权限赋予给角色，而把角色又赋予用户，这样的权限设计很清楚，管理起来很方便
-- **权限:**能对资源的操作， 比如增加，修改，删除，查看等等。 
-- **角色:**自定义的，表示权限的集合。一个角色可以有多个权限。
+- 权限: 能对资源的操作， 比如增加，修改，删除，查看等等。 
+- 角色: 自定义的，表示权限的集合。一个角色可以有多个权限。
 
 ### 2.1 基本思想
 - 对系统操作的各种权限**不是直接授予具体的用户**，而是在用户集合与权限集合之间建立一个**角色集合**
@@ -690,7 +690,7 @@ spring.datasource.url=jdbc:mysql://localhost:3306/springboot?useUnicode=true&cha
 spring.datasource.username=funky
 spring.datasource.password=12345
 
-
+# mybatis需要的mapper文件位置
 mybatis.mapper-locations=classpath:/mapper/*Mapper.xml
 # 别名的设置
 mybatis.type-aliases-package=com.funky.entity
@@ -1050,7 +1050,6 @@ public interface SysRoleMapper {
 }
 ```
 
-
 - 角色类Dao对应的mapper配置文件：resources/mapper/SysRoleMapper.xml
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1134,6 +1133,8 @@ public class JdbcUserDetatilsService implements UserDetailsService {
     }
 }
 ```
+
+
 
 ### 6.9 创建controller以及html访问页面
 - resources/static/index.html
@@ -1245,6 +1246,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 }
 ```
+
 
 
 ### 6.11 测试访问

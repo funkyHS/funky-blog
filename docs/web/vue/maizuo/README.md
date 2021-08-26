@@ -5,8 +5,6 @@ title: 3. Vue.js项目实战-卖座电影项目
 [[TOC]]
 
 
-# Vue.js项目实战-卖座电影项目
-
 ## 1. 创建vue项目
 - 创建vue项目名称是funkymaizuo：`vue create funkymaizuo`
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/vue/3/1.png" width="500"/>
