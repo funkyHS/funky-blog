@@ -11,11 +11,11 @@ tags:
 
 ## 1. 默认的登录页面
 
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/29.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/29.png" width="700"/>
 
 - Spring Security通过`过滤器`来验证请求
 - 在`package org.springframework.security.web.authentication;`过滤器`UsernamePasswordAuthenticationFilter`中，指定了默认的登录信息
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/30.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/30.png" width="700"/>
 
 
 
@@ -45,7 +45,7 @@ tags:
 
 
 - 在CustomSecurityConfig的http configure方法中指定自定义登录页面
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/31.png" width="600"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/31.png" width="700"/>
 
 - 此时再次访问需要权限的地址
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/32.png" width="300"/>
@@ -57,7 +57,34 @@ tags:
 
 
 
-## 3. 指定错误页
+## 3. 前后端不分离，登录回调
+
+### 3.1 登录成功回调
+- 登录成功重定向URL相关的方法有两个：defaultSuccessUrl、successForwardUrl
+- 在配置的时候，defaultSuccessUrl 和 successForwardUrl 只需要配置一个即可
+- 区别：
+    - 在 `defaultSuccessUrl` 中指定登录成功的跳转页面为 `/index`，此时分两种情况，如果是直接在浏览器中输入的登录地址，登录成功后，就直接跳转到 `/index`，如果是在浏览器中输入了其他地址，例如 `http://localhost:8080/hello`，结果因为没有登录，又重定向到登录页面，此时登录成功后，就不会来到 `/index` ，而是来到 `/hello` 页面
+    - defaultSuccessUrl 还有一个重载的方法，第二个参数如果不设置,默认为false，就是上面的情况，如果手动设置第二个参数为true，则 defaultSuccessUrl 的效果和 successForwardUrl 一致
+    - successForwardUrl 表示不管从哪里来的，登录后都会跳转到 successForwardUrl 指定的地址
+- 相关配置
+```java
+.and()
+.formLogin()
+.loginPage("/login.html")
+.loginProcessingUrl("/doLogin")
+.usernameParameter("name")
+.passwordParameter("passwd")
+.defaultSuccessUrl("/index")
+.successForwardUrl("/index")
+.permitAll()
+.and()
+```
+
+### 3.2 登录失败回调
+- 登录失败也是有两个方法：failureForwardUrl、failureUrl
+- failureForwardUrl 是登录失败之后会发生服务端跳转，failureUrl 则在登录失败之后，会发生重定向
+
+指定登录失败错误页
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/33.png" width="700"/>
 
 - 如果输入密码错误，就会跳转到错误页面
@@ -65,11 +92,30 @@ tags:
 
 
 
+### 3.3 注销登录
+- 注销登录的默认接口是 `/logout`
+```java
+.and()
+.logout()
+.logoutUrl("/logout")
+.logoutRequestMatcher(new AntPathRequestMatcher("/logout","POST"))
+.logoutSuccessUrl("/index") // 表示注销成功后要跳转的页面
+.deleteCookies()    // 用来清除 cookie
+.clearAuthentication(true) // 表示清除认证信息 (默认就会清除)
+.invalidateHttpSession(true) // 使 HttpSession 失效 (默认就会清除)
+.permitAll()
+.and()
+```
+- 默认注销的 URL 是 /logout，是一个 GET 请求，我们可以通过 logoutUrl 方法来修改默认的注销 URL
+- logoutRequestMatcher 方法不仅可以修改注销 URL，还可以修改请求方式，实际项目中，这个方法和 logoutUrl 任意设置一个即可
+
+
+
 -----------------------------------------------
 
 
-## 4. 设置自定义的参数名称 
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/35.png" width="500"/>
+### 3.4 设置自定义的参数名称 
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/35.png" width="700"/>
 
 
 
@@ -78,19 +124,19 @@ tags:
 -----------------------------------------------
 
 
-## 5. 前后端分离，图形验证码实现
+## 4. 前后端分离，图形验证码实现
 - 上面的登录方式是 基于表单form的，对于现在的前后端分离的方式不适合，如果要使用前后端分离，一般使用json作为数据的交互格式
 - ajax方式，用户端发起请求，springsecurity接收请求验证用户的用户名和密码，把验证结果返回给请求方
 - 验证码：使用的字母和数字的组合，使用6位图形验证码
 - 实现验证码：使用servlet，也可以使用controller
 
 
-### 5.1 Api说明
+### 4.1 Api说明
 - AuthenticationSuccessHandler: 当spring security框架验证用户信息成功后执行的接口，执行的是 `onAuthenticationSuccess()`方法
 - AuthenticationFailureHandler: 当spring security框架验证用户信息失败后执行的接口，接口中方法 onAuthenticationFailure()方法
 
 
-### 5.2 实现步骤
+### 4.2 实现步骤
 
 #### 1）导入jquery
 - 创建`resources/static/js`文件夹，导入jquery
@@ -495,9 +541,9 @@ public class CaptchaController {
 -----------------------------------------------
 
 
-## 6. 过滤器进行验证
+## 5. 过滤器进行验证
 
-### 6.1 验证code
+### 5.1 验证code
 
 - 使用的是过滤器，整个 spring security 框架都是过滤器实现的。
 - 整个过程：`[用户请求] --> [过滤器] --> [过滤器] --> [多个过滤器...] --> [要访问的资源]`
@@ -509,8 +555,8 @@ public class CaptchaController {
     - 继承 OncePerRequestFilter 只执行一次的过滤器
 
 
-### 6.2 创建异常类，继承 AuthenticationException
-- common/VerificationException.java
+### 5.2 创建异常类
+- 继承 AuthenticationException：common/VerificationException.java
 ```java
 package com.funky.common;
 
@@ -531,8 +577,8 @@ public class VerificationException extends AuthenticationException {
 ```
 
 
-### 6.3 创建过滤器类，继承 OncePerRequestFilter
-- filter/VerificationCodeFilter.java
+### 5.3 创建过滤器类
+- 继承OncePerRequestFilter：filter/VerificationCodeFilter.java
 ```java
 package com.funky.filter;
 
@@ -617,7 +663,7 @@ public class VerificationCodeFilter extends OncePerRequestFilter {
 ```
 
 
-### 6.4 改造失败的处理 MyFailureHandler
+### 5.4 改造失败的回调处理
 - common/MyFailureHandler.java
 ```java
 package com.funky.common;
@@ -677,7 +723,7 @@ public class MyFailureHandler implements AuthenticationFailureHandler {
 
 
 
-### 6.5 把自定义的过滤器添加到过滤器链中
+### 5.5 自定义过滤器添加到过滤器链中
 
 - `http.addFilterBefore(new VerificationCodeFilter(), UsernamePasswordAuthenticationFilter.class);`
 - config/CustomSecurityConfig.java
@@ -751,7 +797,7 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 ```
 
 
-### 6.6 运行项目
+### 5.6 运行项目
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/38.png" width="400"/>
 
 
@@ -760,4 +806,4 @@ public class CustomSecurityConfig extends WebSecurityConfigurerAdapter {
 
 ## 参考
 - [动力节点-细说SpringSecurity安全框架](https://www.bilibili.com/video/BV1Bz4y1m79T?p=22)
-
+- [江南一点雨-Spring Security中的表单登录](https://mp.weixin.qq.com/s/kHJRKwH-WUx-JEeaQMa7jw)

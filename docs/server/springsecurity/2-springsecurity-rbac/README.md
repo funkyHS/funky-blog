@@ -27,15 +27,15 @@ tags:
 
 ## 2. RBAC概念
 - RBAC 是基于角色的访问控制(Role-Based Access Control )
-- 在 RBAC 中，权限与角色相关联，用户通过成为适当角色的成员而得到这些角色的权限。
-- 极大地简化了权限的管理。这样管理都是层级相互依赖的，权限赋予给角色，而把角色又赋予用户，这样的权限设计很清楚，管理起来很方便
-- 权限: 能对资源的操作， 比如增加，修改，删除，查看等等。 
-- 角色: 自定义的，表示权限的集合。一个角色可以有多个权限。
+- 在 RBAC 中，`权限`与`角色`相关联，用户通过成为适当角色的成员而得到这些角色的权限。
+- 极大地简化了权限的管理。这样管理都是层级相互依赖的，`权限赋予给角色，而把角色又赋予用户`，这样的权限设计很清楚，管理起来很方便
+- **权限**: 能对资源的操作， 比如增加，修改，删除，查看等等。 
+- **角色**: 自定义的，表示权限的集合。一个角色可以有多个权限。
 
 ### 2.1 基本思想
 - 对系统操作的各种权限**不是直接授予具体的用户**，而是在用户集合与权限集合之间建立一个**角色集合**
 - 每一种角色对应一组相应的权限。一旦用户被分配了适当的角色后，该用户就拥有此角色的所有操作权限
-- 这样做的好处是，不必在每次创建用户时 都进行分配权限的操作，只要分配用户相应的角色即可，而且角色的 权限变更比用户的权限变更要少得多，这样将简化用户的权限管理， 减少系统的开销。
+- 这样做的好处是，不必在每次创建用户时 都进行分配权限的操作，只要分配用户相应的角色即可，而且角色的 权限变更比用户的权限变更要少得多，这样将简化用户的权限管理，减少系统的开销。
 - RBAC概括: 用户是属于角色的，角色拥有权限的集合。用户属于某个角色，他就具有角色对应的权限
 
 
@@ -57,44 +57,38 @@ tags:
 
 
 
-## 3. spring specurity中认证的接口和类
+## 3. SpringSecurity中认证的接口和类
 
 
 ### 3.1 UserDetails接口
 - UserDetails:接口，表示用户信息的
 ```java
 public interface UserDetails extends Serializable {
-    // 权限集合
-    Collection<? extends GrantedAuthority> getAuthorities();
-
-    String getPassword();
-
-    String getUsername();
-    // 账号是否过期
-    boolean isAccountNonExpired();
-    // 账号是否锁定
-    boolean isAccountNonLocked();
-    // 证书是否过期
-    boolean isCredentialsNonExpired();
-    // 账号是否启用
-    boolean isEnabled();
+    
+    Collection<? extends GrantedAuthority> getAuthorities(); // 权限集合
+    String getPassword(); // 密码
+    String getUsername(); // 用户名
+    boolean isAccountNonExpired(); // 账号是否过期
+    boolean isAccountNonLocked(); // 账号是否锁定
+    boolean isCredentialsNonExpired(); // 证书是否过期
+    boolean isEnabled(); // 账号是否启用
 }
 ```
 
 ### 3.2 UserDetails实现类User
-- 框架中默认的User 实现类：org.springframework.security.core.userdetails.User
-- 可以自定义类，实现UserDetails接口，作为你的系统中的用户类。这个类可以交给spring security 使用
+- 框架中默认的User实现类：`org.springframework.security.core.userdetails.User`
+- 可以自定义类，实现UserDetails接口，作为你的系统中的用户类。这个类可以交给Spring Security使用
 
 
 ### 3.3 通过UserDetailsService获取UserDetails接口对象
 - 主要作用:获取用户信息，得到是 UserDetails 对象。一般项目中都需要自定义类实现这个接口，从数据库中获取数据
-- 一个方法需要实现
+- Security中UserDetailsService接口
 ```java
 package org.springframework.security.core.userdetails;
 
 public interface UserDetailsService {
 
-    // 根据用户名称，获取用 户信息(用户名称，密码，角色结合，是否可用，是否锁定等信息)
+    // 根据用户名称，获取用户信息(用户名称，密码，角色结合，是否可用，是否锁定等信息)
     UserDetails loadUserByUsername(String var1) throws UsernameNotFoundException;
 }
 ```
@@ -116,10 +110,18 @@ public interface UserDetailsService {
 - users.ddl 文件
 ```ddl
 // 默认的用户表 users
-create table users(username varchar_ignorecase(50) not null primary key,password varchar_ignorecase(500) not null,enabled boolean not null);
+create table users(
+    username varchar_ignorecase(50) not null primary key,
+    password varchar_ignorecase(500) not null,
+    enabled boolean not null
+);
 
 // 默认的权限表 authorities
-create table authorities (username varchar_ignorecase(50) not null,authority varchar_ignorecase(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
+create table authorities (
+    username varchar_ignorecase(50) not null,
+    authority varchar_ignorecase(50) not null,
+    constraint fk_authorities_users foreign key(username) references users(username)
+);
 
 // 创建唯一索引
 create unique index ix_auth_username on authorities (username,authority);
@@ -131,24 +133,20 @@ create unique index ix_auth_username on authorities (username,authority);
 
 
 
-## 4. 使用 InMemoryUserDetailsManager来管理内存中的用户信息
+## 4. InMemoryUserDetailsManager
 
-- 实现步骤：
+- 使用 `InMemoryUserDetailsManager`来管理内存中的用户信息，实现步骤：
 ```java
 /*
     1.新建maven项目
-
     2.maven的gav坐标
         1）spring-boot
         2）spring-boot-starter-security
         3）spring-boot-starter-web
-
     3.创建应用的配置类
         创建密码的处理类对象
         使用InMemoryUserDetailsManager创建用户
-
     4.创建类继承WebSecurityConfigurerAdapter, 自定义安全配置
-
     5.测试
 */
 ```
@@ -210,7 +208,8 @@ create unique index ix_auth_username on authorities (username,authority);
 ```
 
 
-### 4.2 使用InMemoryUserDetailsManager创建用户
+### 4.2 创建用户
+- 创建UserDetailService的实现类对象，InMemoryUserDetailsManager
 - config/ApplicationConfig.java
 ```java
 package com.funky.config;
@@ -256,7 +255,8 @@ public class ApplicationConfig {
 ```
 
 
-### 4.3 创建类继承WebSecurityConfigurerAdapter, 自定义安全配置
+### 4.3 自定义安全配置
+- 继承 WebSecurityConfigurerAdapter
 - config/MySecurityConfig.java
 ```java
 package com.funky.config;
@@ -269,7 +269,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService detailsService = null;
+    private UserDetailsService detailsService = null; // 在上一步 ApplicationConfig类中的 UserDetailsService
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -292,7 +292,7 @@ public class HelloController {
     }
 }
 ```
-- 测试在浏览器访问：[http://localhost:8080/hello](http://localhost:8080/hello)，会自动跳转到登录页面，输入在 ApplicationConfig 中定义的用户名和密码，就可以登录并访问成功
+- 测试在浏览器访问：`http://localhost:8080/hello`，会自动跳转到登录页面，输入在 `ApplicationConfig` 类中定义的用户名和密码，就可以登录并访问成功
 
 
 
@@ -302,32 +302,27 @@ public class HelloController {
 
 
 
-## 5. 使用 JdbcUserDetailsManager来管理用户信息
-- 实现步骤：
+## 5. JdbcUserDetailsManager
+
+- 使用 JdbcUserDetailsManager来管理用户信息，实现步骤：
 ```java
 /*
     ch06-jdbcUserDetailsService: 使用访问数据库，获取认证的用户信息
-
     底层使用的spring中的jdbcTemplate访问数据库，需要加入jdbc依赖，数据库mysql依赖
 
     实现步骤：
         1.新建maven项目
-
         2.maven的gav坐标
-            1）spring-boot : 2.0.6
+            1）spring-boot
             2）spring-security
             3）spring-web
             4）spring-jdbc
             5）mysql驱动
-
         3.创建应用的配置类，创建JdbcUserDetatilsService对象。
             获取数据库中users表的数据
-
         4.创建一个security的配置，自定义安全配置信息。指定JdbcUserDetatilsService类
-
         5.修改application.properties文件
             连接数据库。配置数据源DataSource
-
         6.测试
 */
 ```
@@ -337,18 +332,34 @@ public class HelloController {
 - 需要使用数据库，数据库默认使用的表是：users，authorities
 - 先在Mysql数据库中创建这两张表，然后 JdbcUserDetailsManager才能通过这两张表，获取用户信息
 - 数据库的操作不需要我们写，JdbcUserDetailsManager已经完成，内部使用spring框架jdbcTemplate来操作数据库的
-- 数据库文件：org.springframework.security.core.userdetails.jdbc
+- 数据库文件：`org.springframework.security.core.userdetails.jdbc`
 - users.ddl 文件
 ```ddl
-create table users(username varchar_ignorecase(50) not null primary key,password varchar_ignorecase(500) not null,enabled boolean not null);
-create table authorities (username varchar_ignorecase(50) not null,authority varchar_ignorecase(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
+create table users(
+    username varchar_ignorecase(50) not null primary key,
+    password varchar_ignorecase(500) not null,
+    enabled boolean not null
+);
+create table authorities (
+    username varchar_ignorecase(50) not null,
+    authority varchar_ignorecase(50) not null,
+    constraint fk_authorities_users foreign key(username) references users(username)
+);
 create unique index ix_auth_username on authorities (username,authority);
 ```
-- 需要修改一下才可以在mysql中执行，修改如下
+- 需要修改一下才可以在mysql中执行，修改后如下
 ```ddl
-create table users(username varchar(50) not null primary key, password varchar(500) not null, enabled boolean not null);
+create table users(
+    username varchar(50) not null primary key, 
+    password varchar(500) not null, 
+    enabled boolean not null
+);
 
-create table authorities (username varchar(50) not null,authority varchar(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
+create table authorities (
+    username varchar(50) not null,
+    authority varchar(50) not null,
+    constraint fk_authorities_users foreign key(username) references users(username)
+);
 
 create unique index ix_auth_username on authorities (username,authority);
 ```
@@ -358,7 +369,7 @@ create unique index ix_auth_username on authorities (username,authority);
 
 ### 5.2 创建Maven项目，quickstart
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/14.png" width="400"/>
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/15.png" width="400"/>
+<img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/15.png" width="400"/>
 
 
 
@@ -429,7 +440,8 @@ create unique index ix_auth_username on authorities (username,authority);
 ```
 
 
-### 5.4 使用JdbcUserDetailsManager，连接数据库，创建用户信息
+### 5.4 连接数据库，创建用户信息
+- 使用JdbcUserDetailsManager，连接数据库，创建用户信息
 - config/ApplicationConfig.java
 ```java
 package com.funky.config;
@@ -475,27 +487,24 @@ public class ApplicationConfig {
                     .password(encoder.encode("admin"))
                     .roles("ADMIN","USER","MANAGER").build());
         }
-
         if( !manager.userExists("zs")){
             manager.createUser(User.withUsername("zs").
                     password(encoder.encode("123"))
                     .roles("USER").build());
         }
-
         if( !manager.userExists("lisi")){
             manager.createUser(User.withUsername("lisi")
                     .password(encoder.encode("456"))
                     .roles("USER","NORMAL").build());
         }
-
-
         return manager;
     }
 }
 ```
 
 
-### 5.5 创建类继承WebSecurityConfigurerAdapter, 自定义安全配置
+### 5.5 自定义安全配置
+- 创建类继承WebSecurityConfigurerAdapter, 自定义安全配置
 - config/MySecurityConfig.java
 ```java
 package com.funky.config;
@@ -527,7 +536,7 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-### 5.6 核心配置文件中配置数据库连接信息
+### 5.6 配置数据库连接信息
 - application.properties
 ```properties
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
@@ -558,32 +567,28 @@ public class HelloController {
 ### 5.8 启动类，运行程序
 ```java
 @SpringBootApplication
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println("==============Main2=============");
+public class App {
+    public static void main( String[] args ) {
         SpringApplication.run(App.class,args);
     }
 }
 ```
 - 测试在浏览器访问：[http://localhost:8080/hello](http://localhost:8080/hello)，会自动跳转到登录页面，输入在 ApplicationConfig 中定义的用户名和密码，就可以登录并访问成功
 - 自动插入的用户数据，以及权限信息
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/16.png" width="400"/>
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/17.png" width="400"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/16.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/17.png" width="500"/>
 
 
 
 ------------------------------------------
 
 
-## 6. 创建用户表和角色表，自定义获取用户信息和角色信息
+## 6. 自定义获取用户信息和角色信息
 
 - 实现步骤：
 ```java
 /*
     ch07-user-role: 使用用户和角色，认证用户
-
     实现步骤：
         1.新建maven项目
         2.加入gav坐标
@@ -594,26 +599,22 @@ public class App
             5）mysql驱动
         3.编写application.properties
             连接数据库，创建连接池
-
         4.创建自己的user类，代替UserDetatils
-
         5.创建自定义的UserDetatilsService实现类
             在重写方法中，查询数据库获取用户信息， 获取角色数据。
             构建UserDetatils实现类对象。
-
         6.创建类继承WebSecurityConfigurerAdapter
             自定义安全的配置
-
         7.自定义登录
             1）传统form登录
             2）ajax登录
-
         8.创建Controller
 */
 ```
 
 
-### 6.1 创建用户表sys_user，角色表sys_role，角色与用户的对应关系表sys_user_role
+### 6.1 创建相关表
+- 创建用户表sys_user，角色表sys_role，角色与用户的对应关系表sys_user_role
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/18.png" width="500"/>
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/19.png" width="500"/>
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/20.png" width="500"/>
@@ -702,7 +703,7 @@ mybatis.type-aliases-package=com.funky.entity
 ```
 
 
-### 6.4 创建用户类，Dao接口以及mapper配置文件
+### 6.4 创建用户类,Dao,mapper文件
 - 与数据库对应的用户类，实现UserDetails接口：entity/SysUser.java 
 ```java
 package com.funky.entity;
@@ -753,88 +754,37 @@ public class SysUser implements UserDetails {
 
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authorities;
-    }
-
+    public Collection<? extends GrantedAuthority> getAuthorities() { return authorities; }
     @Override
-    public String getPassword() {
-        return password;
-    }
-
+    public String getPassword() { return password; }
     @Override
-    public String getUsername() {
-        return username;
-    }
-
+    public String getUsername() { return username; }
     @Override
-    public boolean isAccountNonExpired() {
-        return isExpired;
-    }
-
+    public boolean isAccountNonExpired() { return isExpired; }
     @Override
-    public boolean isAccountNonLocked() {
-        return isLocked;
-    }
-
+    public boolean isAccountNonLocked() { return isLocked; }
     @Override
-    public boolean isCredentialsNonExpired() {
-        return isCredentials;
-    }
-
+    public boolean isCredentialsNonExpired() { return isCredentials; }
     @Override
-    public boolean isEnabled() {
-        return isEnabled;
-    }
+    public boolean isEnabled() { return isEnabled; }
 
 
 
-
-    public Integer getId() {
-        return id;
-    }
-    public Date getCreateTime() {
-        return createTime;
-    }
-    public Date getLoginTime() {
-        return loginTime;
-    }
-    public String getRealname() {
-        return realname;
-    }
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public void setRealname(String realname) {
-        this.realname = realname;
-    }
-    public void setExpired(boolean expired) {
-        isExpired = expired;
-    }
-    public void setLocked(boolean locked) {
-        isLocked = locked;
-    }
-    public void setCredentials(boolean credentials) {
-        isCredentials = credentials;
-    }
-    public void setEnabled(boolean enabled) {
-        isEnabled = enabled;
-    }
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-    public void setLoginTime(Date loginTime) {
-        this.loginTime = loginTime;
-    }
-    public void setAuthorities(List<GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
+    public Integer getId() { return id; }
+    public Date getCreateTime() { return createTime; }
+    public Date getLoginTime() { return loginTime; }
+    public String getRealname() { return realname; }
+    public void setId(Integer id) { this.id = id; }
+    public void setUsername(String username) { this.username = username; }
+    public void setPassword(String password) { this.password = password; }
+    public void setRealname(String realname) { this.realname = realname; }
+    public void setExpired(boolean expired) { isExpired = expired; }
+    public void setLocked(boolean locked) { isLocked = locked; }
+    public void setCredentials(boolean credentials) { isCredentials = credentials; }
+    public void setEnabled(boolean enabled) { isEnabled = enabled; }
+    public void setCreateTime(Date createTime) { this.createTime = createTime;}
+    public void setLoginTime(Date loginTime) { this.loginTime = loginTime; }
+    public void setAuthorities(List<GrantedAuthority> authorities) { this.authorities = authorities; }
 
     @Override
     public String toString() {
@@ -918,7 +868,7 @@ public interface SysUserMapper {
 ```
 
 
-### 6.5 在入口类编写模拟用户并插入数据库
+### 6.5 入口类编写模拟用户并插入数据库
 - 项目执行成功，确认数据库已经插入用户数据以后，注释掉@PostConstruct，防止下次再次插入
 - UserRoleApplication.java
 ```java
@@ -1014,7 +964,7 @@ public class UserRoleApplication {
 
 
 
-### 6.7 创建角色类，Dao接口及mapper配置文件
+### 6.7 创建角色类,Dao,mapper文件
 - entity/SysRole.java
 ```java
 package com.funky.entity;
@@ -1084,7 +1034,7 @@ public interface SysRoleMapper {
 
 
 
-### 6.8 创建自定义的UserDetatilsService实现类
+### 6.8 自定义的UserDetatilsService实现类
 - service/JdbcUserDetatilsService.java
 ```java
 package com.funky.service;
@@ -1207,7 +1157,7 @@ public class MyController {
 
 
 
-### 6.10 创建Security配置类CustomSecurityConfig
+### 6.10 创建Security配置类
 - config/CustomSecurityConfig.java
 ```java
 package com.funky.config;
