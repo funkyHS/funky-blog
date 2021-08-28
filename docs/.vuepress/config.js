@@ -329,6 +329,12 @@ module.exports = {
     sidebarDepth: 2, // 侧边栏显示2级
     logo: '/logo.jpg',
     sidebar: sidebar,
+    search: true, // false 来禁用默认的搜索框
+    searchMaxSuggestions: 20, // 默认搜索框显示的搜索结果数量
+    // lastUpdated: 'Last Updated', // 最后更新时间 string | boolean
+    
+    nextLinks: true, // 默认值是 true 。设置为 false 来禁用所有页面的 下一篇 链接
+    prevLinks: true, // 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接
   },
   plugins: [
     ['image'],

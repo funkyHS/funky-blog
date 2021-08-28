@@ -1,5 +1,10 @@
 ---
 title: 【2. 基于角色的权限RBAC】
+tags:
+    - security
+    - rbac
+    - 认证
+    - 授权
 ---
 
 

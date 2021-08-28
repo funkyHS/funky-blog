@@ -1,5 +1,9 @@
 ---
 title: 【1. SpringSecurity框架基础实例】
+tags:
+    - security
+    - 用户
+    - 密码
 ---
 
 
@@ -10,6 +14,7 @@ title: 【1. SpringSecurity框架基础实例】
 ## 1. SpringSecurity简介
 - spring security 是基于 spring 的安全框架。它提供全面的安全性解决方案，同时在 Web 请求级和方法调用级处理`身份确认和授权`。
 - 在 Spring Framework 基础 上，spring security 充分利用了`依赖注入(DI)`和`面向切面编程(AOP)`功能，为应用系统提供声明式的安全访问控制功能，减少了为企业系统安全控制编写大量重复 代码的工作。是一个`轻量级的安全框架`。它与 Spring MVC 有很好地集成.
+- 当在一个项目中引入 Spring Security 相关依赖后，默认的就是表单登录
 
 ### 1.1 核心功能
 - 认证(你是谁，用户/设备/系统)
@@ -22,7 +27,7 @@ title: 【1. SpringSecurity框架基础实例】
 -----------------------------------------------
 
 
-## 2. 使用Security默认和配置中的用户信息
+## 2. Security默认生成的用户及密码
 
 ### 2.1 pom中引入依赖
 ```xml
@@ -53,29 +58,20 @@ public class HelloSecurityController {
 }
 ```
 
-### 2.3 访问
-- 浏览器访问：`http://localhost:8080/hello/world`，会重新定向到`http://localhost:8080/login`
+### 2.3 启动项目并访问接口
+- 浏览器访问`http://localhost:8080/hello/world`接口，会重新定向到登录页面`http://localhost:8080/login`
 - 框架生成的用户
     - 用户名：user
-    - 密码：在启动项目时，生成的uuid临时密码
-    - Using generated security password: ed768dc6-ca86-4a91-af65-4bc1c4af6354
+    - 密码：在启动项目时，生成的 UUID字符串 临时密码
+- 输入用户名密码之后，就登录成功了，登录成功后，我们就可以访问到 `/hello/world` 接口了
+- 在 Spring Security 中，默认的登录页面和登录接口，都是 `/login` ，只不过一个是 get 请求（登录页面），另一个是 post 请求（登录接口）
+- 注意：默认的密码在每次重启项目时都会变
 
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/1.png" width="500"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/1.png" width="700"/>
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/2.png" width="300"/>
 
 
-
-### 2.4 自定义Security用户名和密码
-- 自定义以后，在控制台就没有生成的uuid密码了
-- application.properties
-```properties
-# 自定义Security用户名和密码
-spring.security.user.name=funky
-spring.security.user.password=123456
-```
-
-
-### 2.5 关闭Security验证
+### 2.4 关闭Security验证
 - 在启动入口类，排除 Secuirty 的配置
 ```java
 // 排除 Secuirty 的配置，使其不启用
@@ -89,13 +85,43 @@ public class Ch01HelloSpringsecurityApplication {
 ```
 
 
+
 -----------------------------------------------
 
 
 
-## 3. 使用内存中的用户信息
+## 3. 核心配置文件中自定义用户名及密码
+- 默认的用户定义在 `package org.springframework.boot.autoconfigure.security;`包下的 `SecurityProperties`类中
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/39.png" width="600"/>
 
-- 使用：WebSecurityConfigurerAdapter 控制安全管理的内容，继承 WebSecurityConfigurerAdapter，重写方法
+- 在 properties 中定义的用户名密码最终是通过 set 方法注入到属性中去的，源码如下
+```java
+public void setPassword(String password) {
+    if (StringUtils.hasLength(password)) {
+        this.passwordGenerated = false;
+        this.password = password;
+    }
+}
+```
+- 定义的密码在注入进来之后，设置passwordGenerated 属性为 false，控制台就不会打印默认的密码了
+- application.properties
+```properties
+# 自定义Security用户名和密码
+spring.security.user.name=funky
+spring.security.user.password=123456
+```
+
+
+
+
+
+-----------------------------------------------
+
+
+
+## 4. 配置类中(内存中)配置用户信息
+
+- 使用：`WebSecurityConfigurerAdapter` 控制安全管理的内容，继承 WebSecurityConfigurerAdapter，重写方法
 - config/MyWebSecurityConfig.java
 ```java
 import org.springframework.context.annotation.Bean;
@@ -120,10 +146,10 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 给密码进行加密
         PasswordEncoder pe = passwordEncoder();
 
-        auth.inMemoryAuthentication()
-                .withUser("zhangsan")
-                .password(pe.encode("123456"))
-                .roles();
+        auth.inMemoryAuthentication() // inMemoryAuthentication 开启在内存中定义用户
+                .withUser("zhangsan") // 用户名
+                .password(pe.encode("123456")) // 用户密码
+                .roles(); // 用户角色
         auth.inMemoryAuthentication()
                 .withUser("lisi")
                 .password(pe.encode("123456"))
@@ -151,7 +177,8 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 -----------------------------------------------
 
 
-## 4. 基于角色的实现步骤
+
+## 5. 角色Role不同,访问权限不同
 
 - 基于角色 Role 的身份认证， 同一个用户可以有不同 的角色。同时可以开启对方法级别的认证
 - config/MyWebSecurityConfig.java
@@ -163,8 +190,8 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/5.png" width="700"/>
 
 
-- 如果使用没有权限的用户登录
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/3.png" width="500"/>
+- 如果使用没有权限的用户登录，响应403错误
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/3.png" width="400"/>
 
 
 
@@ -172,20 +199,18 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
 
-## 5. 基于jdbc的用户认证
+## 6. 基于jdbc的用户身份信息认证
 - 从数据库 mysql 中获取用户的身份信息(用户名称，密码，角色)
-
-- 在 spring security 框架对象用户信息的表示类是 UserDetails
+- 在 spring security 框架中，对象用户信息的表示类是 `UserDetails`
     - UserDetails 是一个接口，高度抽象的用户信息类(相当于项目中的 User 类)
-    - User 类:是 UserDetails 接口的实现类， 构造方法有三个参数: username，password, authorities
+    - User 类:是 UserDetails 接口的实现类， 构造方法有三个参数: username，password，authorities
     - 需要向 spring security 提供 User 对象，spring security根据User对象来进行身份认证的，这个对象的数据来自数据库 的查询
     <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/6.png" width="700"/>
-
 - 实现 UserDetailsService 接口
     - 重写方法 `UserDetails loadUserByUsername(String var1)`
-    - 在方法中获取数据库中的用户信息， 也就是执行数据库的查询，条 件是用户名称
+    - 在方法中获取数据库中的用户信息，也就是执行数据库的查询，条件是用户名称
 
-### 5.1 创建项目，导入依赖
+### 6.1 创建项目，导入依赖
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/7.png" width="300"/>
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -248,7 +273,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 ```
 
 
-### 5.2 创建实体类UserInfo
+### 6.2 创建实体类UserInfo
 - entity/UserInfo.java
 ```java
 package com.funky.entity;
@@ -258,7 +283,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-// 表示当前类是一个实体类，表示数据库中的一个表
+// @Entity 表示当前类是一个实体类，表示数据库中的一个表
 // 表名默认和类名一样
 @Entity
 public class UserInfo {
@@ -273,36 +298,19 @@ public class UserInfo {
     // 角色
     private String role;
 
-
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getUsername() {
-        return username;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getRole() {
-        return role;
-    }
-    public void setRole(String role) {
-        this.role = role;
-    }
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password;}
+    public String getRole() { return role; }
+    public void setRole(String role) { this.role = role; }
 }
 ```
 
 
-### 5.3 创建Dao层接口
+### 6.3 创建Dao层接口
 - dao/UserInfoDao.java
 ```java
 package com.funky.dao;
@@ -314,11 +322,10 @@ public interface UserInfoDao extends JpaRepository<UserInfo, Long> {
     // 按照username查询数据库信息
     UserInfo findByUsername(String username);
 }
-
 ```
 
 
-### 5.4 创建Service层
+### 6.4 创建Service层
 - 接口service/UserInfoService.java
 ```java
 import com.funky.entity.UserInfo;
@@ -351,14 +358,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 }
 ```
 
-### 5.5 数据库连接配置
+### 6.5 数据库连接配置
 - application.properties
 ```properties
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.datasource.url=jdbc:mysql://localhost:3306/springboot?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8
 spring.datasource.username=funky
 spring.datasource.password=12345
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-
 
 spring.jpa.generate-ddl=true
 spring.jpa.show-sql=true
@@ -366,7 +372,7 @@ spring.jpa.database=mysql
 ```
 
 
-### 5.6 创建启动类
+### 6.6 创建启动类
 ```java
 package com.funky;
 
@@ -383,7 +389,7 @@ public class JdbcApplication {
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/8.png" width="700"/>
 
 
-### 5.7 创建数据库初始化类
+### 6.7 创建数据库初始化类
 - init/JdbcInit.java
 ```java
 package com.funky.init;
@@ -429,7 +435,8 @@ public class JdbcInit {
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/10.png" width="400"/>
 
 
-### 5.8 实现UserDetail的接口，从数据库中获取数据
+### 6.8 从数据库中获取用户信息数据
+- 继承UserDetailsService，实现loadUserByUsername方法
 - provider/MyUserDetailService.java
 ```java
 package com.funky.provider;
@@ -472,7 +479,7 @@ public class MyUserDetailService implements UserDetailsService {
                 GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" +userinfo.getRole());
                 list.add(authority);
 
-                // 创建User对象
+                // 创建User对象  User是UserDetails接口的实现类
                 user = new User(userinfo.getUsername(),userinfo.getPassword(),list);
             }
 
@@ -483,7 +490,8 @@ public class MyUserDetailService implements UserDetailsService {
 ```
 
 
-### 5.9 继承WebSecurityConfigurerAdapter，重写configure方法
+### 6.9 配置类中使用自定义的MyUserDetailService
+- 继承WebSecurityConfigurerAdapter，重写configure方法
 - config/MyWebSecurityConfig.java
 ```java
 package com.funky.config;
@@ -516,7 +524,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 ```
 
 
-### 5.10 创建不同角色对应的请求接口
+### 6.10 创建不同角色对应的请求接口
 - controller/HelloSecurityController.java
 ```java
 package com.funky.controller;
