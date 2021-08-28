@@ -1,5 +1,5 @@
 ---
-title: 【7. swiper轮播,自定义指令,过滤器filter】
+title: 【7. swiper,自定义指令,filter】
 ---
 
 [[TOC]]

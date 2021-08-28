@@ -215,7 +215,8 @@ const sidebar = {
             sidebarDepth: 2,
             children: [
                 '/server/springsecurity/1-springsecurity-base/',
-                '/server/springsecurity/2-springsecurity-rbac/'
+                '/server/springsecurity/2-springsecurity-rbac/',
+                '/server/springsecurity/3-springsecurity-login/'
             ]
         },
         // {

@@ -1,5 +1,5 @@
 ---
-title: 【8. 单文件组件,路由,跨域请求,devtools】
+title: 【8. Vue-CLI,路由,跨域,devtools】
 ---
 
 
