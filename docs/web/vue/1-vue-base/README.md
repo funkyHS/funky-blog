@@ -126,5 +126,4 @@ title: 【1. Vue原理,常用架构模式】
 
 
 ## 参考
-- [vue3.0+2.0超详细讲解（2020最新版）](https://www.bilibili.com/video/BV1dK4y1Z77R)
-- [千锋视频学习](https://www.bilibili.com/video/BV18K4y1f7Vi)
+- [VUE全套教程从入门到精通](https://www.bilibili.com/video/BV18K4y1f7Vi)

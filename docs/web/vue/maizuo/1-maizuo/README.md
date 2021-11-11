@@ -8,10 +8,10 @@ title: 【1. 初始化项目,Vetur,ESLint】
 ## 1. 项目预览
 - 原项目：[https://m.maizuo.com/v5/#/films/nowPlaying](https://m.maizuo.com/v5/#/films/nowPlaying)
 - 项目预览：
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/vue/3/3.png" width="300"/>
-<img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/vue/3/4.png" width="300"/>
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/vue/3/5.png" width="300"/>
-<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/vue/3/6.png" width="300"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/vue/3/3.png" width="250"/>
+<img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/vue/3/4.png" width="250"/>
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/vue/3/5.png" width="250"/>
+<img src="http://funky_hs.gitee.io/imgcloud/funkyblog/web/vue/3/6.png" width="250"/>
 
 
 ## 2. 创建vue项目
@@ -90,3 +90,8 @@ li {
 
 
 
+
+
+
+## 参考
+- [VUE全套教程从入门到精通](https://www.bilibili.com/video/BV18K4y1f7Vi)

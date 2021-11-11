@@ -662,3 +662,6 @@ location /ajax/ {
   proxy_pass https://m.maoyan.com;
 }
 ```
+
+## 参考
+- [VUE全套教程从入门到精通](https://www.bilibili.com/video/BV18K4y1f7Vi)
