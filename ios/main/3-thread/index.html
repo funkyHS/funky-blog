@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>3. 多线程 | Funky&#39;s blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/funkyblog/logo.jpg">
+    <meta name="description" content="Funky的个人技术博客">
+    
+    <link rel="preload" href="/funkyblog/assets/css/0.styles.c5671824.css" as="style"><link rel="preload" href="/funkyblog/assets/js/app.a24b3efd.js" as="script"><link rel="preload" href="/funkyblog/assets/js/2.3aea1f50.js" as="script"><link rel="preload" href="/funkyblog/assets/js/60.016ba18c.js" as="script"><link rel="prefetch" href="/funkyblog/assets/js/10.fdb72551.js"><link rel="prefetch" href="/funkyblog/assets/js/100.322ef7c3.js"><link rel="prefetch" href="/funkyblog/assets/js/101.7adabe50.js"><link rel="prefetch" href="/funkyblog/assets/js/102.b672d5b4.js"><link rel="prefetch" href="/funkyblog/assets/js/103.cbd5f57f.js"><link rel="prefetch" href="/funkyblog/assets/js/104.98c6bdcb.js"><link rel="prefetch" href="/funkyblog/assets/js/105.51f7efcb.js"><link rel="prefetch" href="/funkyblog/assets/js/106.bcdfddc5.js"><link rel="prefetch" href="/funkyblog/assets/js/107.000a9752.js"><link rel="prefetch" href="/funkyblog/assets/js/108.92133c7f.js"><link rel="prefetch" href="/funkyblog/assets/js/109.249e3002.js"><link rel="prefetch" href="/funkyblog/assets/js/11.8d7a0728.js"><link rel="prefetch" href="/funkyblog/assets/js/110.a116e6e3.js"><link rel="prefetch" href="/funkyblog/assets/js/111.5d78ef12.js"><link rel="prefetch" href="/funkyblog/assets/js/112.2c266219.js"><link rel="prefetch" href="/funkyblog/assets/js/113.480d3824.js"><link rel="prefetch" href="/funkyblog/assets/js/114.fa1b4ab2.js"><link rel="prefetch" href="/funkyblog/assets/js/115.d65cb78a.js"><link rel="prefetch" href="/funkyblog/assets/js/116.33a2e878.js"><link rel="prefetch" href="/funkyblog/assets/js/117.bbd07ef4.js"><link rel="prefetch" href="/funkyblog/assets/js/118.0dedd5d9.js"><link rel="prefetch" href="/funkyblog/assets/js/119.5a13d359.js"><link rel="prefetch" href="/funkyblog/assets/js/12.84a022d2.js"><link rel="prefetch" href="/funkyblog/assets/js/120.6d8406bc.js"><link rel="prefetch" href="/funkyblog/assets/js/121.1535eb29.js"><link rel="prefetch" href="/funkyblog/assets/js/122.25226b03.js"><link rel="prefetch" href="/funkyblog/assets/js/123.00d7c304.js"><link rel="prefetch" href="/funkyblog/assets/js/124.16802c94.js"><link rel="prefetch" href="/funkyblog/assets/js/125.541331b4.js"><link rel="prefetch" href="/funkyblog/assets/js/126.8eec9a18.js"><link rel="prefetch" href="/funkyblog/assets/js/127.d14ed3d3.js"><link rel="prefetch" href="/funkyblog/assets/js/13.fe7b989e.js"><link rel="prefetch" href="/funkyblog/assets/js/14.06c2893e.js"><link rel="prefetch" href="/funkyblog/assets/js/15.7db30254.js"><link rel="prefetch" href="/funkyblog/assets/js/16.f5c8a3a0.js"><link rel="prefetch" href="/funkyblog/assets/js/17.ee25e8b2.js"><link rel="prefetch" href="/funkyblog/assets/js/18.138ba97b.js"><link rel="prefetch" href="/funkyblog/assets/js/19.7b046ac4.js"><link rel="prefetch" href="/funkyblog/assets/js/20.93aa8f6a.js"><link rel="prefetch" href="/funkyblog/assets/js/21.b422e4c4.js"><link rel="prefetch" href="/funkyblog/assets/js/22.4b4fa0d1.js"><link rel="prefetch" href="/funkyblog/assets/js/23.3135691d.js"><link rel="prefetch" href="/funkyblog/assets/js/24.5ed690d9.js"><link rel="prefetch" href="/funkyblog/assets/js/25.599c60f6.js"><link rel="prefetch" href="/funkyblog/assets/js/26.9388b7c2.js"><link rel="prefetch" href="/funkyblog/assets/js/27.a17039b1.js"><link rel="prefetch" href="/funkyblog/assets/js/28.51a65ac9.js"><link rel="prefetch" href="/funkyblog/assets/js/29.ca8f9960.js"><link rel="prefetch" href="/funkyblog/assets/js/3.90f0fac9.js"><link rel="prefetch" href="/funkyblog/assets/js/30.c93ba89f.js"><link rel="prefetch" href="/funkyblog/assets/js/31.1739efda.js"><link rel="prefetch" href="/funkyblog/assets/js/32.3d6133c5.js"><link rel="prefetch" href="/funkyblog/assets/js/33.ea1b693d.js"><link rel="prefetch" href="/funkyblog/assets/js/34.f5f68409.js"><link rel="prefetch" href="/funkyblog/assets/js/35.fe8276f9.js"><link rel="prefetch" href="/funkyblog/assets/js/36.7dfbbc31.js"><link rel="prefetch" href="/funkyblog/assets/js/37.38292e55.js"><link rel="prefetch" href="/funkyblog/assets/js/38.814bd863.js"><link rel="prefetch" href="/funkyblog/assets/js/39.ff4fbd9f.js"><link rel="prefetch" href="/funkyblog/assets/js/4.bf89a90b.js"><link rel="prefetch" href="/funkyblog/assets/js/40.b78c54dc.js"><link rel="prefetch" href="/funkyblog/assets/js/41.f17fe040.js"><link rel="prefetch" href="/funkyblog/assets/js/42.83583d5d.js"><link rel="prefetch" href="/funkyblog/assets/js/43.deed3fdd.js"><link rel="prefetch" href="/funkyblog/assets/js/44.8033ac93.js"><link rel="prefetch" href="/funkyblog/assets/js/45.78c09822.js"><link rel="prefetch" href="/funkyblog/assets/js/46.dc92e91d.js"><link rel="prefetch" href="/funkyblog/assets/js/47.58c20506.js"><link rel="prefetch" href="/funkyblog/assets/js/48.03e8e813.js"><link rel="prefetch" href="/funkyblog/assets/js/49.51f46791.js"><link rel="prefetch" href="/funkyblog/assets/js/5.f6f2e860.js"><link rel="prefetch" href="/funkyblog/assets/js/50.d62f902a.js"><link rel="prefetch" href="/funkyblog/assets/js/51.2f77c15c.js"><link rel="prefetch" href="/funkyblog/assets/js/52.14d3dba9.js"><link rel="prefetch" href="/funkyblog/assets/js/53.9598cf79.js"><link rel="prefetch" href="/funkyblog/assets/js/54.669e4f25.js"><link rel="prefetch" href="/funkyblog/assets/js/55.aeb878b8.js"><link rel="prefetch" href="/funkyblog/assets/js/56.23f25070.js"><link rel="prefetch" href="/funkyblog/assets/js/57.f048233b.js"><link rel="prefetch" href="/funkyblog/assets/js/58.f3967f69.js"><link rel="prefetch" href="/funkyblog/assets/js/59.62f0670e.js"><link rel="prefetch" href="/funkyblog/assets/js/6.6d922041.js"><link rel="prefetch" href="/funkyblog/assets/js/61.b5d2cff8.js"><link rel="prefetch" href="/funkyblog/assets/js/62.ac5f87fe.js"><link rel="prefetch" href="/funkyblog/assets/js/63.d9a60137.js"><link rel="prefetch" href="/funkyblog/assets/js/64.b591a667.js"><link rel="prefetch" href="/funkyblog/assets/js/65.e768c8e9.js"><link rel="prefetch" href="/funkyblog/assets/js/66.5f46813d.js"><link rel="prefetch" href="/funkyblog/assets/js/67.02b3f46c.js"><link rel="prefetch" href="/funkyblog/assets/js/68.676ba975.js"><link rel="prefetch" href="/funkyblog/assets/js/69.e031cc98.js"><link rel="prefetch" href="/funkyblog/assets/js/7.7a61e41b.js"><link rel="prefetch" href="/funkyblog/assets/js/70.94a805bd.js"><link rel="prefetch" href="/funkyblog/assets/js/71.281fda5b.js"><link rel="prefetch" href="/funkyblog/assets/js/72.290763cf.js"><link rel="prefetch" href="/funkyblog/assets/js/73.21b036b0.js"><link rel="prefetch" href="/funkyblog/assets/js/74.df7e87b8.js"><link rel="prefetch" href="/funkyblog/assets/js/75.a73c1199.js"><link rel="prefetch" href="/funkyblog/assets/js/76.44658040.js"><link rel="prefetch" href="/funkyblog/assets/js/77.bd56a926.js"><link rel="prefetch" href="/funkyblog/assets/js/78.09a51bc3.js"><link rel="prefetch" href="/funkyblog/assets/js/79.cb143284.js"><link rel="prefetch" href="/funkyblog/assets/js/8.708c7e46.js"><link rel="prefetch" href="/funkyblog/assets/js/80.f134bc8b.js"><link rel="prefetch" href="/funkyblog/assets/js/81.12483621.js"><link rel="prefetch" href="/funkyblog/assets/js/82.e41901b3.js"><link rel="prefetch" href="/funkyblog/assets/js/83.5c039041.js"><link rel="prefetch" href="/funkyblog/assets/js/84.c4c06788.js"><link rel="prefetch" href="/funkyblog/assets/js/85.bced8698.js"><link rel="prefetch" href="/funkyblog/assets/js/86.5315ed66.js"><link rel="prefetch" href="/funkyblog/assets/js/87.4ea61a5c.js"><link rel="prefetch" href="/funkyblog/assets/js/88.aa62f043.js"><link rel="prefetch" href="/funkyblog/assets/js/89.0eb25b80.js"><link rel="prefetch" href="/funkyblog/assets/js/9.e076e28d.js"><link rel="prefetch" href="/funkyblog/assets/js/90.7f136876.js"><link rel="prefetch" href="/funkyblog/assets/js/91.12c27e63.js"><link rel="prefetch" href="/funkyblog/assets/js/92.e2ffad27.js"><link rel="prefetch" href="/funkyblog/assets/js/93.a08e3a15.js"><link rel="prefetch" href="/funkyblog/assets/js/94.977d3ede.js"><link rel="prefetch" href="/funkyblog/assets/js/95.f8e1328d.js"><link rel="prefetch" href="/funkyblog/assets/js/96.c119e0f7.js"><link rel="prefetch" href="/funkyblog/assets/js/97.e483280d.js"><link rel="prefetch" href="/funkyblog/assets/js/98.0f1eb7a4.js"><link rel="prefetch" href="/funkyblog/assets/js/99.7813329f.js">
+    <link rel="stylesheet" href="/funkyblog/assets/css/0.styles.c5671824.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/funkyblog/" class="home-link router-link-active"><img src="/funkyblog/logo.jpg" alt="Funky's blog" class="logo"> <span class="site-name can-hide">Funky's blog</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/funkyblog/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="/funkyblog/flutter/" class="nav-link">
+  Flutter
+</a></div><div class="nav-item"><a href="/funkyblog/server/" class="nav-link">
+  Server
+</a></div><div class="nav-item"><a href="/funkyblog/web/" class="nav-link">
+  Web
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/funkyblog/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="/funkyblog/flutter/" class="nav-link">
+  Flutter
+</a></div><div class="nav-item"><a href="/funkyblog/server/" class="nav-link">
+  Server
+</a></div><div class="nav-item"><a href="/funkyblog/web/" class="nav-link">
+  Web
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>iOS基础</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/funkyblog/ios/main/1-runtime/" class="sidebar-link">1. Runtime</a></li><li><a href="/funkyblog/ios/main/2-runloop/" class="sidebar-link">2. Runloop</a></li><li><a href="/funkyblog/ios/main/3-thread/" aria-current="page" class="active sidebar-link">3. 多线程</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/funkyblog/ios/main/3-thread/#_1-基本概念" class="sidebar-link">1. 基本概念</a></li><li class="sidebar-sub-header"><a href="/funkyblog/ios/main/3-thread/#_2-ios中多线程的实现方案" class="sidebar-link">2. iOS中多线程的实现方案</a></li><li class="sidebar-sub-header"><a href="/funkyblog/ios/main/3-thread/#_3-pthread" class="sidebar-link">3. pthread</a></li><li class="sidebar-sub-header"><a href="/funkyblog/ios/main/3-thread/#_4-nsthread" class="sidebar-link">4. NSThread</a></li><li class="sidebar-sub-header"><a href="/funkyblog/ios/main/3-thread/#_5-gcd" class="sidebar-link">5. GCD</a></li><li class="sidebar-sub-header"><a href="/funkyblog/ios/main/3-thread/#_6-nsoperation" class="sidebar-link">6. NSOperation</a></li></ul></li><li><a href="/funkyblog/ios/main/4-block/" class="sidebar-link">4. Blocks</a></li><li><a href="/funkyblog/ios/main/5-kvc-kvo/" class="sidebar-link">5. KVC/KVO</a></li><li><a href="/funkyblog/ios/main/6-arc/" class="sidebar-link">6. 自动引用计数</a></li><li><a href="/funkyblog/ios/main/7-instrument/" class="sidebar-link">7. Instrument</a></li><li><a href="/funkyblog/ios/main/8-copy/" class="sidebar-link">8. 深拷贝与浅拷贝</a></li><li><a href="/funkyblog/ios/main/9-llvm/" class="sidebar-link">9. 编译器</a></li><li><a href="/funkyblog/ios/main/10-module/" class="sidebar-link">10. 组件化</a></li><li><a href="/funkyblog/ios/main/11-ble/" class="sidebar-link">11. BLE</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>OC学习</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>Swift学习</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><p></p><div class="table-of-contents"><ul><li><a href="#_1-基本概念">1. 基本概念</a><ul><li><a href="#进程">进程</a></li><li><a href="#线程">线程</a></li><li><a href="#多线程">多线程</a></li><li><a href="#多线程在ios开发中的应用">多线程在iOS开发中的应用</a></li></ul></li><li><a href="#_2-ios中多线程的实现方案">2. iOS中多线程的实现方案</a><ul><li><a href="#pthread">pthread</a></li><li><a href="#nsthread">NSThread</a></li><li><a href="#gcd">GCD</a></li><li><a href="#nsoperation">NSOperation</a></li></ul></li><li><a href="#_3-pthread">3. pthread</a></li><li><a href="#_4-nsthread">4. NSThread</a><ul><li><a href="#nsthread的基本使用">NSThread的基本使用</a></li><li><a href="#设置线程的属性">设置线程的属性</a></li><li><a href="#线程的状态">线程的状态</a></li><li><a href="#线程安全">线程安全</a></li><li><a href="#线程间通信">线程间通信</a></li><li><a href="#如何计算代码段的执行时间">如何计算代码段的执行时间</a></li></ul></li><li><a href="#_5-gcd">5. GCD</a><ul><li><a href="#gcd基本知识">GCD基本知识</a></li><li><a href="#gcd基本使用【重点】">GCD基本使用【重点】</a></li><li><a href="#gcd线程间通信">GCD线程间通信</a></li><li><a href="#gcd其它常用函数">GCD其它常用函数</a></li><li><a href="#关于gcd中的创建和释放">关于GCD中的创建和释放</a></li></ul></li><li><a href="#_6-nsoperation">6. NSOperation</a><ul><li><a href="#nsoperation基本使用">NSOperation基本使用</a></li><li><a href="#nsoperationqueue基本使用">NSOperationQueue基本使用</a></li><li><a href="#nsoperation其它用法">NSOperation其它用法</a></li><li><a href="#nsoperation实现线程间通信">NSOperation实现线程间通信</a></li></ul></li></ul></div><p></p> <h1 id="多线程"><a href="#多线程" class="header-anchor">#</a> 多线程</h1> <h2 id="_1-基本概念"><a href="#_1-基本概念" class="header-anchor">#</a> 1. 基本概念</h2> <h3 id="进程"><a href="#进程" class="header-anchor">#</a> 进程</h3> <ul><li>进程是指在系统中正在运行的一个应用程序。每个进程之间是独立的，每个进程均运行在其专用且受保护的内存空间内。</li></ul> <h3 id="线程"><a href="#线程" class="header-anchor">#</a> 线程</h3> <ul><li><p>基本概念: 1个进程要想执行任务，必须得有线程（每1个进程至少要有1条线程），线程是进程的基本执行单元，一个进程（程序）的所有任务都在线程中执行。</p></li> <li><p>线程的串行: 1个线程中任务的执行是串行的，如果要在1个线程中执行多个任务，那么只能一个一个地按顺序执行这些任务。也就是说，在同一时间内，1个线程只能执行1个任务。</p></li></ul> <h3 id="多线程-2"><a href="#多线程-2" class="header-anchor">#</a> 多线程</h3> <ul><li><p>基本概念：即1个进程中可以开启多条线程，每条线程可以并行（同时）执行不同的任务。</p></li> <li><p>线程的并行：并行即同时执行。比如同时开启3条线程分别下载3个文件</p></li> <li><p>多线程并发执行的原理：在同一时间里，CPU只能处理1条线程，只有1条线程在工作（执行）。多线程并发（同时）执行，其实是CPU快速地在多条线程之间调度（切换），如果CPU调度线程的时间足够快，就造成了多线程并发执行的假象</p></li> <li><p>多线程优点：</p> <ul><li><p>能适当提高程序的执行效率。</p></li> <li><p>能适当提高资源利用率（CPU、内存利用率）</p></li></ul></li> <li><p>多线程缺点</p> <ul><li><p>开启线程需要占用一定的内存空间（默认情况下，主线程占用1M，子线程占用512KB），如果开启大量的线程，会占用大量的内存空间，降低程序的性能。</p></li> <li><p>线程越多，CPU在调度线程上的开销就越大。</p></li> <li><p>程序设计更加复杂：比如线程之间的通信、多线程的数据共享</p></li></ul></li></ul> <h3 id="多线程在ios开发中的应用"><a href="#多线程在ios开发中的应用" class="header-anchor">#</a> 多线程在iOS开发中的应用</h3> <ul><li><p>主线程</p> <ul><li><p>一个iOS程序运行后，默认会开启1条线程，称为“主线程”或“UI线程”。</p></li> <li><p>作用：刷新显示UI,处理UI事件。</p></li> <li><p>注意：不要将耗时操作放到主线程中去处理，会卡住线程。</p></li></ul></li></ul> <hr> <h2 id="_2-ios中多线程的实现方案"><a href="#_2-ios中多线程的实现方案" class="header-anchor">#</a> 2. iOS中多线程的实现方案</h2> <h3 id="pthread"><a href="#pthread" class="header-anchor">#</a> pthread</h3> <ul><li><p>特点：一套通用的多线程API、适用于Unix\Linux\Windows等系统、跨平台\可移植、使用难度大</p></li> <li><p>线程生命周期：由程序员进行管理</p></li></ul> <h3 id="nsthread"><a href="#nsthread" class="header-anchor">#</a> NSThread</h3> <ul><li><p>特点：使用更加面向对象、简单易用，可直接操作线程对象</p></li> <li><p>线程生命周期：由程序员进行管理</p></li></ul> <h3 id="gcd"><a href="#gcd" class="header-anchor">#</a> GCD</h3> <ul><li><p>特点：旨在替代NSThread等线程技术、充分利用设备的多核(自动)</p></li> <li><p>线程生命周期：自动管理</p></li></ul> <h3 id="nsoperation"><a href="#nsoperation" class="header-anchor">#</a> NSOperation</h3> <ul><li><p>特点：基于GCD（底层是GCD）、比GCD多了一些更简单实用的功能、使用更加面向对象</p></li> <li><p>线程生命周期：自动管理</p></li></ul> <hr> <h2 id="_3-pthread"><a href="#_3-pthread" class="header-anchor">#</a> 3. pthread</h2> <ul><li>pthread的基本使用（需要包含头文件）</li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+    <span class="token comment">//使用pthread创建线程</span>
+
+   pthread_t thread<span class="token punctuation">;</span>
+
+    NSString <span class="token operator">*</span>name <span class="token operator">=</span> <span class="token string">@&quot;wendingding&quot;</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//使用pthread创建线程</span>
+
+    <span class="token comment">//第一个参数：线程对象地址</span>
+
+    <span class="token comment">//第二个参数：线程属性</span>
+
+    <span class="token comment">//第三个参数：指向函数的执行</span>
+
+    <span class="token comment">//第四个参数：传递给该函数的参数</span>
+
+    <span class="token function">pthread_create</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>thread<span class="token punctuation">,</span> <span class="token constant">NULL</span><span class="token punctuation">,</span> run<span class="token punctuation">,</span> <span class="token punctuation">(</span>__bridge <span class="token keyword">void</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>name<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><hr> <h2 id="_4-nsthread"><a href="#_4-nsthread" class="header-anchor">#</a> 4. NSThread</h2> <h3 id="nsthread的基本使用"><a href="#nsthread的基本使用" class="header-anchor">#</a> NSThread的基本使用</h3> <div class="language-objc extra-class"><pre class="language-objc"><code>
+<span class="token comment">//第一种创建线程的方式：alloc init.</span>
+
+<span class="token comment">//特点：需要手动开启线程，可以拿到线程对象进行详细设置</span>
+
+    <span class="token comment">//创建线程</span>
+
+    <span class="token comment">/*
+
+     第一个参数：目标对象
+
+     第二个参数：选择器，线程启动要调用哪个方法
+
+     第三个参数：前面方法要接收的参数（最多只能接收一个参数，没有则传nil）
+
+     */</span>
+
+    NSThread <span class="token operator">*</span>thread <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSThread alloc<span class="token punctuation">]</span>initWithTarget<span class="token punctuation">:</span><span class="token keyword">self</span> selector<span class="token punctuation">:</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>run<span class="token punctuation">:</span><span class="token punctuation">)</span> object<span class="token punctuation">:</span><span class="token string">@&quot;wendingding&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+     <span class="token comment">//启动线程</span>
+
+    <span class="token punctuation">[</span>thread start<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+<span class="token comment">//第二种创建线程的方式：分离出一条子线程</span>
+
+<span class="token comment">//特点：自动启动线程，无法对线程进行更详细的设置</span>
+
+    <span class="token comment">/*
+
+     第一个参数：线程启动调用的方法
+
+     第二个参数：目标对象
+
+     第三个参数：传递给调用方法的参数
+
+     */</span>
+
+    <span class="token punctuation">[</span>NSThread detachNewThreadSelector<span class="token punctuation">:</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>run<span class="token punctuation">:</span><span class="token punctuation">)</span> toTarget<span class="token punctuation">:</span><span class="token keyword">self</span> withObject<span class="token punctuation">:</span><span class="token string">@&quot;我是分离出来的子线程&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+<span class="token comment">//第三种创建线程的方式：后台线程</span>
+
+<span class="token comment">//特点：自动启动线程，无法进行更详细设置</span>
+
+    <span class="token punctuation">[</span><span class="token keyword">self</span> performSelectorInBackground<span class="token punctuation">:</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>run<span class="token punctuation">:</span><span class="token punctuation">)</span> withObject<span class="token punctuation">:</span><span class="token string">@&quot;我是后台线程&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="设置线程的属性"><a href="#设置线程的属性" class="header-anchor">#</a> 设置线程的属性</h3> <div class="language-objc extra-class"><pre class="language-objc"><code>
+   <span class="token comment">//设置线程的属性</span>
+
+    <span class="token comment">//设置线程的名称</span>
+
+    thread<span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">@&quot;线程A&quot;</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//设置线程的优先级,注意线程优先级的取值范围为0.0~1.0之间，1.0表示线程的优先级最高,如果不设置该值，那么理想状态下默认为0.5</span>
+
+    thread<span class="token punctuation">.</span>threadPriority <span class="token operator">=</span> <span class="token number">1.0</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="线程的状态"><a href="#线程的状态" class="header-anchor">#</a> 线程的状态</h3> <div class="language-objc extra-class"><pre class="language-objc"><code>
+<span class="token comment">//线程的各种状态：新建-就绪-运行-阻塞-死亡</span>
+
+<span class="token comment">//常用的控制线程状态的方法</span>
+
+<span class="token punctuation">[</span>NSThread exit<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//退出当前线程</span>
+
+<span class="token punctuation">[</span>NSThread sleepForTimeInterval<span class="token punctuation">:</span><span class="token number">2.0</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//阻塞线程</span>
+
+<span class="token punctuation">[</span>NSThread sleepUntilDate<span class="token punctuation">:</span><span class="token punctuation">[</span>NSDate dateWithTimeIntervalSinceNow<span class="token punctuation">:</span><span class="token number">2.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//阻塞线程</span>
+
+<span class="token comment">//注意：线程死了不能复生</span>
+
+</code></pre></div><h3 id="线程安全"><a href="#线程安全" class="header-anchor">#</a> 线程安全</h3> <ul><li><p>前提：多个线程访问同一块资源会发生数据安全问题</p></li> <li><p>解决方案：加互斥锁</p></li> <li><p>相关代码：@synchronized(self){}</p></li> <li><p>专业术语-线程同步</p></li> <li><p>原子和非原子属性（是否对setter方法加锁）</p></li></ul> <h3 id="线程间通信"><a href="#线程间通信" class="header-anchor">#</a> 线程间通信</h3> <div class="language-objc extra-class"><pre class="language-objc"><code>
+<span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>touchesBegan<span class="token punctuation">:</span><span class="token punctuation">(</span>nonnull NSSet<span class="token operator">&lt;</span>UITouch <span class="token operator">*</span><span class="token operator">&gt;</span> <span class="token operator">*</span><span class="token punctuation">)</span>touches withEvent<span class="token punctuation">:</span><span class="token punctuation">(</span>nullable UIEvent <span class="token operator">*</span><span class="token punctuation">)</span>event
+
+<span class="token punctuation">{</span>
+
+<span class="token comment">//    [self download2];</span>
+
+   <span class="token comment">//开启一条子线程来下载图片</span>
+
+    <span class="token punctuation">[</span>NSThread detachNewThreadSelector<span class="token punctuation">:</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>downloadImage<span class="token punctuation">)</span> toTarget<span class="token punctuation">:</span><span class="token keyword">self</span> withObject<span class="token punctuation">:</span>nil<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>downloadImage
+
+<span class="token punctuation">{</span>
+
+    <span class="token comment">//1.确定要下载网络图片的url地址，一个url唯一对应着网络上的一个资源</span>
+
+    NSURL <span class="token operator">*</span>url <span class="token operator">=</span> <span class="token punctuation">[</span>NSURL URLWithString<span class="token punctuation">:</span><span class="token operator">@</span>&quot;http<span class="token punctuation">:</span><span class="token comment">//p6.qhimg.com/t01d2954e2799c461ab.jpg&quot;];</span>
+
+
+
+    <span class="token comment">//2.根据url地址下载图片数据到本地（二进制数据</span>
+
+    NSData <span class="token operator">*</span>data <span class="token operator">=</span> <span class="token punctuation">[</span>NSData dataWithContentsOfURL<span class="token punctuation">:</span>url<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//3.把下载到本地的二进制数据转换成图片</span>
+
+    UIImage <span class="token operator">*</span>image <span class="token operator">=</span> <span class="token punctuation">[</span>UIImage imageWithData<span class="token punctuation">:</span>data<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//4.回到主线程刷新UI</span>
+
+    <span class="token comment">//4.1 第一种方式</span>
+
+<span class="token comment">//    [self performSelectorOnMainThread:@selector(showImage:) withObject:image waitUntilDone:YES];</span>
+
+
+
+    <span class="token comment">//4.2 第二种方式</span>
+
+<span class="token comment">//    [self.imageView performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:YES];</span>
+
+
+
+    <span class="token comment">//4.3 第三种方式</span>
+
+    <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>imageView performSelector<span class="token punctuation">:</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>setImage<span class="token punctuation">:</span><span class="token punctuation">)</span> onThread<span class="token punctuation">:</span><span class="token punctuation">[</span>NSThread mainThread<span class="token punctuation">]</span> withObject<span class="token punctuation">:</span>image waitUntilDone<span class="token punctuation">:</span>YES<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="如何计算代码段的执行时间"><a href="#如何计算代码段的执行时间" class="header-anchor">#</a> 如何计算代码段的执行时间</h3> <div class="language-objc extra-class"><pre class="language-objc"><code>
+<span class="token comment">//第一种方法</span>
+
+    NSDate <span class="token operator">*</span>start <span class="token operator">=</span> <span class="token punctuation">[</span>NSDate date<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//2.根据url地址下载图片数据到本地（二进制数据）</span>
+
+    NSData <span class="token operator">*</span>data <span class="token operator">=</span> <span class="token punctuation">[</span>NSData dataWithContentsOfURL<span class="token punctuation">:</span>url<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    NSDate <span class="token operator">*</span>end <span class="token operator">=</span> <span class="token punctuation">[</span>NSDate date<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;第二步操作花费的时间为%f&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>end timeIntervalSinceDate<span class="token punctuation">:</span>start<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+<span class="token comment">//第二种方法</span>
+
+    CFTimeInterval start <span class="token operator">=</span> <span class="token function">CFAbsoluteTimeGetCurrent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    NSData <span class="token operator">*</span>data <span class="token operator">=</span> <span class="token punctuation">[</span>NSData dataWithContentsOfURL<span class="token punctuation">:</span>url<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    CFTimeInterval end <span class="token operator">=</span> <span class="token function">CFAbsoluteTimeGetCurrent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;第二步操作花费的时间为%f&quot;</span><span class="token punctuation">,</span>end <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h2 id="_5-gcd"><a href="#_5-gcd" class="header-anchor">#</a> 5. GCD</h2> <h3 id="gcd基本知识"><a href="#gcd基本知识" class="header-anchor">#</a> GCD基本知识</h3> <ul><li><p>两个核心概念-队列和任务</p></li> <li><p>同步函数和异步函数</p></li></ul> <h3 id="gcd基本使用【重点】"><a href="#gcd基本使用【重点】" class="header-anchor">#</a> GCD基本使用【重点】</h3> <ul><li><p>异步函数+并发队列：开启多条线程，并发执行任务</p></li> <li><p>异步函数+串行队列：开启一条线程，串行执行任务</p></li> <li><p>同步函数+并发队列：不开线程，串行执行任务</p></li> <li><p>同步函数+串行队列：不开线程，串行执行任务</p></li> <li><p>异步函数+主队列：不开线程，在主线程中串行执行任务</p></li> <li><p>同步函数+主队列：不开线程，串行执行任务（注意死锁发生）</p></li> <li><p>注意同步函数和异步函数在执行顺序上面的差异</p></li></ul> <h3 id="gcd线程间通信"><a href="#gcd线程间通信" class="header-anchor">#</a> GCD线程间通信</h3> <div class="language-objc extra-class"><pre class="language-objc"><code>
+ <span class="token comment">//0.获取一个全局的队列</span>
+
+    dispatch_queue_t queue <span class="token operator">=</span> <span class="token function">dispatch_get_global_queue</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//1.先开启一个线程，把下载图片的操作放在子线程中处理</span>
+
+    <span class="token function">dispatch_async</span><span class="token punctuation">(</span>queue<span class="token punctuation">,</span> <span class="token operator">^</span><span class="token punctuation">{</span>
+
+
+
+       <span class="token comment">//2.下载图片</span>
+
+        NSURL <span class="token operator">*</span>url <span class="token operator">=</span> <span class="token punctuation">[</span>NSURL URLWithString<span class="token punctuation">:</span><span class="token operator">@</span>&quot;http<span class="token punctuation">:</span><span class="token comment">//h.hiphotos.baidu.com/zhidao/pic/item/6a63f6246b600c3320b14bb3184c510fd8f9a185.jpg&quot;];</span>
+
+        NSData <span class="token operator">*</span>data <span class="token operator">=</span> <span class="token punctuation">[</span>NSData dataWithContentsOfURL<span class="token punctuation">:</span>url<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        UIImage <span class="token operator">*</span>image <span class="token operator">=</span> <span class="token punctuation">[</span>UIImage imageWithData<span class="token punctuation">:</span>data<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;下载操作所在的线程--%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+        <span class="token comment">//3.回到主线程刷新UI</span>
+
+        <span class="token function">dispatch_async</span><span class="token punctuation">(</span><span class="token function">dispatch_get_main_queue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">^</span><span class="token punctuation">{</span>
+
+           <span class="token keyword">self</span><span class="token punctuation">.</span>imageView<span class="token punctuation">.</span>image <span class="token operator">=</span> image<span class="token punctuation">;</span>
+
+           <span class="token comment">//打印查看当前线程</span>
+
+            <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;刷新UI---%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="gcd其它常用函数"><a href="#gcd其它常用函数" class="header-anchor">#</a> GCD其它常用函数</h3> <div class="language-objc extra-class"><pre class="language-objc"><code>
+
+
+    <span class="token comment">// 栅栏函数（控制任务的执行顺序）</span>
+
+    <span class="token function">dispatch_barrier_async</span><span class="token punctuation">(</span>queue<span class="token punctuation">,</span> <span class="token operator">^</span><span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;--dispatch_barrier_async-&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">// 延迟执行（延迟·控制在哪个线程执行）</span>
+
+      <span class="token function">dispatch_after</span><span class="token punctuation">(</span><span class="token function">dispatch_time</span><span class="token punctuation">(</span>DISPATCH_TIME_NOW<span class="token punctuation">,</span> <span class="token punctuation">(</span>int64_t<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token number">2.0</span> <span class="token operator">*</span> NSEC_PER_SEC<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">dispatch_get_global_queue</span><span class="token punctuation">(</span>DISPATCH_QUEUE_PRIORITY_DEFAULT<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">^</span><span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;---%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">// 一次性代码（注意不能放到懒加载）</span>
+
+    <span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>once
+
+    <span class="token punctuation">{</span>
+
+        <span class="token comment">//整个程序运行过程中只会执行一次</span>
+
+        <span class="token comment">//onceToken用来记录该部分的代码是否被执行过</span>
+
+        <span class="token keyword">static</span> dispatch_once_t onceToken<span class="token punctuation">;</span>
+
+        <span class="token function">dispatch_once</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>onceToken<span class="token punctuation">,</span> <span class="token operator">^</span><span class="token punctuation">{</span>
+
+           <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;-----&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+
+
+    <span class="token comment">// 快速迭代（开多个线程并发完成迭代操作）</span>
+
+    <span class="token function">dispatch_apply</span><span class="token punctuation">(</span>subpaths<span class="token punctuation">.</span>count<span class="token punctuation">,</span> queue<span class="token punctuation">,</span> <span class="token operator">^</span><span class="token punctuation">(</span>size_t index<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">// 队列组（同栅栏函数）</span>
+
+    <span class="token comment">//创建队列组</span>
+
+    dispatch_group_t group <span class="token operator">=</span> <span class="token function">dispatch_group_create</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//队列组中的任务执行完毕之后，执行该函数</span>
+
+    <span class="token function">dispatch_group_notify</span><span class="token punctuation">(</span>dispatch_group_t group<span class="token punctuation">,</span>
+
+dispatch_queue_t queue<span class="token punctuation">,</span>
+
+dispatch_block_t block<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="关于gcd中的创建和释放"><a href="#关于gcd中的创建和释放" class="header-anchor">#</a> 关于GCD中的创建和释放</h3> <ul><li><p>在iOS6.0之前，在GCD中每当使用带creat单词的函数创建对象之后，都应该对其进行一次release操作。在iOS6.0之后，GCD被纳入到了ARC的内存管理机制中，在使用GCD的时候我们就像对待普通OC对象一样对待GCD,因此不再需要我们调用release方法。</p></li> <li><p>GCD中设置队列的优先级</p> <ul><li><p>使用create函数创建出来的队列不论是串行队列还是并发队列，其执行任务线程的优先级都是默认优先级。</p></li> <li><p>可以通过set_target_queue来变更队列的优先级。第一个参数传通过creat创建出来的队列，后面一个参数传指定了优先级的全局并发队列。第一个参数如果传主队列或者全局并发队列的话，那么执行结果是未知的。</p></li></ul></li> <li><p>暂停和恢复：GCD中的队列也是可以暂停和恢复的，直接把相应的队列作为参数就传递就可以。使用 dispatch_resume(queue1);和dispatch_suspend(queue1);</p></li> <li><p>GCD中可以不使用block而使用函数。</p></li> <li><p>在NSOperation中关于main方法的调用问题：先调用start方法，在start方法内部会调用main方法。可以通过代码来进行验证。</p></li> <li><p>参考资料：https://developer.apple.com/library/ios/documentation/Performance/Reference/GCD_libdispatch_Ref/index.html#//apple_ref/c/func/dispatch_queue_create</p></li></ul> <h2 id="_6-nsoperation"><a href="#_6-nsoperation" class="header-anchor">#</a> 6. NSOperation</h2> <h3 id="nsoperation基本使用"><a href="#nsoperation基本使用" class="header-anchor">#</a> NSOperation基本使用</h3> <ul><li><p>相关概念：NSOperation是对GCD的包装，两个核心概念【队列+操作】</p></li> <li><p>基本使用</p> <ul><li><p>NSOperation本身是抽象类，只能只有它的子类</p></li> <li><p>三个子类分别是：NSBlockOperation、NSInvocationOperation以及自定义继承自NSOperation的类</p></li> <li><p>NSOperation和NSOperationQueue结合使用实现多线程并发</p></li></ul></li> <li><p>NSInvocationOperation</p></li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+<span class="token comment">//  01 NSInvocationOperation</span>
+
+    <span class="token comment">//1.封装操作</span>
+
+    <span class="token comment">/*
+
+     第一个参数：目标对象
+
+     第二个参数：该操作要调用的方法，最多接受一个参数
+
+     第三个参数：调用方法传递的参数，如果方法不接受参数，那么该值传nil
+
+     */</span>
+
+    NSInvocationOperation <span class="token operator">*</span>operation <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSInvocationOperation alloc<span class="token punctuation">]</span>
+
+                                        initWithTarget<span class="token punctuation">:</span><span class="token keyword">self</span> selector<span class="token punctuation">:</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>run<span class="token punctuation">)</span> object<span class="token punctuation">:</span>nil<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//2.启动操作</span>
+
+    <span class="token punctuation">[</span>operation start<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+</code></pre></div><ul><li>NSBlockOperation</li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+    <span class="token comment">//1.封装操作</span>
+
+    <span class="token comment">/*
+
+     NSBlockOperation提供了一个类方法，在该类方法中封装操作
+
+     */</span>
+
+    NSBlockOperation <span class="token operator">*</span>operation <span class="token operator">=</span> <span class="token punctuation">[</span>NSBlockOperation blockOperationWithBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+        <span class="token comment">//在主线程中执行</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;---download1--%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//2.追加操作，追加的操作在子线程中执行</span>
+
+    <span class="token punctuation">[</span>operation addExecutionBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;---download2--%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token punctuation">[</span>operation addExecutionBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+         <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;---download3--%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//3.启动执行操作</span>
+
+    <span class="token punctuation">[</span>operation start<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+</code></pre></div><ul><li>自定义NSOperation</li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+    <span class="token comment">//如何封装操作？</span>
+
+    <span class="token comment">//自定义的NSOperation,通过重写内部的main方法实现封装操作</span>
+
+    <span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>main
+
+    <span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;--main--%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+
+
+    <span class="token comment">//如何使用？</span>
+
+    <span class="token comment">//1.实例化一个自定义操作对象</span>
+
+    XMGOperation <span class="token operator">*</span>op <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>XMGOperation alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//2.执行操作</span>
+
+    <span class="token punctuation">[</span>op start<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+</code></pre></div><h3 id="nsoperationqueue基本使用"><a href="#nsoperationqueue基本使用" class="header-anchor">#</a> NSOperationQueue基本使用</h3> <ul><li><p>NSOperation中的两种队列</p> <ul><li><p>主队列 通过mainQueue获得，凡是放到主队列中的任务都将在主线程执行</p></li> <li><p>非主队列 直接alloc init出来的队列。非主队列同时具备了并发和串行的功能，通过设置最大并发数属性来控制任务是并发执行还是串行执行</p></li></ul></li> <li><p>自定义NSOperation</p></li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+<span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>customOperation
+
+<span class="token punctuation">{</span>
+
+    <span class="token comment">//1.创建队列</span>
+
+    NSOperationQueue <span class="token operator">*</span>queue <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSOperationQueue alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//2.封装操作</span>
+
+    <span class="token comment">//好处：1.信息隐蔽、2.代码复用</span>
+
+   XMGOperation <span class="token operator">*</span>op1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>XMGOperation alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    XMGOperation <span class="token operator">*</span>op2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>XMGOperation alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//3.添加操作到队列中</span>
+
+    <span class="token punctuation">[</span>queue addOperation<span class="token punctuation">:</span>op1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">[</span>queue addOperation<span class="token punctuation">:</span>op2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><ul><li>NSBlockOperation</li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+<span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>block
+
+<span class="token punctuation">{</span>
+
+    <span class="token comment">//1.创建队列</span>
+
+    NSOperationQueue <span class="token operator">*</span>queue <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSOperationQueue alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//2.封装操作</span>
+
+    NSBlockOperation <span class="token operator">*</span>op1 <span class="token operator">=</span> <span class="token punctuation">[</span>NSBlockOperation blockOperationWithBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;1----%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    NSBlockOperation <span class="token operator">*</span>op2 <span class="token operator">=</span> <span class="token punctuation">[</span>NSBlockOperation blockOperationWithBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;2----%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+   <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token punctuation">[</span>op2 addExecutionBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;3----%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token punctuation">[</span>op2 addExecutionBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;4----%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//3.添加操作到队列中</span>
+
+    <span class="token punctuation">[</span>queue addOperation<span class="token punctuation">:</span>op1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">[</span>queue addOperation<span class="token punctuation">:</span>op2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//补充：简便方法</span>
+
+    <span class="token punctuation">[</span>queue addOperationWithBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;5----%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><ul><li>NSInvocationOperation</li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+<span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>invocation
+
+<span class="token punctuation">{</span>
+
+    <span class="token comment">/*
+
+     GCD中的队列：
+
+     串行队列：自己创建的，主队列
+
+     并发队列：自己创建的，全局并发队列
+
+
+
+     NSOperationQueue
+
+     主队列：[NSOperationQueue mainqueue];凡事放在主队列中的操作都在主线程中执行
+
+     非主队列：[[NSOperationQueue alloc]init]，并发和串行，默认是并发执行的
+
+     */</span>
+
+
+
+    <span class="token comment">//1.创建队列</span>
+
+    NSOperationQueue <span class="token operator">*</span>queue <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSOperationQueue alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//2.封装操作</span>
+
+    NSInvocationOperation <span class="token operator">*</span>op1 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSInvocationOperation alloc<span class="token punctuation">]</span>initWithTarget<span class="token punctuation">:</span><span class="token keyword">self</span> selector<span class="token punctuation">:</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>download1<span class="token punctuation">)</span> object<span class="token punctuation">:</span>nil<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+   NSInvocationOperation <span class="token operator">*</span>op2 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSInvocationOperation alloc<span class="token punctuation">]</span>initWithTarget<span class="token punctuation">:</span><span class="token keyword">self</span> selector<span class="token punctuation">:</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>download2<span class="token punctuation">)</span> object<span class="token punctuation">:</span>nil<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  NSInvocationOperation <span class="token operator">*</span>op3 <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSInvocationOperation alloc<span class="token punctuation">]</span>initWithTarget<span class="token punctuation">:</span><span class="token keyword">self</span> selector<span class="token punctuation">:</span><span class="token keyword">@selector</span><span class="token punctuation">(</span>download3<span class="token punctuation">)</span> object<span class="token punctuation">:</span>nil<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//3.把封装好的操作添加到队列中</span>
+
+    <span class="token punctuation">[</span>queue addOperation<span class="token punctuation">:</span>op1<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//[op1 start]</span>
+
+    <span class="token punctuation">[</span>queue addOperation<span class="token punctuation">:</span>op2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">[</span>queue addOperation<span class="token punctuation">:</span>op3<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="nsoperation其它用法"><a href="#nsoperation其它用法" class="header-anchor">#</a> NSOperation其它用法</h3> <ul><li>设置最大并发数【控制任务并发和串行】</li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+<span class="token comment">//1.创建队列</span>
+
+    NSOperationQueue <span class="token operator">*</span>queue <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSOperationQueue alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//2.设置最大并发数</span>
+
+    <span class="token comment">//注意点：该属性需要在任务添加到队列中之前进行设置</span>
+
+    <span class="token comment">//该属性控制队列是串行执行还是并发执行</span>
+
+    <span class="token comment">//如果最大并发数等于1，那么该队列是串行的，如果大于1那么是并行的</span>
+
+    <span class="token comment">//系统的最大并发数有个默认的值，为-1，如果该属性设置为0，那么不会执行任何任务</span>
+
+    queue<span class="token punctuation">.</span>maxConcurrentOperationCount <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+
+</code></pre></div><ul><li>暂停和恢复以及取消</li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+    <span class="token comment">//设置暂停和恢复</span>
+
+    <span class="token comment">//suspended设置为YES表示暂停，suspended设置为NO表示恢复</span>
+
+    <span class="token comment">//暂停表示不继续执行队列中的下一个任务，暂停操作是可以恢复的</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>queue<span class="token punctuation">.</span>isSuspended<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">self</span><span class="token punctuation">.</span>queue<span class="token punctuation">.</span>suspended <span class="token operator">=</span> NO<span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token keyword">else</span>
+
+    <span class="token punctuation">{</span>
+
+        <span class="token keyword">self</span><span class="token punctuation">.</span>queue<span class="token punctuation">.</span>suspended <span class="token operator">=</span> YES<span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+
+
+    <span class="token comment">//取消队列里面的所有操作</span>
+
+    <span class="token comment">//取消之后，当前正在执行的操作的下一个操作将不再执行，而且永远都不在执行，就像后面的所有任务都从队列里面移除了一样</span>
+
+    <span class="token comment">//取消操作是不可以恢复的</span>
+
+    <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>queue cancelAllOperations<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">-</span>自定义NSOperation取消操作<span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span><span class="token operator">--</span>
+
+<span class="token operator">-</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>main
+
+<span class="token punctuation">{</span>
+
+    <span class="token comment">//耗时操作1</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">1000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;任务1-%d--%@&quot;</span><span class="token punctuation">,</span>i<span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+    <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;+++++++++++++++++++++++++++++++++&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//苹果官方建议，每当执行完一次耗时操作之后，就查看一下当前队列是否为取消状态，如果是，那么就直接退出</span>
+
+    <span class="token comment">//好处是可以提高程序的性能</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token keyword">self</span><span class="token punctuation">.</span>isCancelled<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token keyword">return</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+
+
+    <span class="token comment">//耗时操作2</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span><span class="token number">1000</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;任务1-%d--%@&quot;</span><span class="token punctuation">,</span>i<span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+
+
+    <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;+++++++++++++++++++++++++++++++++&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token punctuation">}</span>
+
+</code></pre></div><h3 id="nsoperation实现线程间通信"><a href="#nsoperation实现线程间通信" class="header-anchor">#</a> NSOperation实现线程间通信</h3> <ul><li>开子线程下载图片</li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+ <span class="token comment">//1.创建队列</span>
+
+    NSOperationQueue <span class="token operator">*</span>queue <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSOperationQueue alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//2.使用简便方法封装操作并添加到队列中</span>
+
+    <span class="token punctuation">[</span>queue addOperationWithBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+
+
+        <span class="token comment">//3.在该block中下载图片</span>
+
+        NSURL <span class="token operator">*</span>url <span class="token operator">=</span> <span class="token punctuation">[</span>NSURL URLWithString<span class="token punctuation">:</span><span class="token operator">@</span>&quot;http<span class="token punctuation">:</span><span class="token comment">//news.51sheyuan.com/uploads/allimg/111001/133442IB-2.jpg&quot;];</span>
+
+        NSData <span class="token operator">*</span>data <span class="token operator">=</span> <span class="token punctuation">[</span>NSData dataWithContentsOfURL<span class="token punctuation">:</span>url<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        UIImage <span class="token operator">*</span>image <span class="token operator">=</span> <span class="token punctuation">[</span>UIImage imageWithData<span class="token punctuation">:</span>data<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;下载图片操作--%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+
+        <span class="token comment">//4.回到主线程刷新UI</span>
+
+        <span class="token punctuation">[</span><span class="token punctuation">[</span>NSOperationQueue mainQueue<span class="token punctuation">]</span> addOperationWithBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+            <span class="token keyword">self</span><span class="token punctuation">.</span>imageView<span class="token punctuation">.</span>image <span class="token operator">=</span> image<span class="token punctuation">;</span>
+
+            <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;刷新UI操作---%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+</code></pre></div><ul><li>下载多张图片合成综合案例（设置操作依赖）</li></ul> <div class="language-objc extra-class"><pre class="language-objc"><code>
+<span class="token comment">//02 综合案例</span>
+
+<span class="token operator">-</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>download2
+
+<span class="token punctuation">{</span>
+
+    <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;----&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//1.创建队列</span>
+
+    NSOperationQueue <span class="token operator">*</span>queue <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">[</span>NSOperationQueue alloc<span class="token punctuation">]</span>init<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//2.封装操作下载图片1</span>
+
+    NSBlockOperation <span class="token operator">*</span>op1 <span class="token operator">=</span> <span class="token punctuation">[</span>NSBlockOperation blockOperationWithBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+
+
+        NSURL <span class="token operator">*</span>url <span class="token operator">=</span> <span class="token punctuation">[</span>NSURL URLWithString<span class="token punctuation">:</span><span class="token operator">@</span>&quot;http<span class="token punctuation">:</span><span class="token comment">//h.hiphotos.baidu.com/zhidao/pic/item/6a63f6246b600c3320b14bb3184c510fd8f9a185.jpg&quot;];</span>
+
+        NSData <span class="token operator">*</span>data <span class="token operator">=</span> <span class="token punctuation">[</span>NSData dataWithContentsOfURL<span class="token punctuation">:</span>url<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+        <span class="token comment">//拿到图片数据</span>
+
+        <span class="token keyword">self</span><span class="token punctuation">.</span>image1 <span class="token operator">=</span> <span class="token punctuation">[</span>UIImage imageWithData<span class="token punctuation">:</span>data<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+
+
+    <span class="token comment">//3.封装操作下载图片2</span>
+
+    NSBlockOperation <span class="token operator">*</span>op2 <span class="token operator">=</span> <span class="token punctuation">[</span>NSBlockOperation blockOperationWithBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+        NSURL <span class="token operator">*</span>url <span class="token operator">=</span> <span class="token punctuation">[</span>NSURL URLWithString<span class="token punctuation">:</span><span class="token operator">@</span>&quot;http<span class="token punctuation">:</span><span class="token comment">//pic.58pic.com/58pic/13/87/82/27Q58PICYje_1024.jpg&quot;];</span>
+
+        NSData <span class="token operator">*</span>data <span class="token operator">=</span> <span class="token punctuation">[</span>NSData dataWithContentsOfURL<span class="token punctuation">:</span>url<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+        <span class="token comment">//拿到图片数据</span>
+
+        <span class="token keyword">self</span><span class="token punctuation">.</span>image2 <span class="token operator">=</span> <span class="token punctuation">[</span>UIImage imageWithData<span class="token punctuation">:</span>data<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//4.合成图片</span>
+
+    NSBlockOperation <span class="token operator">*</span>combine <span class="token operator">=</span> <span class="token punctuation">[</span>NSBlockOperation blockOperationWithBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+
+        <span class="token comment">//4.1 开启图形上下文</span>
+        <span class="token function">UIGraphicsBeginImageContext</span><span class="token punctuation">(</span><span class="token function">CGSizeMake</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//4.2 画image1</span>
+        <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>image1 drawInRect<span class="token punctuation">:</span><span class="token function">CGRectMake</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//4.3 画image2</span>
+        <span class="token punctuation">[</span><span class="token keyword">self</span><span class="token punctuation">.</span>image2 drawInRect<span class="token punctuation">:</span><span class="token function">CGRectMake</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//4.4 根据图形上下文拿到图片数据</span>
+        UIImage <span class="token operator">*</span>image <span class="token operator">=</span> <span class="token function">UIGraphicsGetImageFromCurrentImageContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">//        NSLog(@&quot;%@&quot;,image);</span>
+
+        <span class="token comment">//4.5 关闭图形上下文</span>
+        <span class="token function">UIGraphicsEndImageContext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">//7.回到主线程刷新UI</span>
+        <span class="token punctuation">[</span><span class="token punctuation">[</span>NSOperationQueue mainQueue<span class="token punctuation">]</span>addOperationWithBlock<span class="token punctuation">:</span><span class="token operator">^</span><span class="token punctuation">{</span>
+            <span class="token keyword">self</span><span class="token punctuation">.</span>imageView<span class="token punctuation">.</span>image <span class="token operator">=</span> image<span class="token punctuation">;</span>
+            <span class="token function">NSLog</span><span class="token punctuation">(</span><span class="token string">@&quot;刷新UI---%@&quot;</span><span class="token punctuation">,</span><span class="token punctuation">[</span>NSThread currentThread<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//5.设置操作依赖</span>
+    <span class="token punctuation">[</span>combine addDependency<span class="token punctuation">:</span>op1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">[</span>combine addDependency<span class="token punctuation">:</span>op2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+
+
+    <span class="token comment">//6.添加操作到队列中执行</span>
+    <span class="token punctuation">[</span>queue addOperation<span class="token punctuation">:</span>op1<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">[</span>queue addOperation<span class="token punctuation">:</span>op2<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">[</span>queue addOperation<span class="token punctuation">:</span>combine<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+    <span class="token punctuation">}</span>
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/funkyblog/ios/main/2-runloop/" class="prev">
+        2. Runloop
+      </a></span> <span class="next"><a href="/funkyblog/ios/main/4-block/">
+        4. Blocks
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/funkyblog/assets/js/app.a24b3efd.js" defer></script><script src="/funkyblog/assets/js/2.3aea1f50.js" defer></script><script src="/funkyblog/assets/js/60.016ba18c.js" defer></script>
+  </body>
+</html>
