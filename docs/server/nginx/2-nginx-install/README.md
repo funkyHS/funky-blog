@@ -57,6 +57,11 @@ title: 【2. 安装，常用命令，配置文件】
 - 暂停：nginx -s stop
 - 重载：nginx -s reload
 - 对mac中安装的nginx配置文件进行说明，从配置文件可以看出，我这里的nginx监听的是8181端口，在浏览器中可以直接访问[http://localhost:8181/](http://localhost:8181/),可以看到nginx的html页面
+- 注意：
+    - mac的`nginx.conf`中 看到根路径`root html`，这里html指向的相对路径是在编译时设置的，可以使用命令 `nginx -V` 检查路径
+    - 可以看到：`--prefix=/usr/local/Cellar/nginx/1.19.9`，这是nginx文件的文件夹
+    - cd到nginx文件夹，可以看到html文件夹是`/usr/local/var/www` 文件夹的软连接
+    <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/nginx/11.png" width="600"/>
 
 
 ### 3.2 配置文件

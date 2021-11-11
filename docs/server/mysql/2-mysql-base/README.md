@@ -62,7 +62,7 @@ mysql> update user set password=password('123') where user='root' and host='loca
 mysql> flush privileges;
 ```
 
-- 方法4：在忘记root密码的时候，（以windows为例）
+- 方法4：忘记root密码（以windows为例）
 ```shell
 (1) 关闭正在运行的MySQL服务。 
 (2) 打开DOS窗口，转到mysql\bin目录。 
@@ -75,6 +75,22 @@ mysql> flush privileges;
 (9) 退出 `quit`。 
 (10) 注销系统，再进入，使用用户名root和刚才设置的新密码123登录。
 ```
+
+- 方法5：忘记root密码（以Linux为例）
+（1）查看mysql版本：`mysql --version`
+（2）编辑/etc/my.cnf配置文件：`vim /etc/my.cnf`
+（3）在`[mysqld]`下添加`skip-grant-tables`，然后保存并退出
+<br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/database/mysql/2/9.png" width="400"/>
+（4）重启mysql服务：`service mysqld restart`
+（5）进入mysql命令行：`mysql`
+（6）修改root用户密码：`UPDATE mysql.user SET Password=PASSWORD('新密码') where USER='root';`
+（7）刷新权限：`flush privileges;`
+（8）退出：`exit`
+（9）注释掉`/etc/my.cnf`中的skip-grant-tables，然后重启mysql：`service mysqld restart`
+（10）下面就可以使用root新的密码登录MySQL了：`mysql -u root -p`
+
+
+
 
 ### 2.3 DB、DBMS、SQL分别是什么，他们之间的关系
 - **DB**: DataBase（数据库，数据库实际上在硬盘上以文件的形式存在）

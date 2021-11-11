@@ -604,14 +604,14 @@ export default new Vuex.Store({
 ## 7. 300ms延迟
 - vue全家桶三大件：vue，vuex，vue路由
 
-### 300ms延迟
+### click事件300ms的延迟原因
 - 移动web页面上的click事件响应都要慢上300ms
 - 移动设备访问web页面时往往需要“双击”或者“捏开”，放大页面后来看清页面的具体内容
 - 正是为了确认用户是单击还是双击，safari需要300ms的延迟来判断
 - 后来的iPhone也一直沿用这样的设计，同时android也借鉴并沿用了这样的设计
 - 于是“300ms的延迟”就成为了一个默认的规范
 
-### 解决
+### 解决延迟
 - （1）设置meta viewport
 ```html
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -622,6 +622,43 @@ export default new Vuex.Store({
 
 
 ## 8. 手势
-- [vue-touch](https://github.com/vuejs/vue-touch)
+- [Hammer.js](https://github.com/hammerjs/hammer.js)
+- [vue-touch](https://github.com/vuejs/vue-touch): 对Hammer.js库的封装
 
-## 9. Vuex持久化
+### vue-touch的基本使用
+- 导入：npm install vue-touch@next
+- 在 Detail.vue组件中
+```vue
+<template>
+  <v-touch @swiperight="onSwipeRight">
+    // 中间省略
+  </v-touch>
+</template>
+
+<script>
+import VueTouch from 'vue-touch'
+Vue.use(VueTouch, { name: 'v-touch' })
+
+export default {
+  methods: {
+    onSwipeRight () {
+      this.$router.back()
+    }
+  }
+}
+</script>
+```
+
+
+## 9. 发布流程
+- 阿里云/百度云/腾讯云提供了虚拟化的主机，我们申请主机
+- 本地执行 `npm run build`, 项目会打包生成dist文件夹
+- 本机先装nginx，测试项目（test环境），当测试没有问题后，将dist发布到之前申请的外网可以访问的云服务器上
+
+- Nginx解决跨域问题，添加如下配置
+```shell
+# 凡是以ajax开头的请求，都转到 https://m.maoyan.com
+location /ajax/ {
+  proxy_pass https://m.maoyan.com;
+}
+```

@@ -201,7 +201,7 @@ section {
 </template>
 ```
 
-- 创建正在热组件`/views/film/Nowplaying`，即将上映组件`/views/film/Comingsoon`
+- 创建正在热映的组件`/views/film/Nowplaying`，即将上映组件`/views/film/Comingsoon`
 ```vue
 <template>
   <div>
@@ -324,7 +324,7 @@ const routes = [
 ]
 ```
 
-- 组件内部判断是否登录
+- 组件`Center.vue`内部判断是否登录
 ```js
 <script>
 export default {
@@ -362,7 +362,7 @@ router.beforeEach((to, from, next) => {
 })
 ```
 
-- 局部守卫(组件内的路由拦截)
+- 局部守卫(Center.vue组件内的路由拦截)
 ```js
 <script>
 export default {

@@ -136,6 +136,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity // 表示启用 spring security 安全框架的功能
 public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    // configure(HttpSecurity httpSecurity)：用于配置需要拦截的url路径、jwt过滤器及出异常后的处理器；
+    // configure(AuthenticationManagerBuilder auth)：用于配置UserDetailsService及PasswordEncoder；
+
     /**
      * 重写 configure(AuthenticationManagerBuilder auth)
      *      在方法中配置 用户和密码的信息， 作为登录的数据
@@ -180,7 +183,7 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 ## 5. 角色Role不同,访问权限不同
 
-- 基于角色 Role 的身份认证， 同一个用户可以有不同 的角色。同时可以开启对方法级别的认证
+- 基于角色 Role 的身份认证， 同一个用户可以有不同 的角色。同时可以开启方法级别的认证
 - config/MyWebSecurityConfig.java
 <br/><img src="http://funky_hs.gitee.io/imgcloud/funkyblog/springsecurity/4.png" width="700"/>
 
