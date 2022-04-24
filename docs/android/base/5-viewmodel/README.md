@@ -15,7 +15,6 @@ title: 【5. ViewModel,LiveData,DataBinding,SharedPreferences】
 - MyViewModel.java
 ```java
 package com.funky.a3_viewmodel;
-
 import androidx.lifecycle.ViewModel;
 
 public class MyViewModel extends ViewModel {

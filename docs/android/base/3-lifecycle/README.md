@@ -35,7 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
 ### 1.2 onStart
 - Activity呈现到屏幕上的时候，回调此方法
-- `onStart()` 方法会非常快速地完成，并且与“已创建”状态一样，Activity 不会一直处于“已开始”状态。一旦此回调结束，Activity 便会进入“已恢复”状态，系统将调用 `onResume()` 方法
+- `onStart()` 方法会非常快速地完成，并且与“已创建”状态一样，Activity 不会一直处于“已开始”状态。
+- 一旦此回调结束，Activity 便会进入“已恢复”状态，系统将调用 `onResume()` 方法
 ```java
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 ### 1.3 onResume
-- 这个阶段，允许与用户进行交互
+- Activity可见，允许与用户进行交互
 ```java
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 ### 1.4 onPause
+- 当前Activity不可见，失去焦点，用户没法交互
 ```java
 public class MainActivity extends AppCompatActivity {
     @Override
